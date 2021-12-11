@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="shared_ptr 和 unique_ptr8909080收到对">
+<meta name="description" content="shared_ptr 和 unique_ptr    shared_ptr unique_ptr     初始化 ①shared_ptr&lt;T&gt;sp;          sp.reset(new T()); ②shared_ptr&lt;T&gt; sp(new T());③shared_ptr&lt;T&gt; sp1 &#x3D; sp;  &#x2F;&#x2F;拷贝构造④auto sp &#x3D; make_shar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能指针">
 <meta property="og:url" content="http://example.com/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/index.html">
 <meta property="og:site_name" content="我的一些记录">
-<meta property="og:description" content="shared_ptr 和 unique_ptr8909080收到对">
+<meta property="og:description" content="shared_ptr 和 unique_ptr    shared_ptr unique_ptr     初始化 ①shared_ptr&lt;T&gt;sp;          sp.reset(new T()); ②shared_ptr&lt;T&gt; sp(new T());③shared_ptr&lt;T&gt; sp1 &#x3D; sp;  &#x2F;&#x2F;拷贝构造④auto sp &#x3D; make_shar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-11T05:06:53.000Z">
-<meta property="article:modified_time" content="2021-12-11T05:37:31.788Z">
+<meta property="article:modified_time" content="2021-12-11T07:28:00.129Z">
 <meta property="article:tag" content="shared_ptr unique_ptr">
 <meta name="twitter:card" content="summary">
 
@@ -120,12 +120,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -189,7 +189,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-12-11 13:06:53 / 修改时间：13:37:31" itemprop="dateCreated datePublished" datetime="2021-12-11T13:06:53+08:00">2021-12-11</time>
+      <time title="创建时间：2021-12-11 13:06:53 / 修改时间：15:28:00" itemprop="dateCreated datePublished" datetime="2021-12-11T13:06:53+08:00">2021-12-11</time>
     </span>
 
   
@@ -202,7 +202,58 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="shared-ptr-和-unique-ptr"><a href="#shared-ptr-和-unique-ptr" class="headerlink" title="shared_ptr 和 unique_ptr"></a>shared_ptr 和 unique_ptr</h1><p>8909080<br>收到对</p>
+        <h1 id="shared-ptr-和-unique-ptr"><a href="#shared-ptr-和-unique-ptr" class="headerlink" title="shared_ptr 和 unique_ptr"></a>shared_ptr 和 unique_ptr</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>shared_ptr</th>
+<th>unique_ptr</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化</td>
+<td>①shared_ptr&lt;T&gt;sp;      <br />    sp.reset(new T()); <br />②shared_ptr&lt;T&gt; sp(new T());<br />③shared_ptr&lt;T&gt; sp1 = sp;  //拷贝构造<br />④auto sp = make_shared&lt;int&gt;(10);</td>
+<td>①unique_ptr&lt;T&gt; up;<br />up.reset(new T());<br />②unique_ptr&lt;T&gt; up(new T() );<br />③unique_ptr&lt;T&gt; up1 = std::move(up);  //移动构造，因为<strong>unique_ptr是move-only</strong><br />④auto up = make_unique&lt;int&gt;(10);</td>
+<td>两者的<strong>构造函数将声明为explicit</strong>，即不允许隐式类型转换，如shared_ptr&lt;int&gt; sp = new int(10)  //错误<br />shared_ptr&lt;int&gt;  sp(new int(10))  //正确<br />第一句是拷贝构造函数，一般拷贝构造都要传入与其类型相同的变量引用。内置指针无法隐式转换为shared_ptr所以报错。<br />第二局显式调用了shared_ptr的构造函数，正常传入内置指针。</td>
+</tr>
+<tr>
+<td>条件判断</td>
+<td>if(sp){…}</td>
+<td>if(up){…}</td>
+<td>二者均<strong>重载operator bool()</strong></td>
+</tr>
+<tr>
+<td>解引用</td>
+<td>*sp</td>
+<td>*up</td>
+<td>获得所指的对象</td>
+</tr>
+<tr>
+<td>-&gt;mem</td>
+<td>sp-&gt;mem，等价于(*sp).mem</td>
+<td>up-&gt;mem，等价于(*up).mem</td>
+<td>-&gt;主要用于类类型的指针访问类的成员<br />.主要用于类类型的对象访问类的成员</td>
+</tr>
+<tr>
+<td>get()</td>
+<td>sp.get()</td>
+<td>up.get()</td>
+<td>返回p中保存的指针。<strong>小心使用</strong>，若智能指针释放了其对象，返回的指针所指向的对象也就消失了。</td>
+</tr>
+<tr>
+<td>p.swap(q)</td>
+<td>swap(p,q)<br />p.swap(q)</td>
+<td>swap(p,q)<br />p.swap(q)</td>
+<td>交换p和q中的指针</td>
+</tr>
+<tr>
+<td>独有操作</td>
+<td>①shared_ptr&lt;T&gt; p1(p); //拷贝构造<br />②p=q;  //赋值<br />③p.unique();  //若p.use_count();为1，返回true，否则返回false.<br />④p.use_count(); //返回强引用计数。</td>
+<td>①up = nullptr;  //释放up指向的对象，并将up置空<br />②up.release();  //up放弃对指针的控制权，返回裸指针，并将up置空。<br />③up.reset(); //置空up<br />up.reset(p);  // p为裸指针，将up指向p;<br />③up.reset(nullptr); // 置空up</td>
+<td>①unique_ptr为move-only，不可拷贝和赋值，可以被移动。<br />②release()会切断一个unique_ptr和它原来管理的对象之间的联系。<strong>通常用来初始化一个智能指针。</strong></td>
+</tr>
+</tbody></table>
 
     </div>
 
@@ -224,6 +275,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/12/11/EBO/" rel="next" title="EBO(Empty Base Optimization)">
+                  EBO(Empty Base Optimization) <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

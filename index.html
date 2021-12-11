@@ -114,12 +114,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -157,6 +157,149 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88deleter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88deleter/" class="post-title-link" itemprop="url">智能指针deleter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-11 21:17:50 / 修改时间：21:18:35" itemprop="dateCreated datePublished" datetime="2021-12-11T21:17:50+08:00">2021-12-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/11/EBO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/11/EBO/" class="post-title-link" itemprop="url">EBO(Empty Base Optimization)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-11 15:28:43 / 修改时间：21:17:08" itemprop="dateCreated datePublished" datetime="2021-12-11T15:28:43+08:00">2021-12-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="EBO概念"><a href="#EBO概念" class="headerlink" title="EBO概念"></a>EBO概念</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B1</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	A a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B2</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	A a;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">private</span> A &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(A) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(B1) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(B2) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(C) &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为<img src="https://s2.loli.net/2021/12/11/JIx6n5ztubm8hPp.png" alt="EBO_1.png"></p>
+<p>对于A这样一个空类，编译器会给这个空类安插一个char，来标识这个类。</p>
+<p>对于B，由于字节对齐，B将占用8个字节。</p>
+<p><strong>对于B1来说，A的大小为1，int大小为4，一共为5，字节补齐将其补齐为8(4的倍数)。</strong></p>
+<p><strong>对于B2来说，直接继承然后添加一个int，空间为5，并未进行补齐。1的补齐所浪费的空间是巨大的。EBO机制存在的意义就在此。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty1</span> :</span> <span class="keyword">public</span> Empty &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty2</span> :</span> <span class="keyword">public</span> Empty1 &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty3</span> :</span> <span class="keyword">public</span> Empty,Empty1 &#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//sizeof(Empty) == 1     &lt;- EBO机制</span></span><br><span class="line"><span class="comment">//sizeof(Empty1) == 1    &lt;- EBO机制</span></span><br><span class="line"><span class="comment">//sizeof(Empty2) == 1    &lt;- EBO机制</span></span><br><span class="line"><span class="comment">//sizeof(Empty3) == 1    </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>前三个都是EBO的体现，但是Empty3继承了两次Empty，不符合EBO的规则，但实际上Empty3的大小仍为1。</p>
+<p>:(===为啥是1===</p>
+<p><strong>EBO的准则：只有空类对象不与同一类型的其他对象或子对象分配在同一地址，就不需要为其分配空间。</strong></p>
+<p><strong>同一地址的问题，即使是同一类型的对象只有分配地址不同，也不需要为其分配空间</strong></p>
+<p>我理解的不好，网址插个旗</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxiao93/article/details/76038001">https://blog.csdn.net/zhangxiao93/article/details/76038001</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -182,7 +325,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-12-11 13:06:53 / 修改时间：13:37:31" itemprop="dateCreated datePublished" datetime="2021-12-11T13:06:53+08:00">2021-12-11</time>
+      <time title="创建时间：2021-12-11 13:06:53 / 修改时间：15:28:00" itemprop="dateCreated datePublished" datetime="2021-12-11T13:06:53+08:00">2021-12-11</time>
     </span>
 
   
@@ -195,7 +338,58 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="shared-ptr-和-unique-ptr"><a href="#shared-ptr-和-unique-ptr" class="headerlink" title="shared_ptr 和 unique_ptr"></a>shared_ptr 和 unique_ptr</h1><p>8909080<br>收到对</p>
+          <h1 id="shared-ptr-和-unique-ptr"><a href="#shared-ptr-和-unique-ptr" class="headerlink" title="shared_ptr 和 unique_ptr"></a>shared_ptr 和 unique_ptr</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>shared_ptr</th>
+<th>unique_ptr</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化</td>
+<td>①shared_ptr&lt;T&gt;sp;      <br />    sp.reset(new T()); <br />②shared_ptr&lt;T&gt; sp(new T());<br />③shared_ptr&lt;T&gt; sp1 = sp;  //拷贝构造<br />④auto sp = make_shared&lt;int&gt;(10);</td>
+<td>①unique_ptr&lt;T&gt; up;<br />up.reset(new T());<br />②unique_ptr&lt;T&gt; up(new T() );<br />③unique_ptr&lt;T&gt; up1 = std::move(up);  //移动构造，因为<strong>unique_ptr是move-only</strong><br />④auto up = make_unique&lt;int&gt;(10);</td>
+<td>两者的<strong>构造函数将声明为explicit</strong>，即不允许隐式类型转换，如shared_ptr&lt;int&gt; sp = new int(10)  //错误<br />shared_ptr&lt;int&gt;  sp(new int(10))  //正确<br />第一句是拷贝构造函数，一般拷贝构造都要传入与其类型相同的变量引用。内置指针无法隐式转换为shared_ptr所以报错。<br />第二局显式调用了shared_ptr的构造函数，正常传入内置指针。</td>
+</tr>
+<tr>
+<td>条件判断</td>
+<td>if(sp){…}</td>
+<td>if(up){…}</td>
+<td>二者均<strong>重载operator bool()</strong></td>
+</tr>
+<tr>
+<td>解引用</td>
+<td>*sp</td>
+<td>*up</td>
+<td>获得所指的对象</td>
+</tr>
+<tr>
+<td>-&gt;mem</td>
+<td>sp-&gt;mem，等价于(*sp).mem</td>
+<td>up-&gt;mem，等价于(*up).mem</td>
+<td>-&gt;主要用于类类型的指针访问类的成员<br />.主要用于类类型的对象访问类的成员</td>
+</tr>
+<tr>
+<td>get()</td>
+<td>sp.get()</td>
+<td>up.get()</td>
+<td>返回p中保存的指针。<strong>小心使用</strong>，若智能指针释放了其对象，返回的指针所指向的对象也就消失了。</td>
+</tr>
+<tr>
+<td>p.swap(q)</td>
+<td>swap(p,q)<br />p.swap(q)</td>
+<td>swap(p,q)<br />p.swap(q)</td>
+<td>交换p和q中的指针</td>
+</tr>
+<tr>
+<td>独有操作</td>
+<td>①shared_ptr&lt;T&gt; p1(p); //拷贝构造<br />②p=q;  //赋值<br />③p.unique();  //若p.use_count();为1，返回true，否则返回false.<br />④p.use_count(); //返回强引用计数。</td>
+<td>①up = nullptr;  //释放up指向的对象，并将up置空<br />②up.release();  //up放弃对指针的控制权，返回裸指针，并将up置空。<br />③up.reset(); //置空up<br />up.reset(p);  // p为裸指针，将up指向p;<br />③up.reset(nullptr); // 置空up</td>
+<td>①unique_ptr为move-only，不可拷贝和赋值，可以被移动。<br />②release()会切断一个unique_ptr和它原来管理的对象之间的联系。<strong>通常用来初始化一个智能指针。</strong></td>
+</tr>
+</tbody></table>
 
       
     </div>
