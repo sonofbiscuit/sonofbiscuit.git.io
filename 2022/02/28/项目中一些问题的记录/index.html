@@ -20,22 +20,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的一些记录">
-<meta property="og:url" content="http://example.com/tags/shared-ptr-unique-ptr-deleter/index.html">
+<meta name="description" content="ostream 的重载。 宏定义函数。 流对象是不能复制的。 virtual void format(std::shared_ptr logger, std::ostream&amp; os, LogLevel::Level level, LogEvent::ptr event) &#x3D; 0; 第一次写的为std::ostream os 我在log.cc中使用时，a-&gt;format(logge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目中一些问题的记录">
+<meta property="og:url" content="http://example.com/2022/02/28/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="我的一些记录">
+<meta property="og:description" content="ostream 的重载。 宏定义函数。 流对象是不能复制的。 virtual void format(std::shared_ptr logger, std::ostream&amp; os, LogLevel::Level level, LogEvent::ptr event) &#x3D; 0; 第一次写的为std::ostream os 我在log.cc中使用时，a-&gt;format(logge">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-28T11:49:14.000Z">
+<meta property="article:modified_time" content="2022-02-28T11:51:57.637Z">
+<meta property="article:tag" content="webserver, record">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/tags/shared-ptr-unique-ptr-deleter/">
+<link rel="canonical" href="http://example.com/2022/02/28/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/shared-ptr-unique-ptr-deleter/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/02/28/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/","path":"2022/02/28/项目中一些问题的记录/","title":"项目中一些问题的记录"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: shared_ptr, unique_ptr, deleter | 我的一些记录</title>
+<title>项目中一些问题的记录 | 我的一些记录</title>
   
 
 
@@ -147,50 +152,93 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">shared_ptr, unique_ptr, deleter
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/28/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          项目中一些问题的记录
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+      <time title="创建时间：2022-02-28 19:49:14 / 修改时间：19:51:57" itemprop="dateCreated datePublished" datetime="2022-02-28T19:49:14+08:00">2022-02-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ol>
+<li><strong>ostream 的重载。</strong></li>
+<li><strong>宏定义函数。</strong></li>
+<li><strong>流对象是不能复制的。</strong><br> virtual void format(std::shared_ptr<Logger> logger, std::ostream&amp; os, LogLevel::Level level, LogEvent::ptr event) = 0;<br> 第一次写的为std::ostream os<br> 我在log.cc中使用时，a-&gt;format(logger, ss, level, event);<br> 报错为：Calling a protected constructor of class ‘std::basic_ostream<char><br> 后续修改为 std::ostream&amp; os 才通过</li>
+<li><strong>auto self = shared_from_this()</strong>; //返回一个当前类的std::shared_ptr<br>shared_from_this 是个模板类，要让使用shared_from_this()的类继承才可使用<br>如 log.h之中的 class Logger : public std::enable_shared_from_this<Logger><br><strong>我们可通过这种方法来使用智能指针去控制对象的生存周期</strong></li>
+<li></li>
+</ol>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-11T21:17:50+08:00"
-              content="2021-12-11">
-          12-11
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88deleter/" itemprop="url">
-            <span itemprop="name">智能指针deleter</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/webserver-record/" rel="tag"># webserver, record</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/27/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="prev" title="webserver环境配置">
+                  <i class="fa fa-chevron-left"></i> webserver环境配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>
