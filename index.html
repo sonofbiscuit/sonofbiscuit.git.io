@@ -251,9 +251,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-27 14:05:14 / 修改时间：15:46:01" itemprop="dateCreated datePublished" datetime="2022-01-27T14:05:14+08:00">2022-01-27</time>
+      <time title="创建时间：2022-01-27 14:05:14" itemprop="dateCreated datePublished" datetime="2022-01-27T14:05:14+08:00">2022-01-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-03-01 19:37:50" itemprop="dateModified" datetime="2022-03-01T19:37:50+08:00">2022-03-01</time>
     </span>
 
   
@@ -319,7 +325,9 @@
 <h1 id="安装GDB"><a href="#安装GDB" class="headerlink" title="安装GDB"></a>安装GDB</h1><p>linux下使用GDB调试<br>gdb需要在gcc安装完成之后再安装</p>
 <p>wget <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gdb/gdb-8.3.tar.xz">http://ftp.gnu.org/gnu/gdb/gdb-8.3.tar.xz</a><br>tar xvf gdb-8.3.tar.xz<br>cd gdb-8.3<br>./configure –prefix=/apps/webserver<br>make -j4<br>make install</p>
 <p>#验证安装成功<br>which gdb<br>/apps/webserver/bin/gdb</p>
-<h1 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h1><p>wget <a target="_blank" rel="noopener" href="https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz</a><br>tar xvf cmake-3.14.5.tar.gz<br>cd cmake-3.14.5<br>./configure –prefix=/apps/webserver<br>make -j4<br>make install</p>
+<h1 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h1><p>wget <a target="_blank" rel="noopener" href="https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz</a></p>
+<p>其余版本 <a target="_blank" rel="noopener" href="https://cmake.org/download/">https://cmake.org/download/</a></p>
+<p>tar xvf cmake-3.14.5.tar.gz<br>cd cmake-3.14.5<br>./configure –prefix=/apps/webserver<br>make -j4<br>make install</p>
 <p>#验证安装成功<br>which cmake<br>/apps/webserver/bin/cmake</p>
 <h1 id="安装Ragel"><a href="#安装Ragel" class="headerlink" title="安装Ragel"></a>安装Ragel</h1><p>wget <a target="_blank" rel="noopener" href="http://www.colm.net/files/ragel/ragel-6.10.tar.gz">http://www.colm.net/files/ragel/ragel-6.10.tar.gz</a><br>tar xvf ragel-6.10.tar.gz<br>cd ragel-6.10<br>./configure –prefix=/apps/webserver<br>make -j4<br>make install</p>
 <p>#验证安装成功<br>which ragel<br>/apps/webserver/bin/ragel</p>
