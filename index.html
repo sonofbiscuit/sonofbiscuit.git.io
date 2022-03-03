@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-03 17:46:48" itemprop="dateModified" datetime="2022-03-03T17:46:48+08:00">2022-03-03</time>
+      <time title="修改时间：2022-03-03 20:23:57" itemprop="dateModified" datetime="2022-03-03T20:23:57+08:00">2022-03-03</time>
     </span>
 
   
@@ -301,7 +301,7 @@
 <p>函数调用是在一个栈空间完成函数之间参数的传递。</p>
 <p>应用程序发出系统调用之后，<strong>应用程序、操作系统、内核都有自己的堆栈</strong>，要<strong>切换堆栈（操作系统堆栈与其不同，需要开销。即系统调用开销大于函数调用，但好处是安全、可靠）</strong>，也要实现<strong>由用户态到内核态的转换</strong>。系统处理完之后，要把数据从内核空间拷贝到用户空间，接着实现状态转换。</p>
 <p><img src="https://s2.loli.net/2022/03/02/wMtQbJs6nkxq3aB.png" alt="image-20220302135601695"></p>
-<p>（TLB：TLB是Translation Lookaside Buffer的简称，可翻译为“地址转换后援缓冲器。简而言之就是页表的Cache)</p>
+<p>（TLB（快表）：TLB是Translation Lookaside Buffer的简称，可翻译为“地址转换后援缓冲器。简而言之就是页表的Cache)</p>
 <h4 id="为什么应用程序不能直接访问外设呢？（必须要经过操作系统？）"><a href="#为什么应用程序不能直接访问外设呢？（必须要经过操作系统？）" class="headerlink" title="为什么应用程序不能直接访问外设呢？（必须要经过操作系统？）"></a><strong>为什么应用程序不能直接访问外设呢？（必须要经过操作系统？）</strong></h4><p>在计算机运行中，内核是被信任的<strong>第三方。</strong><br>只有内核可以执行特权指令。<br>为了方便应用程序。</p>
 <h2 id="计算机的体系结构及内存分层体系"><a href="#计算机的体系结构及内存分层体系" class="headerlink" title="计算机的体系结构及内存分层体系"></a>计算机的体系结构及内存分层体系</h2><h2 id="计算机基本硬件结构"><a href="#计算机基本硬件结构" class="headerlink" title="计算机基本硬件结构"></a>计算机基本硬件结构</h2><p><img src="https://s2.loli.net/2022/03/02/aIMsPG1SwfcCUkR.png" alt="image-20220302140147945"></p>
 <h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>内存的层次结构</p>
@@ -353,17 +353,17 @@
 <li><strong>外碎片：</strong> 分配单元间的碎片；</li>
 <li><strong>内碎片：</strong> 分配单元内没有使用的碎片</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/03/03/u654zUmcPaENIKx.png" alt="image-20220303165833008"></p>
-<h5 id="首次适配算法"><a href="#首次适配算法" class="headerlink" title="首次适配算法"></a><strong>首次适配算法</strong></h5><p><img src="https://s2.loli.net/2022/03/03/Sz6OmFPwjT2Yl8y.png" alt="image-20220303165913647"></p>
+<h5 id="分区的动态分配"><a href="#分区的动态分配" class="headerlink" title="分区的动态分配"></a>分区的动态分配</h5><p><img src="https://s2.loli.net/2022/03/03/u654zUmcPaENIKx.png" alt="image-20220303165833008"></p>
+<h6 id="首次适配算法"><a href="#首次适配算法" class="headerlink" title="首次适配算法"></a><strong>首次适配算法</strong></h6><p><img src="https://s2.loli.net/2022/03/03/Sz6OmFPwjT2Yl8y.png" alt="image-20220303165913647"></p>
 <p>碰到第一个能满足需求的空块，那么就分配。如图，需求400 byte，那么从低地址到高地址，可以看到第一块1K的就满足要求。</p>
 <p>需求：</p>
 <p>​    按地址排序的空闲块列表。</p>
 <p>​    重分配需要检查，看自由分区能合并于相邻的空闲分区。</p>
-<h5 id="最优分配算法"><a href="#最优分配算法" class="headerlink" title="最优分配算法"></a><strong>最优分配算法</strong></h5><img src="https://s2.loli.net/2022/03/03/U5h7ioOv2NaRPSG.png" alt="image-20220303171858880" style="zoom: 67%;" />
+<h6 id="最优分配算法"><a href="#最优分配算法" class="headerlink" title="最优分配算法"></a><strong>最优分配算法</strong></h6><img src="https://s2.loli.net/2022/03/03/U5h7ioOv2NaRPSG.png" alt="image-20220303171858880" style="zoom: 67%;" />
 
 <img src="https://s2.loli.net/2022/03/03/4qNwJcKeFXskOh7.png" alt="image-20220303171933297" style="zoom:80%;" />
 
-<h5 id="最差适配算法"><a href="#最差适配算法" class="headerlink" title="最差适配算法"></a><strong>最差适配算法</strong></h5><img src="https://s2.loli.net/2022/03/03/HsWtvTSfGjYnVBL.png" alt="image-20220303172111143" style="zoom:67%;" />
+<h6 id="最差适配算法"><a href="#最差适配算法" class="headerlink" title="最差适配算法"></a><strong>最差适配算法</strong></h6><img src="https://s2.loli.net/2022/03/03/HsWtvTSfGjYnVBL.png" alt="image-20220303172111143" style="zoom:67%;" />
 
 <img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220303172157479.png" alt="image-20220303172157479" style="zoom:67%;" />
 
@@ -380,6 +380,50 @@
 
 <p>利用起<strong>硬盘</strong>，将等待中的程序所占用的内存放到硬盘上。</p>
 <p>问题： 哪些程序进行交换？开销？（<strong>后续虚存管理会提及</strong>）</p>
+<h4 id="非连续内存分配"><a href="#非连续内存分配" class="headerlink" title="非连续内存分配"></a>非连续内存分配</h4><p><img src="https://s2.loli.net/2022/03/03/KX32ehQqnVZrPWc.png" alt="image-20220303175127951"></p>
+<p><img src="https://s2.loli.net/2022/03/03/wXyKnGvbDuSf56h.png" alt="image-20220303175156111"></p>
+<p><img src="https://s2.loli.net/2022/03/03/CXTmBH4nwcMotKz.png" alt="image-20220303175336780"></p>
+<h5 id="分段（更好的分离和共享）"><a href="#分段（更好的分离和共享）" class="headerlink" title="分段（更好的分离和共享）"></a>分段（更好的分离和共享）</h5><ul>
+<li>程序的分段地址空间</li>
+<li>分段寻址方案</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/03/UiH7DfbACtzgO41.png" alt="image-20220303175545711"></p>
+<p><img src="https://s2.loli.net/2022/03/03/kIx2Qu91T3VjorO.png" alt="image-20220303175704679"></p>
+<h6 id="分段访问方案"><a href="#分段访问方案" class="headerlink" title="分段访问方案"></a>分段访问方案</h6><ul>
+<li>段访问机制</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/03/9NjziLuyWEmGRYx.png" alt="image-20220303175944470"></p>
+<p><img src="https://s2.loli.net/2022/03/03/d4wYauZ3NOGmXKp.png" alt="image-20220303180049323"></p>
+<p>操作系统在正式寻址之前建立段表</p>
+<h5 id="分页（目前cpu主要采取机制）"><a href="#分页（目前cpu主要采取机制）" class="headerlink" title="分页（目前cpu主要采取机制）"></a>分页（目前cpu主要采取机制）</h5><ul>
+<li>分页地址空间</li>
+<li>页寻址方案</li>
+</ul>
+<p>分页需要一个页号和一个页内偏移。</p>
+<p><strong>和分段机制的区别：段的尺寸是可变的，页的大小是固定不变的。</strong></p>
+<ul>
+<li>划分物理内存到<strong>固定大小的帧</strong>（frame）<ul>
+<li>大小是2的幂</li>
+</ul>
+</li>
+<li>划分逻辑地址空间至<strong>相同大小的页</strong>（page）<ul>
+<li>大小是2的幂</li>
+</ul>
+</li>
+<li>建立方案  转换逻辑地址为物理地址（pages to frames）<ul>
+<li>页表</li>
+<li>MMU/TLB（TLB叫快表）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/03/7t9D6NLhYdX5mVC.png" alt="image-20220303181106638"></p>
+<p>2^S 一帧的大小   f为帧号   o是页内偏移</p>
+<p><img src="https://s2.loli.net/2022/03/03/dBqPigH7hwu3cAG.png" alt="image-20220303181504551"></p>
+<p><img src="https://s2.loli.net/2022/03/03/6IMxGOSE3Q1mrpL.png" alt="image-20220303195530575"></p>
+<img src="https://s2.loli.net/2022/03/03/eOzKj6xCQWZp3Ri.png" alt="image-20220303195601460"  />
+
+<p><img src="https://s2.loli.net/2022/03/03/5I1DtVNxqXL9sJA.png" alt="image-20220303200419753"></p>
+<p>逻辑地址空间一般<strong>大于</strong>物理地址空间（存不下的会使用虚拟内存）</p>
 
       
     </div>
