@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-03 16:52:14" itemprop="dateModified" datetime="2022-03-03T16:52:14+08:00">2022-03-03</time>
+      <time title="修改时间：2022-03-03 17:46:48" itemprop="dateModified" datetime="2022-03-03T17:46:48+08:00">2022-03-03</time>
     </span>
 
   
@@ -221,7 +221,7 @@
 <p>2.共享<br>是“同时”访问还是互斥共享，根据情况而定。</p>
 <p>3.虚拟<br>把硬件虚拟化。比如：把CPU虚拟化为进程，把磁盘虚拟化为文件，内存虚拟化为地址空间。<br>利用多道程序设计技术，让每个用户都觉得有一个计算机专门为他服务。</p>
 <p>4.异步<br>程序执行不是一贯到底，而是走走停停，向前推进速度不可预知。<br>但只要运行环境相同，OS需要保证程序运行的结果也相同。<br>（异步双方不需要共同的时钟，也就是接收方不知道发送方什么时候发送，所以在发送的信息中就要有提示接收方开始接收的信息，如开始位，同时在结束时有停止位。）</p>
-<h3 id="操作系统的启动"><a href="#操作系统的启动" class="headerlink" title="操作系统的启动"></a>操作系统的启动</h3><p>通电之后，如何启动。</p>
+<h2 id="操作系统的启动"><a href="#操作系统的启动" class="headerlink" title="操作系统的启动"></a>操作系统的启动</h2><p>通电之后，如何启动。</p>
 <ul>
 <li><strong>DISK：</strong> 存放OS</li>
 <li><strong>BIOS：</strong> 基本I/O处理系统。（检查各种外设）</li>
@@ -307,8 +307,7 @@
 <h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>内存的层次结构</p>
 <p><img src="https://s2.loli.net/2022/03/02/l475hJugdyRtrDL.png" alt="image-20220302140238204"></p>
 <p><em>主存：物理内存</em></p>
-<p><strong>操作系统需要完成的一些事情</strong></p>
-<p><img src="https://s2.loli.net/2022/03/02/S1Uh2JRsZWn5dfK.png" alt="image-20220302140612170"></p>
+<h4 id="操作系统需要完成的一些事情"><a href="#操作系统需要完成的一些事情" class="headerlink" title="操作系统需要完成的一些事情"></a><strong>操作系统需要完成的一些事情</strong></h4><p><img src="https://s2.loli.net/2022/03/02/S1Uh2JRsZWn5dfK.png" alt="image-20220302140612170"></p>
 <p>MMU: 内存管理单元（memory management unit)  </p>
 <ul>
 <li>抽象</li>
@@ -316,8 +315,7 @@
 <li>共享（进程间的数据传递机制）</li>
 <li>虚拟化</li>
 </ul>
-<p><strong>在操作系统中管理内存的不同方法</strong></p>
-<ul>
+<h4 id="在操作系统中管理内存的不同方法"><a href="#在操作系统中管理内存的不同方法" class="headerlink" title="在操作系统中管理内存的不同方法"></a><strong>在操作系统中管理内存的不同方法</strong></h4><ul>
 <li>程序重定位</li>
 <li>分段</li>
 <li>分页</li>
@@ -350,7 +348,39 @@
 <p><strong>在这个过程中，OS所做的操作就是需要在这些操作之前把映射关系建立好。</strong></p>
 <p><strong>OS需要确保不同程序的地址不受干扰。加以限制和约束（如图）。</strong></p>
 <p><img src="https://s2.loli.net/2022/03/02/SCeGVBgIjZicb3x.png" alt="image-20220302142850662"></p>
-<h4 id="连续内存分配"><a href="#连续内存分配" class="headerlink" title="连续内存分配"></a>连续内存分配</h4>
+<h4 id="连续内存分配"><a href="#连续内存分配" class="headerlink" title="连续内存分配"></a>连续内存分配</h4><h5 id="内存碎片"><a href="#内存碎片" class="headerlink" title="内存碎片"></a>内存碎片</h5><ul>
+<li>无法进一步利用的空间。</li>
+<li><strong>外碎片：</strong> 分配单元间的碎片；</li>
+<li><strong>内碎片：</strong> 分配单元内没有使用的碎片</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/03/u654zUmcPaENIKx.png" alt="image-20220303165833008"></p>
+<h5 id="首次适配算法"><a href="#首次适配算法" class="headerlink" title="首次适配算法"></a><strong>首次适配算法</strong></h5><p><img src="https://s2.loli.net/2022/03/03/Sz6OmFPwjT2Yl8y.png" alt="image-20220303165913647"></p>
+<p>碰到第一个能满足需求的空块，那么就分配。如图，需求400 byte，那么从低地址到高地址，可以看到第一块1K的就满足要求。</p>
+<p>需求：</p>
+<p>​    按地址排序的空闲块列表。</p>
+<p>​    重分配需要检查，看自由分区能合并于相邻的空闲分区。</p>
+<h5 id="最优分配算法"><a href="#最优分配算法" class="headerlink" title="最优分配算法"></a><strong>最优分配算法</strong></h5><img src="https://s2.loli.net/2022/03/03/U5h7ioOv2NaRPSG.png" alt="image-20220303171858880" style="zoom: 67%;" />
+
+<img src="https://s2.loli.net/2022/03/03/4qNwJcKeFXskOh7.png" alt="image-20220303171933297" style="zoom:80%;" />
+
+<h5 id="最差适配算法"><a href="#最差适配算法" class="headerlink" title="最差适配算法"></a><strong>最差适配算法</strong></h5><img src="https://s2.loli.net/2022/03/03/HsWtvTSfGjYnVBL.png" alt="image-20220303172111143" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220303172157479.png" alt="image-20220303172157479" style="zoom:67%;" />
+
+<h5 id="压缩式碎片整理（紧致算法）"><a href="#压缩式碎片整理（紧致算法）" class="headerlink" title="压缩式碎片整理（紧致算法）"></a><strong>压缩式碎片整理（紧致算法）</strong></h5><ul>
+<li>重置程序以合并孔洞</li>
+<li>要求所有程序是 动态可重置的</li>
+<li>问题？ <ul>
+<li>何时重置</li>
+<li>开销</li>
+</ul>
+</li>
+</ul>
+<h5 id="交换式碎片整理"><a href="#交换式碎片整理" class="headerlink" title="交换式碎片整理"></a><strong>交换式碎片整理</strong></h5><img src="https://s2.loli.net/2022/03/03/95mqt2g6kfNJwTn.png" alt="image-20220303173035887" style="zoom:67%;" />
+
+<p>利用起<strong>硬盘</strong>，将等待中的程序所占用的内存放到硬盘上。</p>
+<p>问题： 哪些程序进行交换？开销？（<strong>后续虚存管理会提及</strong>）</p>
+
       
     </div>
 
