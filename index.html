@@ -180,9 +180,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-03-02 09:49:14 / 修改时间：23:01:16" itemprop="dateCreated datePublished" datetime="2022-03-02T09:49:14+08:00">2022-03-02</time>
+      <time title="创建时间：2022-03-02 09:49:14" itemprop="dateCreated datePublished" datetime="2022-03-02T09:49:14+08:00">2022-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-03-03 16:52:14" itemprop="dateModified" datetime="2022-03-03T16:52:14+08:00">2022-03-03</time>
     </span>
 
   
@@ -210,11 +216,11 @@
 <p>操作系统是<strong>硬件之上、应用程序</strong>之下的层次结构。<br>操作系统位于应用软件之下，为应用软件提供服务支撑。</p>
 <p>外壳（shell） 内核（kernel）。</p>
 <h4 id="操作系统包含什么"><a href="#操作系统包含什么" class="headerlink" title="操作系统包含什么"></a>操作系统包含什么</h4><p>硬件资源三大块：CPU、内存、磁盘。</p>
-<p><strong>CPU：</strong> CPU调度、进程线程。<br><strong>内存：</strong> <strong>物理内存管理</strong>、<strong>虚拟内存管理</strong>（在有限物理内存之上为应用提供内存）。<br><strong>文件系统：</strong> disk过于底层，不方便上层应用。所以我们做出<strong>文件系统管理</strong>。<br><strong>中断处理与设备驱动：</strong> 驱动实现操作系统。</p>
+<p><strong>CPU：</strong> CPU调度、进程线程。<br><strong>内存：</strong> <strong>物理内存管理</strong>、<strong>虚拟内存管理</strong>（在有限物理内存之上为应用提供内存）。MMU<br><strong>文件系统：</strong> disk过于底层，不方便上层应用。所以我们做出<strong>文件系统管理</strong>。<br><strong>中断处理与设备驱动：</strong> 驱动实现操作系统。</p>
 <h4 id="OS-Kernel的特征："><a href="#OS-Kernel的特征：" class="headerlink" title="OS Kernel的特征："></a>OS Kernel的特征：</h4><p>1.并发<br>并发：在<strong>一段时间内</strong>多个程序运行，需要OS管理和调度。<br>并行：在<strong>一个时间点</strong>上共同运行（因此<strong>只有一个CPU无法完成并行</strong>）。</p>
 <p>2.共享<br>是“同时”访问还是互斥共享，根据情况而定。</p>
 <p>3.虚拟<br>把硬件虚拟化。比如：把CPU虚拟化为进程，把磁盘虚拟化为文件，内存虚拟化为地址空间。<br>利用多道程序设计技术，让每个用户都觉得有一个计算机专门为他服务。</p>
-<p>4.异步<br>程序执行不是一贯到底，而是走走停停，向前推进速度不可预知。<br>但只要运行环境相同，OS需要保证程序运行的结果也相同。</p>
+<p>4.异步<br>程序执行不是一贯到底，而是走走停停，向前推进速度不可预知。<br>但只要运行环境相同，OS需要保证程序运行的结果也相同。<br>（异步双方不需要共同的时钟，也就是接收方不知道发送方什么时候发送，所以在发送的信息中就要有提示接收方开始接收的信息，如开始位，同时在结束时有停止位。）</p>
 <h3 id="操作系统的启动"><a href="#操作系统的启动" class="headerlink" title="操作系统的启动"></a>操作系统的启动</h3><p>通电之后，如何启动。</p>
 <ul>
 <li><strong>DISK：</strong> 存放OS</li>
@@ -285,6 +291,13 @@
 <p>一旦执行系统调用之后，用户态会转换为内核态</p>
 <p><strong>程序的用户态</strong>是指级别比较低的状态；<br><strong>操作系统的内核态</strong>是等级最高的状态。可以控制整个计算机系统。</p>
 <p><strong>函数调用和系统调用是不同的。</strong></p>
+<hr>
+<p>函数调用：</p>
+<p>ESP是栈指针寄存器，存储着栈顶的地址<br>EBP存储着栈底的地址<br>EIP是返回地址<br>栈空间主要通过这两个地址确定</p>
+<p><img src="https://s2.loli.net/2022/03/03/IbMcOpuhnlwt1jW.png" alt="image-20220303164250542" style="zoom: 50%;" /><img src="https://s2.loli.net/2022/03/03/LsDaec3HFCRMP56.png" alt="image-20220303164400123" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/c4b6fW7Gn9uFxko.png" alt="image-20220303164422815" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/xSOL5GdKEeltTAv.png" alt="image-20220303164444703" style="zoom:50%;" /></p>
+<p><img src="https://s2.loli.net/2022/03/03/DmQXxO8nls4RqGb.png" alt="image-20220303164500922" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/47FTVzo1J8n5uMc.png" alt="image-20220303164533760" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/GUMe26l3WhfCYOJ.png" alt="image-20220303164618366" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/PKYDUaqReCohXJS.png" alt="image-20220303164641942" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/fvly4gXiP6Vm2eY.png" alt="image-20220303164710823" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/opuMm2riP1X5kG9.png" alt="image-20220303164754462" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/KSisNqkaGQ9hVmI.png" alt="image-20220303164824766" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/D5c3Sv1pUmkFXOJ.png" alt="image-20220303164921104" style="zoom:50%;" /><img src="https://s2.loli.net/2022/03/03/7R5U6caxSJQpjmb.png" alt="image-20220303164934992" style="zoom:50%;" /></p>
+<p>结束func1，返回主程序过程类似。</p>
+<hr>
 <p>函数调用是在一个栈空间完成函数之间参数的传递。</p>
 <p>应用程序发出系统调用之后，<strong>应用程序、操作系统、内核都有自己的堆栈</strong>，要<strong>切换堆栈（操作系统堆栈与其不同，需要开销。即系统调用开销大于函数调用，但好处是安全、可靠）</strong>，也要实现<strong>由用户态到内核态的转换</strong>。系统处理完之后，要把数据从内核空间拷贝到用户空间，接着实现状态转换。</p>
 <p><img src="https://s2.loli.net/2022/03/02/wMtQbJs6nkxq3aB.png" alt="image-20220302135601695"></p>
@@ -314,7 +327,7 @@
 <h4 id="地址空间和地址生成"><a href="#地址空间和地址生成" class="headerlink" title="地址空间和地址生成"></a>地址空间和地址生成</h4><p>几个问题：</p>
 <pre><code>               1. 什么是地址空间？逻辑地址空间和物理地址空间的区别？
                2. 地址空间是怎么生成的？什么时候生成逻辑地址空间？什么时候生成物理地址空间？
-            1. OS如何保护不同的地址之间不受干扰？
+               1. OS如何保护不同的地址之间不受干扰？
 </code></pre>
 <p><strong>地址空间</strong></p>
 <p><img src="https://s2.loli.net/2022/03/02/nhPdJ8HouNbj5v7.png" alt="image-20220302141411806"></p>
