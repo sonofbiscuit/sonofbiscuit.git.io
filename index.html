@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-03 20:23:57" itemprop="dateModified" datetime="2022-03-03T20:23:57+08:00">2022-03-03</time>
+      <time title="修改时间：2022-03-04 19:47:40" itemprop="dateModified" datetime="2022-03-04T19:47:40+08:00">2022-03-04</time>
     </span>
 
   
@@ -424,6 +424,63 @@
 
 <p><img src="https://s2.loli.net/2022/03/03/5I1DtVNxqXL9sJA.png" alt="image-20220303200419753"></p>
 <p>逻辑地址空间一般<strong>大于</strong>物理地址空间（存不下的会使用虚拟内存）</p>
+<h6 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h6><ul>
+<li>页表概述</li>
+<li>转换后备缓冲区</li>
+<li>二级/多级 页表  （时间换空间）</li>
+<li>反向页表</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/04/Li9nNgXMF5oGqKP.png" alt="image-20220304154133037"></p>
+<p>逻辑地址大小为64KB，物理地址大小为32KB</p>
+<p>（4，0）-&gt; 可以找到第四页100，页帧号均为0，说明不存在。产生内存访问异常。</p>
+<p>（3，1023)-&gt;可以找到第三页011，页帧号为00100，页帧内偏移和页偏移相同为1023，可以得到（4，1023）</p>
+<p><strong>分页机制的性能问题</strong></p>
+<p>​    1）访问一个内存单元需要两次内存访问：一次用于获取页表项，一次用于访问数据</p>
+<p>​    2）页表可能非常大。如64位及其如果每页1024字节，那么一个页表的大小为（2^64 /2^10 = 2^54），这是不合理的。     每个程序都有自己的页表，那么页表也非常大。</p>
+<p>可以使用<strong>缓存（caching）</strong> ， <strong>间接（indirecting）访问</strong>   两种方法来解决</p>
+<p><strong>TLB（Translation Look-aside Buffer）</strong></p>
+<p>把经常访问的页表项放到TLB中<img src="https://s2.loli.net/2022/03/04/ucAG5BswJgFTNZI.png" alt="image-20220304155407574"></p>
+<p>为了减少TLB的缺失，要注意程序的局部性。</p>
+<p><strong>二级页表</strong></p>
+<p><img src="https://s2.loli.net/2022/03/04/dmzDNhUc9qgFvi4.png" alt="image-20220304155941131"></p>
+<p><strong>页表基寄存器（<em>PTBR</em>）指向页表. 页表长度寄存器（PTLR）指示页表的大小</strong></p>
+<p>一级页表存的是二级页表的起始地址</p>
+<p>二级页表可以节省空间</p>
+<p><strong>e.g.</strong>  页面的大小为4KB，每个页表项为4B，所以每个页面中可以存放1K个（1024）个页表项，因此每1K个连续的页表项为一组，每组刚好占一个页面，这样就<strong>需要为离散的页表再建立一张页表</strong>，称为<strong>页目录表</strong>。 </p>
+<p>32位的逻辑地址空间，页表项大小为4B，页面大小4KB，则页内地址占12位将页表分为分为1024个表，每个表中包含1024个页表项，形成二级页表。二级页表结构的逻辑地址结构如下图：<img src="https://s2.loli.net/2022/03/04/W6zU5PER4tTd9QD.png" alt="image-20220304164358274" style="zoom: 67%;" /></p>
+<p><strong>多级页表</strong></p>
+<p><img src="https://s2.loli.net/2022/03/04/2CAHaQ5Ljp1qfso.png" alt="image-20220304164955556"></p>
+<p><strong>反向页表</strong></p>
+<p><img src="https://s2.loli.net/2022/03/04/j7cG3QUa4DTntzA.png" alt="image-20220304165316766"></p>
+<p>以物理页号来查找逻辑页号</p>
+<p><img src="https://s2.loli.net/2022/03/04/bjzYRVrOJkutGNs.png" alt="image-20220304165432223"></p>
+<p>页容量只与物理页地址大小相关。好处是节省空间</p>
+<p><strong>问题：</strong>如何根据page frame号查找page号？</p>
+<p><img src="https://s2.loli.net/2022/03/04/WZ5n7DerubvAymL.png" alt="image-20220304165636788"></p>
+<p><img src="https://s2.loli.net/2022/03/04/CQEAl6ixoU1SjYJ.png" alt="image-20220304165748983"></p>
+<p><strong>基于关联内存的方案（设计成本太大）</strong></p>
+<p><img src="https://s2.loli.net/2022/03/04/yUsAq9TNxci7J8S.png" alt="image-20220304165814703"></p>
+<p><strong>基于哈希（hash）查找的方案</strong></p>
+<p>page frame number （hash）-&gt; page number</p>
+<p><img src="https://s2.loli.net/2022/03/04/hQC1ngWTutvkPDo.png" alt="image-20220304170118030"></p>
+<p><img src="https://s2.loli.net/2022/03/04/KsjrUOiJ5v2lyke.png" alt="image-20220304170216697"></p>
+<h4 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h4><ul>
+<li>起因 （程序规模的增长远大于存储器容量的增长）</li>
+<li>覆盖技术</li>
+<li>交换技术</li>
+<li>虚存技术<ul>
+<li>目标</li>
+<li>程序局部性原理</li>
+<li>基本概念</li>
+<li>基本特征</li>
+<li>虚拟页式内存管理</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/04/BVuDflk2wrYzA6P.png" alt="image-20220304170733457"></p>
+<p><img src="https://s2.loli.net/2022/03/04/q8aPfWZp9DrTRnU.png" alt="image-20220304193756065"></p>
+<p>把一些希望通过OS的管理把不常用的数据放在硬盘，常用的数据放在内存中，这样使得有限的内存能够存放常用的代码和数据。这种管理方式需要CPU（硬件）、MMU（硬件）、OS内核协同管理之下可以实现。</p>
+<p><img src="https://s2.loli.net/2022/03/04/NdiuZtqmCxapDIg.png" alt="image-20220304194234186"></p>
 
       
     </div>
