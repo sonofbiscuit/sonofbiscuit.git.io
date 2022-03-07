@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-04 19:47:40" itemprop="dateModified" datetime="2022-03-04T19:47:40+08:00">2022-03-04</time>
+      <time title="修改时间：2022-03-07 20:58:02" itemprop="dateModified" datetime="2022-03-07T20:58:02+08:00">2022-03-07</time>
     </span>
 
   
@@ -481,6 +481,43 @@
 <p><img src="https://s2.loli.net/2022/03/04/q8aPfWZp9DrTRnU.png" alt="image-20220304193756065"></p>
 <p>把一些希望通过OS的管理把不常用的数据放在硬盘，常用的数据放在内存中，这样使得有限的内存能够存放常用的代码和数据。这种管理方式需要CPU（硬件）、MMU（硬件）、OS内核协同管理之下可以实现。</p>
 <p><img src="https://s2.loli.net/2022/03/04/NdiuZtqmCxapDIg.png" alt="image-20220304194234186"></p>
+<h5 id="覆盖技术"><a href="#覆盖技术" class="headerlink" title="覆盖技术"></a>覆盖技术</h5><p><img src="https://s2.loli.net/2022/03/07/HSTGwWX5ZEo81jy.png" alt="image-20220307195820595"></p>
+<p>e.g.</p>
+<p><img src="https://s2.loli.net/2022/03/07/vI1eqLifC68gpGj.png" alt="image-20220307195843199"></p>
+<p>A在常驻区（固定区），把相互之间没有调用关系的程序放到同一个区，在需要调用前，再调入覆盖区，替换掉覆盖区原有的段。</p>
+<p>注：另一种覆盖方法</p>
+<p>​        A占一个分区20K</p>
+<p>​        B、E和F 共用一个分区50K</p>
+<p>​        C和D 共用一个分区30K</p>
+<p>覆盖技术的缺点：</p>
+<ul>
+<li>由程序员来把一个大的程序划分为若干个小地功能模块，并确定各个模块之间的覆盖关系，费时费力，增加了编程复杂度。</li>
+<li>覆盖模块由外存装入内存，实际上是以时间来换取空间。</li>
+</ul>
+<h5 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h5><p><img src="https://s2.loli.net/2022/03/07/O5qKgjuCfTarBHt.png" alt="image-20220307200955050"></p>
+<p>交换技术的问题：</p>
+<ul>
+<li>何时发生交换？ 因为内存和外存的读写速度差异太大，因此频繁的交换会造成巨大的开销，只当内存空间不够或有危险的时候换出。</li>
+<li>如何划分硬盘，交换区的大小？</li>
+<li>程序换入时的重定位。换出后和换入时的内存地址一定要是一样吗？可以采取<strong>动态</strong>地址映射来解决。</li>
+</ul>
+<p><strong>覆盖和交换的比较</strong></p>
+<p><img src="https://s2.loli.net/2022/03/07/4EXJcpPlqmYMn7e.png" alt="image-20220307201733036"></p>
+<p>交换发生在内存的程序之间，覆盖发生在运行中的程序之内。</p>
+<h5 id="虚存技术"><a href="#虚存技术" class="headerlink" title="虚存技术"></a>虚存技术</h5><p><img src="https://s2.loli.net/2022/03/07/AZG8CK2vFgeTXbO.png" alt="image-20220307201950432"></p>
+<p><strong>虚存技术的目标：</strong></p>
+<ul>
+<li>像覆盖技术那样，不是把程序的所有内容都放在内存中，但是是自动执行的，无需程序员干涉；</li>
+<li>像交换技术那样，实现进程在内存与外存之间的交换，但是不是以一个程序为粒度，而是以<strong>页</strong>为粒度。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/07/6B3ncaOjzT5HJI2.png" alt="image-20220307203523022"></p>
+<p><strong>e.g.</strong> </p>
+<p><img src="https://s2.loli.net/2022/03/07/UEPmGeMI3rgXCpb.png" alt="image-20220307204113840"></p>
+<p><img src="https://s2.loli.net/2022/03/07/O1g924UVHDzP5uE.png" alt="image-20220307204215209"></p>
+<p>4byte x 1024 = 4k，正好是一页</p>
+<p><img src="https://s2.loli.net/2022/03/07/HO2bq5XZ1g4f3xW.png" alt="image-20220307204738244"></p>
+<p>以<strong>页</strong>或<strong>段</strong></p>
+<p><img src="https://s2.loli.net/2022/03/07/18GzoIgjBskR5OQ.png" alt="image-20220307205429633"></p>
 
       
     </div>
