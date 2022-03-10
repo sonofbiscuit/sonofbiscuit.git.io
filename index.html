@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-08 19:24:05" itemprop="dateModified" datetime="2022-03-08T19:24:05+08:00">2022-03-08</time>
+      <time title="修改时间：2022-03-10 20:38:51" itemprop="dateModified" datetime="2022-03-10T20:38:51+08:00">2022-03-10</time>
     </span>
 
   
@@ -214,7 +214,9 @@
 </ul>
 <p><img src="https://s2.loli.net/2022/03/02/hyO78dDNgHeQYsB.png" alt="image-20220302110840436"></p>
 <p>操作系统是<strong>硬件之上、应用程序</strong>之下的层次结构。<br>操作系统位于应用软件之下，为应用软件提供服务支撑。</p>
-<p>外壳（shell） 内核（kernel）。</p>
+<p><strong>外壳（shell）</strong> <strong>内核（kernel）。</strong></p>
+<p><strong>内核空间</strong>是操作系统内核访问的区域，独立于普通的应用程序，是受保护的内存空间。</p>
+<p>用户空间是普通应用程序可访问的内存区域。</p>
 <h4 id="操作系统包含什么"><a href="#操作系统包含什么" class="headerlink" title="操作系统包含什么"></a>操作系统包含什么</h4><p>硬件资源三大块：CPU、内存、磁盘。</p>
 <p><strong>CPU：</strong> CPU调度、进程线程。<br><strong>内存：</strong> <strong>物理内存管理</strong>、<strong>虚拟内存管理</strong>（在有限物理内存之上为应用提供内存）。MMU<br><strong>文件系统：</strong> disk过于底层，不方便上层应用。所以我们做出<strong>文件系统管理</strong>。<br><strong>中断处理与设备驱动：</strong> 驱动实现操作系统。</p>
 <h4 id="OS-Kernel的特征："><a href="#OS-Kernel的特征：" class="headerlink" title="OS Kernel的特征："></a>OS Kernel的特征：</h4><p>1.并发<br>并发：在<strong>一段时间内</strong>多个程序运行，需要OS管理和调度。<br>并行：在<strong>一个时间点</strong>上共同运行（因此<strong>只有一个CPU无法完成并行</strong>）。</p>
@@ -365,7 +367,7 @@
 
 <h6 id="最差适配算法"><a href="#最差适配算法" class="headerlink" title="最差适配算法"></a><strong>最差适配算法</strong></h6><img src="https://s2.loli.net/2022/03/03/HsWtvTSfGjYnVBL.png" alt="image-20220303172111143" style="zoom:67%;" />
 
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220303172157479.png" alt="image-20220303172157479" style="zoom:67%;" />
+<img src="https://s2.loli.net/2022/03/08/OxbsETpmwGa4nIg.png" alt="image-20220303172157479" style="zoom:67%;" />
 
 <h5 id="压缩式碎片整理（紧致算法）"><a href="#压缩式碎片整理（紧致算法）" class="headerlink" title="压缩式碎片整理（紧致算法）"></a><strong>压缩式碎片整理（紧致算法）</strong></h5><ul>
 <li>重置程序以合并孔洞</li>
@@ -519,7 +521,7 @@
 <p>以<strong>页</strong>或<strong>段</strong></p>
 <p><img src="https://s2.loli.net/2022/03/07/18GzoIgjBskR5OQ.png" alt="image-20220307205429633"></p>
 <h6 id="虚存技术-虚拟页式内存管理"><a href="#虚存技术-虚拟页式内存管理" class="headerlink" title="虚存技术--虚拟页式内存管理"></a>虚存技术--虚拟页式内存管理</h6><p><img src="https://s2.loli.net/2022/03/08/G2c4lhfYxLtXR5g.png" alt="image-20220308094031524"></p>
-<p><img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220308094623664.png" alt="image-20220308094623664"></p>
+<p><img src="https://s2.loli.net/2022/03/08/IgP3GW4YlXdERH1.png" alt="image-20220308094623664"></p>
 <p><img src="https://s2.loli.net/2022/03/08/eWMVhot1APRsy2Q.png" alt="image-20220308095025342"></p>
 <p><img src="https://s2.loli.net/2022/03/08/U7KzqkLhWScCwMn.png" alt="image-20220308095238169"></p>
 <p><img src="https://s2.loli.net/2022/03/08/QHeYILrGJ9BKq3f.png" alt="image-20220308100151048"></p>
@@ -531,7 +533,7 @@
 <li>最近最久未使用算法</li>
 <li>时钟页面置换算法</li>
 </ul>
-<p><img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220308101453507.png" alt="image-20220308101453507"></p>
+<p><img src="https://s2.loli.net/2022/03/08/wxOXJ3Vr8EbIkvS.png" alt="image-20220308101453507"></p>
 <p>OPT以时间来记录，替换掉<strong>距离下一次访问最长时间内不被访问</strong>的页面</p>
 <p><img src="https://s2.loli.net/2022/03/08/Rt6Dpg5xiBWEGM7.png" alt="image-20220308102021090"></p>
 <p>FIFO（队列），产生的缺页多</p>
@@ -599,6 +601,206 @@
 <p><img src="https://s2.loli.net/2022/03/08/OqlI6f259AcVsty.png" alt="image-20220308162707592"></p>
 <p><img src="https://s2.loli.net/2022/03/08/Ty12F4mtzKpbgGZ.png" alt="image-20220308165341384"></p>
 <p><img src="https://s2.loli.net/2022/03/08/U2zaTK1uICxrpeQ.png" alt="image-20220308165641433"></p>
+<h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><ul>
+<li>进程的生命期管理</li>
+<li>进程状态变化模型</li>
+<li>进程挂起模型</li>
+</ul>
+<h4 id="进程的生命期管理"><a href="#进程的生命期管理" class="headerlink" title="进程的生命期管理"></a>进程的生命期管理</h4><p>创建—运行—等待—唤醒—结束</p>
+<p><strong>进程创建</strong></p>
+<p>引起进程创建的3个主要事件：</p>
+<ol>
+<li>系统初始化时；</li>
+<li>用户请求创建一个新进程；</li>
+<li>正在运行的进程执行了创建进程的系统调用。</li>
+</ol>
+<p><strong>进程运行</strong></p>
+<p>内核选择一个就绪进程，让它占用处理机并执行。如何选择？此类问题将在调度算法中讨论。</p>
+<p><strong>进程等待</strong></p>
+<p>在以下情况下，进程等待（阻塞）：</p>
+<ol>
+<li>请求并等待系统服务，无法马上完成；</li>
+<li>启动某种操作，无法马上完成；</li>
+<li>需要的数据没有到达。</li>
+</ol>
+<p><strong>进程只能自己阻塞自己</strong>，因为只用进程自身才能知道何时需要等待某种事件的发生。</p>
+<p><strong>进程唤醒</strong><br>进程唤醒的原因：</p>
+<ul>
+<li>被阻塞进程需要的资源可以被满足。</li>
+<li>被阻塞进程等待的事件到达。</li>
+<li>将该进程的PCB插入到就绪队列。</li>
+<li>进程只能被别的进程或者操作系统唤醒。</li>
+</ul>
+<p><strong>进程结束</strong><br>在以下四种情况下，进程结束：</p>
+<ul>
+<li>正常退出（自愿的）；</li>
+<li>错误退出（自愿的）；</li>
+<li>致命错误（强制性的）；</li>
+<li>被其他进程所杀（强制性的）。</li>
+</ul>
+<h4 id="进程状态变化模型"><a href="#进程状态变化模型" class="headerlink" title="进程状态变化模型"></a>进程状态变化模型</h4><p><img src="https://s2.loli.net/2022/03/08/eKsyV9PMW4OxT2B.png" alt="image-20220308195829362"></p>
+<p><img src="https://s2.loli.net/2022/03/08/kULZbIFpTYrXNyn.png" alt="image-20220308195912986"></p>
+<h4 id="进程挂起模型"><a href="#进程挂起模型" class="headerlink" title="进程挂起模型"></a>进程挂起模型</h4><p>定义：进程没有占用内存空间。处在挂起状态的进程映像在磁盘上。</p>
+<p><img src="https://s2.loli.net/2022/03/08/1r4OimSXvIzPn72.png" alt="image-20220308202421901"></p>
+<p><img src="https://s2.loli.net/2022/03/08/bIpQVoXdKmCtevZ.png" alt="image-20220308202732327"></p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220308202950585.png" alt="image-20220308202950585"  />
+
+<p><img src="https://s2.loli.net/2022/03/08/1VyXThjmfAY7vUg.png" alt="image-20220308203027637"></p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>定义：线程是进程当中的一条执行流程。</p>
+<p><img src="https://s2.loli.net/2022/03/10/XtKV4kJS7ur9ZQv.png" alt="image-20220310101623209"></p>
+<p>TCB（thread control block）</p>
+<p><img src="https://s2.loli.net/2022/03/10/oxF7nE8iqhDIc43.png" alt="image-20220310101655975"></p>
+<p><img src="https://s2.loli.net/2022/03/10/CPXIjVQOy4WumTa.png" alt="image-20220310102058483"></p>
+<p>需要有各自独立的寄存器、堆栈，但是能共享代码段、数据段、网络资源等等，</p>
+<p><img src="https://s2.loli.net/2022/03/10/7R6pij4xnS5tWmP.png" alt="image-20220310102451819"></p>
+<p>线程的创建和终止时间较短是因为不需要去考虑资源的创建和释放问题。<br>线程的切换时间不需要切换内存管理所需要的页表，而进程需要切换页表，这一操作开销很大。</p>
+<h4 id="线程实现"><a href="#线程实现" class="headerlink" title="线程实现"></a>线程实现</h4><p>用户线程和内核线程的关系</p>
+<ul>
+<li>1对1</li>
+<li>1对多</li>
+<li>多对多</li>
+</ul>
+<p>操作系统看不到TCB，OS只能看到进程信息，看不到进程内的线程信息。所以说整个线程的调度和管理主要是由线程库（用户级的线程库）管理，OS不直接参与。</p>
+<p><strong>用户线程：</strong></p>
+<p><img src="https://s2.loli.net/2022/03/10/wAPqcSkNTUjxD5p.png" alt="image-20220310103051707"></p>
+<p><img src="https://s2.loli.net/2022/03/10/915iU4YrHq7TNwV.png" alt="image-20220310103118949"></p>
+<p><img src="https://s2.loli.net/2022/03/10/DW6BLT3CuMjfU9d.png" alt="image-20220310103409435"></p>
+<p><strong>内核线程：</strong></p>
+<p><img src="https://s2.loli.net/2022/03/10/lvAnMsgaJm1ZGxK.png" alt="image-20220310103538101"></p>
+<p>一个PCB管理了一个TCB的list，但是在具体的线程调度时，还是TCB进行</p>
+<p><strong>轻量级进程</strong></p>
+<p>定义：是内核支持的用户线程。一个进程可有一个或多个轻量级进程，每个量级进程由一个单独的内核线程来支持。</p>
+<p><img src="https://s2.loli.net/2022/03/10/mOTxRvbJt3s984V.png" alt="image-20220310104353987"></p>
+<p><strong>内核线程</strong><br>内核线程只运行在内核态，不受用户态上下文的拖累。</p>
+<ul>
+<li><p>处理器竞争：可以在全系统范围内竞争处理器资源；</p>
+</li>
+<li><p>使用资源：唯一使用的资源是内核栈和上下文切换时保持寄存器的空间</p>
+</li>
+<li><p>调度：调度的开销可能和进程自身差不多昂贵</p>
+</li>
+<li><p>同步效率：资源的同步和数据共享比整个进程的数据同步和共享要低一些。</p>
+</li>
+</ul>
+<p><strong>轻量级进程</strong><br>轻量级进程(LWP)是建立在内核之上并由内核支持的用户线程，它是内核线程的高度抽象，每一个轻量级进程都与一个特定的内核线程关联。内核线程只能由内核管理并像普通进程一样被调度。</p>
+<p>轻量级进程由clone()系统调用创建，参数是CLONE_VM，即与父进程是共享进程地址空间和系统资源。</p>
+<p><strong>与普通进程区别：LWP只有一个最小的执行上下文和调度程序所需的统计信息</strong>。</p>
+<ul>
+<li><p>处理器竞争：因与特定内核线程关联，因此可以在全系统范围内竞争处理器资源</p>
+</li>
+<li><p>使用资源：与父进程共享进程地址空间</p>
+</li>
+<li><p>调度：像普通进程一样调度</p>
+</li>
+</ul>
+<p><strong>用户线程</strong><br>用户线程是完全建立在用户空间的线程库，用户线程的创建、调度、同步和销毁全又库函数在用户空间完成，不需要内核的帮助。因此这种线程是极其低消耗和高效的。</p>
+<ul>
+<li><p>处理器竞争：单纯的用户线程是建立在用户空间，其对内核是透明的，因此其所属进程单独参与处理器的竞争，而进程的所有线程参与竞争该进程的资源。</p>
+</li>
+<li><p>使用资源：与所属进程共享进程地址空间和系统资源。</p>
+</li>
+<li><p>调度：由在用户空间实现的线程库，在所属进程内进行调度</p>
+</li>
+</ul>
+<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p><img src="https://s2.loli.net/2022/03/10/O1mIJrEBeCNUKvD.png" alt="image-20220310113333580"></p>
+<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h4 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h4><h4 id="加载和执行进程"><a href="#加载和执行进程" class="headerlink" title="加载和执行进程"></a>加载和执行进程</h4><h4 id="等待和终止进程"><a href="#等待和终止进程" class="headerlink" title="等待和终止进程"></a>等待和终止进程</h4><h2 id="协程补充"><a href="#协程补充" class="headerlink" title="协程补充"></a>协程补充</h2><p>当系统线程较少的时候没有什么问题，但是当线程数量非常多的时候，却产生了问题。<strong>一是系统线程会占用非常多的内存空间，二是过多的线程切换会占用大量的系统时间。</strong></p>
+<p>协程运行在线程之上，当一个协程执行完成后，可以选择主动让出，让另一个协程运行在当前线程之上。<strong>协程并没有增加线程数量，只是在线程的基础之上通过分时复用的方式运行多个协程</strong>，而且协程的切换在用户态完成，切换的代价比线程从用户态到内核态的代价小很多。</p>
+<p>实际上协程并不是什么银弹，协程只有在等待IO的过程中才能重复利用线程，上面我们已经讲过了，线程在等待IO的过程中会陷入阻塞状态，意识到问题没有？</p>
+<p>假设协程运行在线程之上，并且协程调用了一个阻塞IO操作，这时候会发生什么？实际上操作系统并不知道协程的存在，它只知道线程，<strong>因此在协程调用阻塞IO操作的时候，操作系统会让线程进入阻塞状态，当前的协程和其它绑定在该线程之上的协程都会陷入阻塞而得不到调度，这往往是不能接受的。</strong></p>
+<p>因此在协程中不能调用导致线程阻塞的操作。也就是说，协程只有和异步IO结合起来，才能发挥最大的威力。</p>
+<p>那么如何处理在协程中调用阻塞IO的操作呢？一般有2种处理方式：</p>
+<ol>
+<li><strong>在调用阻塞IO操作的时候，重新启动一个线程去执行这个操作，等执行完成后，协程再去读取结果。这其实和多线程没有太大区别。</strong></li>
+<li><strong>对系统的IO进行封装，改成异步调用的方式，这需要大量的工作，最好寄希望于编程语言原生支持。</strong><br>（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/172471249%EF%BC%89">https://zhuanlan.zhihu.com/p/172471249）</a></li>
+</ol>
+<h2 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h2><ul>
+<li><p>上下文切换</p>
+<ul>
+<li><p>切换CPU的当前任务，从一个进程/线程到另一个。</p>
+</li>
+<li><p>保存当前进程/线程在PCB/TCB中的执行上下文（CPU状态）。</p>
+</li>
+<li><p>读取下一个进程/线程的上下文。</p>
+</li>
+</ul>
+</li>
+<li><p>CPU调度</p>
+<ul>
+<li>从就绪队列中挑选一个进程/线程作为CPU将要运行的下一个进程/线程。</li>
+<li>调度程序：挑选进程/线程的内核函数（通过一些调度策略）</li>
+<li>什么时候进行调度？</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/10/rDEVQqh4awOu2CR.png" alt="image-20220310142248386"></p>
+<h3 id="调度准则"><a href="#调度准则" class="headerlink" title="调度准则"></a>调度准则</h3><ul>
+<li>CPU使用率</li>
+</ul>
+<p>​        CPU处于<strong>忙状态所占时间</strong>的百分比。</p>
+<ul>
+<li>吞吐量</li>
+</ul>
+<p>​        在<strong>单位时间</strong>内完成的进程数量。</p>
+<ul>
+<li>周转时间</li>
+</ul>
+<p>​        一个进程<strong>从初始化到结束</strong>， <strong>所花费的时间</strong>。</p>
+<ul>
+<li>等待时间</li>
+</ul>
+<p>​        进程在<strong>就绪队列中</strong>的时间。</p>
+<ul>
+<li>响应时间</li>
+</ul>
+<p>​        从一个请求<strong>被提交到第一次产生响应</strong>  所花费的时间。</p>
+<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><ul>
+<li>FCFS        先来先服务</li>
+<li>SPN(SJF)   SRT    短进程优先（短作业优先）   短剩余时间<ul>
+<li>可以是抢占的（SRT）或者是不可抢占的（SPN）</li>
+</ul>
+</li>
+<li>HRRN      最高响应比优先</li>
+<li>Round Robin    轮循（时间片轮转调度算法）</li>
+<li>Multilevel Feedback Queues     多级反馈队列<ul>
+<li>是时间片轮转调度算法和优先级调度算法的综合和发展，动态调整进程优先级和时间片大小。</li>
+</ul>
+</li>
+<li>Fair Share Scheduling      公平共享调度</li>
+</ul>
+<h3 id="实时调度"><a href="#实时调度" class="headerlink" title="实时调度"></a>实时调度</h3><p>实时调度所面对的系统为Real Time System（实时系统）。</p>
+<p>对于实时系统：</p>
+<ul>
+<li>时间约束的及时性（deadlines）很重要；</li>
+<li>速度和平均性能相对不重要；</li>
+<li>时间约束的可预测性是其主要特性。</li>
+</ul>
+<p>实时系统可分为：</p>
+<ul>
+<li>强实时系统：需要在保证的时间内完成重要的任务，必须完成；</li>
+<li>弱实时系统：要求重要的进程的优先级更高，尽量完成，并非必须。</li>
+</ul>
+<p>比如视频掉帧，就是弱实时系统的体现。</p>
+<p><img src="https://s2.loli.net/2022/03/10/t5BTvwfziFDg2d4.png" alt="image-20220310155516515"></p>
+<h3 id="多处理器调度与优先反转"><a href="#多处理器调度与优先反转" class="headerlink" title="多处理器调度与优先反转"></a>多处理器调度与优先反转</h3><p><img src="https://s2.loli.net/2022/03/10/x8Q4eKGsMRonuXq.png" alt="image-20220310160002562"></p>
+<p>如何避免优先级反转：</p>
+<p>优先级继承</p>
+<p>优先级天花板</p>
+<p><img src="https://s2.loli.net/2022/03/10/idSmTJx3oOjE8XK.png" alt="image-20220310160622217"></p>
+<h2 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h2><p>进程之间的交互会造成共享资源的访问。</p>
+<p><img src="https://s2.loli.net/2022/03/10/kVb3q2jnSUM7Haw.png" alt="image-20220310165436516"></p>
+<p><img src="https://s2.loli.net/2022/03/10/7IZBL6Cc8yU2Jkm.png" alt="image-20220310165822882"></p>
+<p>next_pid保存的是当前最大的进程ID。但是这种方法，在两个进程并行时，会产生冲突。</p>
+<p>所谓<strong>原子操作</strong>是指不会被线程调度机制打断的操作；这种操作一旦开始，就一直运行到结束，中间不会有任何 context switch </p>
+<p><strong>临界资源</strong></p>
+<p>一次仅允许一个进程使用的资源称为临界资源。</p>
+<p><strong>临界区</strong></p>
+<p>临界区是指进程中的一段需要访问共享资源并且当另一个进程处于相应代码区域时便不会被执行的代码区域。</p>
+<p><strong>互斥</strong></p>
+<p>当一个进程处于临界区并访问共享资源时，没有其他进程会处于临界区并且访问任何相同的共享资源。</p>
+<p><strong>死锁</strong></p>
+<p>两个或以上的进程，在相互等待完成任务，而最终没法将自身任务进行下去。</p>
+<p><strong>饥饿</strong></p>
+<p>一个可执行的进程，被调度器持续忽略，以至于虽然处于可执行状态却不被执行。</p>
 
       
     </div>
