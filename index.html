@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-10 20:38:51" itemprop="dateModified" datetime="2022-03-10T20:38:51+08:00">2022-03-10</time>
+      <time title="修改时间：2022-03-12 20:01:42" itemprop="dateModified" datetime="2022-03-12T20:01:42+08:00">2022-03-12</time>
     </span>
 
   
@@ -799,8 +799,113 @@
 <p>当一个进程处于临界区并访问共享资源时，没有其他进程会处于临界区并且访问任何相同的共享资源。</p>
 <p><strong>死锁</strong></p>
 <p>两个或以上的进程，在相互等待完成任务，而最终没法将自身任务进行下去。</p>
-<p><strong>饥饿</strong></p>
+<p><strong>饥饿（starvation）</strong></p>
 <p>一个可执行的进程，被调度器持续忽略，以至于虽然处于可执行状态却不被执行。</p>
+<h4 id="实现临界区互斥的基本方法"><a href="#实现临界区互斥的基本方法" class="headerlink" title="实现临界区互斥的基本方法"></a>实现临界区互斥的基本方法</h4><ul>
+<li><p><strong>硬件实现方法</strong></p>
+<p><strong>禁用中断（中断屏蔽）</strong></p>
+<p>当一个进程在使用处理机执行它的临界区代码时，防止其他进程进入临界区进行访问的最简单方法是，禁止一切中断发生。因为CPU只在发生中断时引起进程切换，但是在多CPU情况下，中断屏蔽不可使用，因为其他CPU还能访问临界区。</p>
+</li>
+<li><p><strong>软件方法</strong></p>
+</li>
+</ul>
+<p>​        1. 单标志法</p>
+<p>​        2. 双标志法先检查</p>
+<p>​        3. 双标志发后检查</p>
+<p>​        4. Peterson’s Algorithm    </p>
+<p>​                P82</p>
+<ul>
+<li><strong>更高级的抽象</strong></li>
+</ul>
+<p>​        <img src="https://s2.loli.net/2022/03/11/YJWKlU9Lphq3EIe.png" alt="image-20220311155942022"></p>
+<p><img src="https://s2.loli.net/2022/03/11/QZbigJYutK4lo8a.png" alt="image-20220311160026267"></p>
+<p><img src="https://s2.loli.net/2022/03/11/YNoMLIdcZkSnJO1.png" alt="image-20220311160849414"></p>
+<p>test-and-set是不允许执行中断的</p>
+<p><img src="https://s2.loli.net/2022/03/11/PHVkOCrwWB1fhNj.png" alt="image-20220311161512979"></p>
+<p><img src="https://s2.loli.net/2022/03/11/lAjUxBDno5ratSy.png" alt="image-20220311162052788"></p>
+<p><img src="https://s2.loli.net/2022/03/11/IwqOvLUKgZxCtXJ.png" alt="image-20220311171025863"></p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p><img src="https://s2.loli.net/2022/03/11/YKLa4Isxg5zyhCv.png" alt="image-20220311171229318"></p>
+<p> <img src="https://s2.loli.net/2022/03/11/SGar3xLyJYQVnAM.png" alt="image-20220311171848157"></p>
+<p><img src="https://s2.loli.net/2022/03/11/rn2yhU6Qbl597Zk.png" alt="image-20220311172004248"></p>
+<p><img src="https://s2.loli.net/2022/03/11/ZnSd6vK3g2q9HLz.png" alt="image-20220311172547273"></p>
+<p><img src="https://s2.loli.net/2022/03/11/nU3pYIulHaoBE5R.png" alt="image-20220311172747406"></p>
+<p><strong>消费者问题需要引入同步和互斥操作。</strong></p>
+<p><img src="https://s2.loli.net/2022/03/11/E1KYUl8aNufwoGB.png" alt="image-20220311172825230"></p>
+<p><img src="https://s2.loli.net/2022/03/11/yosWSEJPKaBvV4b.png" alt="image-20220311173017337"></p>
+<p><img src="https://s2.loli.net/2022/03/11/Cw23VPlSAZJXN7B.png" alt="image-20220311173234150"></p>
+<p><img src="https://s2.loli.net/2022/03/12/AZSTVjsUNowgneL.png" alt="image-20220312095247585"></p>
+<p><img src="https://s2.loli.net/2022/03/12/dRcnOCQilL7UP2D.png" alt="image-20220312095513514"></p>
+<p><strong>P,V操作的顺序有影响，P操作能够产生阻塞。</strong>若Deposit交换前两个P操作，即先做mutex-&gt;P()，在执行emptyBuffers-&gt;p()，若生产者非常快，把fullbuffer填满了，那么下一个操作会执行mutex-&gt;P()，没问题，在下一个操作对emptyBuffer执行P操作，此时因为buffer满了，那么emptyBuffer为0，导致挂起，在此之后，消费者是没法执行操作的。<strong>陷入了死锁。</strong></p>
+<p><img src="https://s2.loli.net/2022/03/12/sZL8Od37KExCDBR.png" alt="image-20220312101537375"></p>
+<h2 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h2><p>比信号量的抽象程度更高。</p>
+<p><strong>目的：</strong>分离互斥和条件同步</p>
+<p>定义：包含了一系列的共享变量（共享资源的数据结构），以及对该共享变量实时操作的一组过程。</p>
+<p><strong>要访问管程管理的那些函数只能有一个线程。</strong></p>
+<p><img src="https://s2.loli.net/2022/03/12/zKpSorjuYqJ3WIi.png" alt="image-20220312103414643"></p>
+<p> <img src="https://s2.loli.net/2022/03/12/k8GCcYJqBITFzi4.png" alt="image-20220312103405772"></p>
+<p>wait时一定要release，不然会导致无法释放lock，导致死锁。</p>
+<p><strong>用管程来解决生产者、消费者问题：</strong></p>
+<p><img src="https://s2.loli.net/2022/03/12/O49JkD1wofKXWpP.png" alt="image-20220312103705994"></p>
+<p>操作时一定要先上锁，优先满足进程互斥条件。</p>
+<p><strong>Hansen和Hoare方法</strong></p>
+<p>在管程中，A线程将B线程唤醒，是先执行A还是先执行B？Hanse和Hoare两位科学家给出了不同的解决办法。</p>
+<p><img src="https://s2.loli.net/2022/03/12/vLAGtQp6x57rNJn.png" alt="image-20220312104515844"></p>
+<p>其中，Hansen机制较为容易实现（较为简单直观），实践中大量使用。</p>
+<p><img src="https://s2.loli.net/2022/03/12/fdKkSUrLRXxqGmy.png" alt="image-20220312104842461"></p>
+<p>hansen使用while，release之后会造成多个等待进程抢占cpu资源。</p>
+<p>hoare使用if，release之后只会有一个等待进程使用CPU。</p>
+<p><img src="https://s2.loli.net/2022/03/12/mK4bQSBw9EXJyk5.png" alt="image-20220312104952749"></p>
+<h3 id="经典同步问题"><a href="#经典同步问题" class="headerlink" title="经典同步问题"></a>经典同步问题</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><ul>
+<li>死锁问题</li>
+<li>系统模型</li>
+<li>死锁特征</li>
+<li>死锁处理方法<ul>
+<li>死锁预防</li>
+<li>死锁避免</li>
+<li>死锁检测</li>
+<li>死锁恢复</li>
+</ul>
+</li>
+</ul>
+<p>定义：是指多个进程因竞争资源而造成的一种僵局（互相等待）。</p>
+<p><img src="https://s2.loli.net/2022/03/12/Dfmqr3wsJjby56W.png" alt="image-20220312112144926"></p>
+<p>需要一个资源的情况下，没有死锁。</p>
+<p><img src="https://s2.loli.net/2022/03/12/FTXI3tMgAEck2yw.png" alt="image-20220312112414132"></p>
+<p><strong>死锁一定产生环，有环不一定有死锁。</strong></p>
+<h3 id="死锁产生的必要条件"><a href="#死锁产生的必要条件" class="headerlink" title="死锁产生的必要条件"></a>死锁产生的必要条件</h3><p>有死锁产生，一定有这四种条件满足。满足这四种条件，不一定产生死锁。</p>
+<ol>
+<li><p>互斥条件</p>
+<p>在一个时间只能有一个进程使用资源。</p>
+</li>
+<li><p>不剥夺条件</p>
+<p>以恶搞资源只能被进程自愿释放。</p>
+</li>
+<li><p>请求并保持条件</p>
+<p>进程保持至少一个资源正在等待获取其他进程持有的额外资源。</p>
+</li>
+<li><p>循环等待条件</p>
+<p>存在等待进程集合 [P0, P1, … , PN] ，产生环。</p>
+</li>
+</ol>
+<h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><p>破坏死锁产生的4个必要条件之一。</p>
+<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>避免死锁同样属于事先预防策略，并不是在事先采取某种限制措施破坏死锁的必要条件，而是在资源动态分配过程中，防止系统进入不安全状态，以避免发生死锁。</p>
+<h4 id="系统安全状态"><a href="#系统安全状态" class="headerlink" title="系统安全状态"></a>系统安全状态</h4><p>是指系统能够按某种进程推进顺序为每个进程分配其所需的资源，直至满足每个进程对资源的最大需求，使每个进程都可顺序完成。</p>
+<h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><p>把操作系统视为银行家，操作系统管理的资源相当于银行家的资源，进程向操作系统请求分配资源相当于用户向银行家贷款。</p>
+<p>进程运行之前先<strong>声明</strong>对各种资源的最大需求量，当进程在执行中继续申请资源时，先测试该进程已占用的资源数与本次申请的资源数之和是否超过该进程声明的最大需求量。若超过则拒绝分配资源，若未超过则再测试系统现存的资源能否满足该进程尚需的最大资源量，若能满足则按当前的申请量分配资源，否则也要推迟分配。</p>
+<p><img src="https://s2.loli.net/2022/03/12/o5sKZnlQwW4DTrP.png" alt="image-20220312170442725"></p>
+<p><strong>并非所有的不安全状态都是死锁状态，但当系统进入不安全状态之后，便可能进入死锁状态。反之，只要系统处于安全状态，系统便可避免进入死锁状态。</strong></p>
+<p><img src="https://s2.loli.net/2022/03/12/rLtAgbUQ8ZVzGMR.png" alt="image-20220312171202629"></p>
+<p><img src="https://s2.loli.net/2022/03/12/9mHcgUSvZnWFy8A.png" alt="image-20220312171733152"></p>
+<h5 id="银行家算法-1"><a href="#银行家算法-1" class="headerlink" title="银行家算法"></a>银行家算法</h5><p><img src="https://s2.loli.net/2022/03/12/qhIBON83eTgmM1S.png" alt="image-20220312172345316"></p>
+<h5 id="安全性算法"><a href="#安全性算法" class="headerlink" title="安全性算法"></a>安全性算法</h5><p><img src="https://s2.loli.net/2022/03/12/2uKxQ7YRXyL6FUM.png" alt="image-20220312172830717"></p>
+<p><img src="https://s2.loli.net/2022/03/12/mCGgTLxhU4Od1Hc.png" alt="image-20220312172837053"></p>
+<p><img src="https://s2.loli.net/2022/03/12/584bcnAS7JQuWsN.png" alt="image-20220312172840088"></p>
+<p><img src="https://s2.loli.net/2022/03/12/zxZuYL1A2oEls5g.png" alt="image-20220312172905505"></p>
+<p>同理P4。</p>
+<p>P2-P1-P3-P4是个安全状态</p>
+<h4 id="死锁检测和死锁恢复"><a href="#死锁检测和死锁恢复" class="headerlink" title="死锁检测和死锁恢复"></a>死锁检测和死锁恢复</h4><p><strong>死锁检测</strong></p>
+<p><img src="https://s2.loli.net/2022/03/12/ft8zNdnjc7r4Iha.png" alt="image-20220312175652848"></p>
+<p>把资源分配图做一定的简化，变为一个等待图（去掉资源节点，只留下进程节点）</p>
 
       
     </div>
