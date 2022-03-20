@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -157,6 +157,171 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/20/%E5%89%91%E6%8C%87offer%E5%9B%9E%E5%BF%86%E5%BD%95%EF%BC%88%E9%80%9F%E5%88%B7%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/20/%E5%89%91%E6%8C%87offer%E5%9B%9E%E5%BF%86%E5%BD%95%EF%BC%88%E9%80%9F%E5%88%B7%EF%BC%89/" class="post-title-link" itemprop="url">剑指offer回忆录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-03-20 10:45:00 / 修改时间：20:06:19" itemprop="dateCreated datePublished" datetime="2022-03-20T10:45:00+08:00">2022-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a><strong>从尾到头打印链表</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 栈</span><br><span class="line"><span class="number">2.</span> insert</span><br><span class="line"><span class="number">3.</span>递归</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; vec, ListNode* p)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next)&#123;</span><br><span class="line">            <span class="built_in">backtrace</span>(vec, p-&gt;next);</span><br><span class="line">        &#125;</span><br><span class="line">        vec.<span class="built_in">push_back</span>(p-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">printListFromTailToHead</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> vec;</span><br><span class="line">        &#125;       </span><br><span class="line">        <span class="built_in">backtrace</span>(vec, head);</span><br><span class="line">        <span class="keyword">return</span> vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在vector对象<strong>尾部之外的位置</strong>插入或删除元素可能很慢，那么结合链表与顺序表的特性可以认为vector对象的元素所使用的数据结构应该是顺序表。</p>
+<h3 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a><strong>反转链表</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">ReverseList</span><span class="params">(ListNode* pHead)</span> </span>&#123;  <span class="comment">//头插法反转</span></span><br><span class="line">        ListNode* newHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">-1</span>); <span class="comment">//新的头节点</span></span><br><span class="line">        <span class="keyword">while</span>(pHead != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            ListNode* nxt = pHead-&gt;next;  <span class="comment">//提前保存head的下一个结点，防止赋值后head更改</span></span><br><span class="line">            pHead-&gt;next = newHead-&gt;next;</span><br><span class="line">            newHead-&gt;next = pHead;</span><br><span class="line">            pHead = nxt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newHead-&gt;next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="合并两个排序的链表"><a href="#合并两个排序的链表" class="headerlink" title="合并两个排序的链表"></a><strong>合并两个排序的链表</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">Merge</span><span class="params">(ListNode* pHead1, ListNode* pHead2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead1 == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> pHead2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pHead2 == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> pHead1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 节省空间就不创建新的链表了，较小的当第一个节点</span></span><br><span class="line">        ListNode *nh = pHead1-&gt;val &lt;= pHead2-&gt;val?pHead1:pHead2;</span><br><span class="line">        ListNode *prev = nh; <span class="comment">// 尾结点</span></span><br><span class="line">        ListNode *nxt = <span class="literal">nullptr</span>; <span class="comment">// temp</span></span><br><span class="line">        <span class="keyword">while</span>(pHead1 &amp;&amp; pHead2)&#123;</span><br><span class="line">            <span class="keyword">if</span>(pHead1-&gt;val &lt;= pHead2-&gt;val)&#123;</span><br><span class="line">                nxt = pHead1;</span><br><span class="line">                pHead1 = pHead1-&gt;next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nxt = pHead2;</span><br><span class="line">                pHead2 = pHead2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            prev-&gt;next = nxt;</span><br><span class="line">            prev = prev-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(pHead1)&#123;</span><br><span class="line">            prev-&gt;next = pHead1;</span><br><span class="line">            prev = prev-&gt;next;</span><br><span class="line">            pHead1 = pHead1-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(pHead2)&#123;</span><br><span class="line">            prev-&gt;next = pHead2;</span><br><span class="line">            prev = prev-&gt;next;</span><br><span class="line">            pHead2 = pHead2-&gt;next;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        prev-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> nh;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><h3 id="树的子结构"><a href="#树的子结构" class="headerlink" title="树的子结构"></a><strong>树的子结构</strong></h3><p>判断一棵树是不是另一棵树的子结构.</p>
+<p>没啥好解释的，我直接暴力穷举。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">HasSubtree</span><span class="params">(TreeNode* pRoot1, TreeNode* pRoot2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!pRoot1 || !pRoot2)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        std::function&lt;<span class="built_in"><span class="keyword">bool</span></span>(TreeNode*, TreeNode*)&gt; compareVal = [&amp;](TreeNode* p, TreeNode* q)-&gt;<span class="keyword">bool</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(q == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">            <span class="keyword">if</span>(p == <span class="literal">nullptr</span> || p-&gt;val != q-&gt;val)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">compareVal</span>(p-&gt;left, q-&gt;left) &amp;&amp; <span class="built_in">compareVal</span>(p-&gt;right,q-&gt;right);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">bool</span> tag = <span class="literal">false</span>;</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        que.<span class="built_in">push</span>(pRoot1);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">auto</span> temp = que.<span class="built_in">front</span>();</span><br><span class="line">            que.<span class="built_in">pop</span>();</span><br><span class="line">            tag = <span class="built_in">compareVal</span>(temp, pRoot2);</span><br><span class="line">            <span class="keyword">if</span>(tag)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(temp-&gt;left)&#123;</span><br><span class="line">                que.<span class="built_in">push</span>(temp-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(temp-&gt;right)&#123;</span><br><span class="line">                que.<span class="built_in">push</span>(temp-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二叉树的镜像"><a href="#二叉树的镜像" class="headerlink" title="二叉树的镜像"></a><strong>二叉树的镜像</strong></h3><p>我第一反应想的是层次遍历倒序</p>
+<p>发现前序，中序获得，倒序构建貌似也可以。没实验过</p>
+<p>递归操作也可以用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">Mirror</span><span class="params">(TreeNode* pRoot)</span> </span>&#123;   <span class="comment">// 递归</span></span><br><span class="line">        <span class="keyword">if</span>(pRoot == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!pRoot-&gt;left &amp;&amp; !pRoot-&gt;right)&#123;</span><br><span class="line">            <span class="keyword">return</span> pRoot;  <span class="comment">// 单节点返回自身, &#123;1&#125; return 1;</span></span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* temp = pRoot-&gt;left;</span><br><span class="line">        pRoot-&gt;left = pRoot-&gt;right;</span><br><span class="line">        pRoot-&gt;right = temp;</span><br><span class="line">        <span class="built_in">Mirror</span>(pRoot-&gt;left);</span><br><span class="line">        <span class="built_in">Mirror</span>(pRoot-&gt;right);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> pRoot;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="对称的二叉树"><a href="#对称的二叉树" class="headerlink" title="对称的二叉树"></a><strong>对称的二叉树</strong></h3><p>判断二叉树是否对称。</p>
+<p>中序遍历拆开   或者  不拆开直接判断，即递归，一样的。</p>
+<p>非递归方法，使用stack，每次成双取出，判断p1-&gt;left == p2-&gt;right &amp;&amp; p1-&gt;right == p2-&gt;left。然后成双放入。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSymmetrical</span><span class="params">(TreeNode* pRoot)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pRoot == <span class="literal">nullptr</span> || (!pRoot-&gt;left &amp;&amp; !pRoot-&gt;right))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        std::function&lt;<span class="built_in"><span class="keyword">bool</span></span>(TreeNode*, TreeNode*)&gt; cpr = [&amp;](TreeNode* leftt, TreeNode* rightt)-&gt;<span class="keyword">bool</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(leftt == <span class="literal">nullptr</span> &amp;&amp; rightt == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 说明不全空</span></span><br><span class="line">            <span class="keyword">if</span>(leftt==<span class="literal">nullptr</span> || rightt == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">//一空一不空</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> leftt-&gt;val == rightt-&gt;val</span><br><span class="line">                   &amp;&amp; <span class="built_in">cpr</span>(leftt-&gt;right, rightt-&gt;left)</span><br><span class="line">                   &amp;&amp; <span class="built_in">cpr</span>(leftt-&gt;left, rightt-&gt;right);</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">cpr</span>(pRoot-&gt;left, pRoot-&gt;right);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>边界条件处我犯了错。状态判断不好。</p>
+<h3 id="从上往下打印二叉树"><a href="#从上往下打印二叉树" class="headerlink" title="从上往下打印二叉树"></a><strong>从上往下打印二叉树</strong></h3><p>层次遍历。不赘述</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">PrintFromTopToBottom</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            TreeNode* temp = que.<span class="built_in">front</span>();</span><br><span class="line">            ans.<span class="built_in">push_back</span>(temp-&gt;val);</span><br><span class="line">            que.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span>(temp-&gt;left)&#123;</span><br><span class="line">                que.<span class="built_in">push</span>(temp-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(temp-&gt;right)&#123;</span><br><span class="line">                que.<span class="built_in">push</span>(temp-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二叉搜索树的后序遍历序列"><a href="#二叉搜索树的后序遍历序列" class="headerlink" title="二叉搜索树的后序遍历序列"></a><strong>二叉搜索树的后序遍历序列</strong></h3><p>二叉搜索树的中序遍历是递增的。</p>
+<p>后序遍历的最后一位是根节点root</p>
+<p>说明序列中，小于root-&gt;val的都是左子树，大于的都是右子树</p>
+<p>接下来，相似的操作。</p>
+<p>如  2 4 3 6 8 7 5   -&gt;    root = 5     left: 2 4 3   right: 6 8 7</p>
+<p>2 4 3 -&gt; root=3  left = 2  right = 4             6 8 7 -&gt;  root = 7  left = 6  right = 8 </p>
+<p><strong>递归</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">VerifySquenceOfBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; sequence)</span> </span>&#123;</span><br><span class="line">       std::function&lt;<span class="built_in"><span class="keyword">bool</span></span>(vector&lt;<span class="keyword">int</span>&gt;&amp;, <span class="keyword">size_t</span>, <span class="keyword">size_t</span>)&gt; judge = </span><br><span class="line">           [&amp;](vector&lt;<span class="keyword">int</span>&gt;&amp; seq, <span class="keyword">size_t</span> l, <span class="keyword">size_t</span> r)-&gt;<span class="keyword">bool</span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(l &gt;= r)&#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">int</span> temp = seq[r];  <span class="comment">// root</span></span><br><span class="line">           <span class="keyword">int</span> i = r - <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">while</span>(i&gt;l &amp;&amp; seq[i]&gt;temp)&#123;</span><br><span class="line">               --i;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//找到分界点了</span></span><br><span class="line">           <span class="comment">// 判断左侧是否全部都是小于temp的</span></span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">size_t</span> j = l;j&lt;i;++j)&#123;</span><br><span class="line">               <span class="keyword">if</span>(seq[j]&gt;temp)&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           </span><br><span class="line">           <span class="keyword">return</span> <span class="built_in">judge</span>(seq, l, i) &amp;&amp; <span class="built_in">judge</span>(seq, i+<span class="number">1</span>, r<span class="number">-1</span>);</span><br><span class="line">       &#125;;</span><br><span class="line">        <span class="keyword">if</span>(sequence.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">size_t</span> n = sequence.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">judge</span>(sequence, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二叉树中和为某一值的路径-二"><a href="#二叉树中和为某一值的路径-二" class="headerlink" title="二叉树中和为某一值的路径(二)"></a><strong>二叉树中和为某一值的路径(二)</strong></h3><p>找出二叉树中结点值的和为目标值的所有路径（<strong>路径指根节点到叶子</strong>）</p>
+<p>可以及时剪枝</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h2><h3 id="顺时针打印矩阵"><a href="#顺时针打印矩阵" class="headerlink" title="顺时针打印矩阵"></a><strong>顺时针打印矩阵</strong></h3><p>从外向里以顺时针打印。</p>
+<p>螺旋输出，小心单行的情况，要判断 <code>if (top != bottom)</code>  和 <code>if (left != right)</code></p>
+<p>在这里犯了错。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">printMatrix</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt; &gt; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = n<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> top = <span class="number">0</span>, bottom = m<span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right &amp;&amp; top&lt;=bottom)&#123;</span><br><span class="line">            <span class="comment">// 左到右</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = left;i&lt;=right;++i)&#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(matrix[top][i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//上到下</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = top+<span class="number">1</span>;i&lt;=bottom;++i)&#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(matrix[i][right]);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 小心单行的情况</span></span><br><span class="line">            <span class="comment">//右到左</span></span><br><span class="line">            <span class="keyword">if</span> (top != bottom)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = right<span class="number">-1</span>; i&gt;=left;--i)&#123;</span><br><span class="line">                    ans.<span class="built_in">push_back</span>(matrix[bottom][i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 下到上</span></span><br><span class="line">            <span class="keyword">if</span> (left != right)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = bottom<span class="number">-1</span>;i&gt;top;--i)&#123;</span><br><span class="line">                    ans.<span class="built_in">push_back</span>(matrix[i][left]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            top++;</span><br><span class="line">            bottom--;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="队列-amp-栈"><a href="#队列-amp-栈" class="headerlink" title="队列&amp;栈"></a>队列&amp;栈</h2><h3 id="包含min函数的栈"><a href="#包含min函数的栈" class="headerlink" title="包含min函数的栈"></a><strong>包含min函数的栈</strong></h3><p>用了个辅助栈，保存当前最小值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    stack&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">    stack&lt;<span class="keyword">int</span>&gt; aux_st;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        st.<span class="built_in">push</span>(value);</span><br><span class="line">        <span class="keyword">if</span>(aux_st.<span class="built_in">empty</span>() || aux_st.<span class="built_in">top</span>() &gt;= value)&#123;</span><br><span class="line">            aux_st.<span class="built_in">push</span>(value);   <span class="comment">//保存当前最小值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = st.<span class="built_in">top</span>();</span><br><span class="line">        st.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">if</span>(temp == aux_st.<span class="built_in">top</span>())&#123;</span><br><span class="line">            aux_st.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> st.<span class="built_in">top</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> aux_st.<span class="built_in">top</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="栈的压入、弹出序列"><a href="#栈的压入、弹出序列" class="headerlink" title="栈的压入、弹出序列"></a><strong>栈的压入、弹出序列</strong></h3><p>判断出栈序列有没有可能是入栈序列的对应序列。</p>
+<p>入栈1,2,3,4,5</p>
+<p>出栈4,5,3,2,1</p>
+<p>首先1入辅助栈，此时栈顶1≠4，继续入栈2</p>
+<p>此时栈顶2≠4，继续入栈3</p>
+<p>此时栈顶3≠4，继续入栈4</p>
+<p>此时栈顶4＝4，出栈4，弹出序列向后一位，此时为5，,辅助栈里面是1,2,3</p>
+<p>此时栈顶3≠5，继续入栈5</p>
+<p>此时栈顶5=5，出栈5,弹出序列向后一位，此时为3，,辅助栈里面是1,2,3</p>
+<p>….</p>
+<p>依次执行，最后辅助栈为空。如果不为空说明弹出序列不是该栈的弹出顺序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsPopOrder</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; pushV,vector&lt;<span class="keyword">int</span>&gt; popV)</span> </span>&#123;</span><br><span class="line">        stack&lt;<span class="keyword">int</span>&gt; aux_st;</span><br><span class="line">        <span class="keyword">size_t</span> n = pushV.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">size_t</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span>;i &lt; n;++i)&#123;</span><br><span class="line">            aux_st.<span class="built_in">push</span>(pushV[i]);  <span class="comment">// 当前值入辅助栈</span></span><br><span class="line">            <span class="keyword">while</span>((!aux_st.<span class="built_in">empty</span>() &amp;&amp; aux_st.<span class="built_in">top</span>()==popV[j]))&#123;</span><br><span class="line">                <span class="comment">// 判断辅助栈当前顶部能否弹出和当前出栈序列对应的值</span></span><br><span class="line">                aux_st.<span class="built_in">pop</span>();</span><br><span class="line">                ++j;  <span class="comment">// 出栈序列后移一位</span></span><br><span class="line">            &#125;           </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> aux_st.<span class="built_in">empty</span>();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -180,9 +345,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-03-13 11:32:00 / 修改时间：16:01:49" itemprop="dateCreated datePublished" datetime="2022-03-13T11:32:00+08:00">2022-03-13</time>
+      <time title="创建时间：2022-03-13 11:32:00" itemprop="dateCreated datePublished" datetime="2022-03-13T11:32:00+08:00">2022-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-03-14 11:13:55" itemprop="dateModified" datetime="2022-03-14T11:13:55+08:00">2022-03-14</time>
     </span>
 
   
@@ -235,8 +406,68 @@
 <p>​    虽然链路层的任务是将一个个帧从一个网络元素移动到下一个网络元素，而物理层的任务是将该帧中的<strong>一个个比特</strong>从一个结点移动到下一个结点。</p>
 <p>​    协议：这层的协议仍然是链路相关的，并且进一步与该链路的实际传输媒体相关。例如以太网具有许多物理层协议：关于双绞铜线、关于同轴电缆、关于光纤等。</p>
 <h3 id="七层ISO-OSI模型"><a href="#七层ISO-OSI模型" class="headerlink" title="七层ISO/OSI模型"></a>七层ISO/OSI模型</h3><p><img src="https://s2.loli.net/2022/03/13/LYqPyRxNVna6CHG.png" alt="image-20220313145416137"></p>
-<h3 id="TCP-IP模型"><a href="#TCP-IP模型" class="headerlink" title="TCP/IP模型"></a>TCP/IP模型</h3><p><img src="https://s2.loli.net/2022/03/13/DHmPletYio7VZQn.png" alt="image-20220313145451650"></p>
+<p><strong>物理层</strong></p>
+<p>传输单位：比特</p>
+<p>任务：传输比特流（<strong>二进制传输</strong>）</p>
+<p>功能：在物理媒体上为数据端设备透明传输原始比特流。</p>
+<p>主要协议：IEEE802.3</p>
+<p><strong>数据链路层</strong></p>
+<p>传输单位：帧</p>
+<p>任务：将网络层传来的IP数据报组装成帧。</p>
+<p>功能：成帧、差错控制、流量控制和传输管理等。</p>
+<p>主要协议：MAC 、VLAN、PPP</p>
+<p><strong>网络层</strong></p>
+<p>传输单位：数据报</p>
+<p>任务：把网络层的（PDU）协议数据单元（分组）从源端传到目的端。</p>
+<p>功能：流量控制、拥塞控制、差错控制和网际互连等功能。</p>
+<p>主要协议：IP、IPX、ICMP（Internet Control Message Protocol）、ARP（Address Resolution Protocol）</p>
+<p>因特网的主要协议是无连接的网际协议（IP，  internet Protocol）和许多路由选择协议，因此因特网的网络层也叫网际层和IP层</p>
+<p><strong>传输层</strong></p>
+<p>传输单位：报文段（TCP报文）或数据用户报（UDP）</p>
+<p>任务：负责主机中两个进程之间的通信</p>
+<p>功能：为端到端提供可靠的传输服务，为端到端提供流量控制、差错控制、服务质量、数据传输管理等服务。</p>
+<p>主要协议：TCP、UDP</p>
+<p><strong>会话层</strong></p>
+<p>传输单位：会话层协议数据单元（Session Protocol Data Unit, SPDU）</p>
+<p>任务：允许不同主机上的各个进程之间进行会话。会话也称<strong>建立同步</strong>（synchronize）</p>
+<p>功能：负责管理主机间的会话进程，包括建立、管理及终止进程间的会话</p>
+<p>主要协议：RPC（远程调用协议  Remote Procedure Call Protocol）、NFS（Network File System）</p>
+<p><strong>表现层</strong></p>
+<p>传输单位：PPDU（Presentation Protocol Data Unit 表示协议数据单元）</p>
+<p>功能：对数据进行翻译、加密和压缩</p>
+<p>主要协议：ASCII、JPEG</p>
+<p><strong>应用层</strong></p>
+<p>传输单位：APDU（Application Protocol Data Unit  应用协议数据单元）</p>
+<p>功能：允许访问OSI环境的手段</p>
+<p>主要协议：FTP、HTTP、DNS</p>
+<img src="https://img-blog.csdn.net/20180719225055535?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGFpc3Vu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="OSI协议栈" style="zoom: 33%;" />
 
+
+
+<h3 id="TCP-IP模型"><a href="#TCP-IP模型" class="headerlink" title="TCP/IP模型"></a>TCP/IP模型</h3><p><img src="https://s2.loli.net/2022/03/13/DHmPletYio7VZQn.png" alt="image-20220313145451650"></p>
+<p><img src="https://s2.loli.net/2022/03/14/Bh1EDnu7ldZqvtW.png" alt="image-20220314104243592"></p>
+<h3 id="TCP-IP模型与OSI参考模型的比较"><a href="#TCP-IP模型与OSI参考模型的比较" class="headerlink" title="TCP/IP模型与OSI参考模型的比较"></a>TCP/IP模型与OSI参考模型的比较</h3><ul>
+<li><p>相似之处</p>
+<ul>
+<li>二者都采用分层体系结构，将庞大且复杂的问题划分为若干较容易处理的、范围较小的问题。</li>
+<li>二者都是基于独立的协议栈的概念。<ul>
+<li>协议栈（英语：Protocol stack），又称协议堆叠，是计算机网络协议套件的一个具体的软件实现。协议套件中的一个协议通常是只为一个目的而设计的，这样可以使得设计更容易。因为每个协议模块通常都要和上下两个其他协议模块通信，它们通常可以想象成是协议栈中的层。</li>
+</ul>
+</li>
+<li>二者都可以解决异构网络的互联，实现不同计算机之间的通信。</li>
+</ul>
+</li>
+<li><p>不同之处</p>
+<ul>
+<li>OSI参考模型的最大贡献就是精确地定义了三个主要概念：服务、协议和接口，这与面向对象的设计思想非常吻合。而TCP/IP模型在这三个概念上没有明确的区分。</li>
+<li>OSI参考模型在协议发明之前，没有偏向于任何特定的协议，通用性良好。TCP/IP模型在设计方面最先出现的是协议，模型实际上是对已有协议的描述，因此不会出现协议不匹配模型的情况，但是模型不适合于非TCP/IP模型。</li>
+<li>TCP/IP模型在设计之初就考虑到了多种异构网的互联问题，并把IP作为一个单独的重要层次。</li>
+<li>OSI参考模型在网络层支持无连接和面向连接的通信，而在传输层仅又面向连接的通信。而TCP/IP模型认为可靠性是端到端的问题，因此它在网际层仅有一种无连接的通信模式，但传输层支持无连接和面向连接的通信模式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p><img src="https://s2.loli.net/2022/03/14/SklYUD7CzyabQHq.png" alt="image-20220314111335985"></p>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2>
       
     </div>
 
