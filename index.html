@@ -114,12 +114,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -148,6 +148,88 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/02/%E8%BF%90%E7%AD%B9%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/02/%E8%BF%90%E7%AD%B9%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">运筹优化知识</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-02 10:45:00" itemprop="dateCreated datePublished" datetime="2022-04-02T10:45:00+08:00">2022-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-04 15:26:42" itemprop="dateModified" datetime="2022-04-04T15:26:42+08:00">2022-04-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="optimization-problem"><a href="#optimization-problem" class="headerlink" title="optimization problem"></a>optimization problem</h1><ol>
+<li>无约束的优化问题</li>
+<li>带等式约束的优化问题</li>
+<li>带不等式约束的优化问题</li>
+</ol>
+<h1 id="dual"><a href="#dual" class="headerlink" title="dual"></a>dual</h1><h2 id="KKT"><a href="#KKT" class="headerlink" title="KKT"></a>KKT</h2><p>经典注水问题：<br>$$<br>min -\sum^n_{i=1}log(\alpha + x_i) \<br>s.t.~~~~~~~~  x \geq, 1^Tx=1<br>$$<br>其中$\alpha_i &gt;0$ 。</p>
+<p>令$x^*$ and $(\lambda^*,v*)$分别是原问题和对偶问题的某对最优解，对偶间隙为0，可以得到如下的KTT条件：<br>$$<br>x^* &gt; 0,~~~ 1^Tx^*=1,~~~\lambda^<em>\succeq0,~~~ \lambda_i^</em>x_i^*=0,i=1…n, \<br>\frac{-1}{\alpha_i + x_i^*}-\lambda_i^*+v^*=0, i=1…,n<br>$$<br>$\lambda^*$在最后一个方程里是一个松弛变量，可以消去。<br>$$<br>x^* &gt; 0,~~~ 1^Tx^*=1,~~~\lambda^<em>\succeq0,~~~ x_i^</em>(v^* - \frac{1}{\alpha_i + x_i^*})=0,i=1…n, \<br>v^* \geq \frac{1}{\alpha_i + x_i^*}, i=1…,n<br>$$<br>所以有下式：<br>$$<br>x_i^*=\left{ \begin{aligned} &amp;\frac{1}{v^*}-\alpha_i, &amp;v^* &lt; \frac{1}{\alpha^*} \<br>&amp;0 , &amp;v^<em>\geq \frac{1}{\alpha^</em>}<br>\end{aligned}<br>\right.<br>$$<br>更简洁地，$x^* = max{\frac{1}{v^*} - \alpha_i, 0}$, 将该值代入条件$1^Tx^*=1$，可以得到<br>$$<br>\sum^n_{i=1}max{ 0,\frac{1}{v^*}-\alpha_i }=1<br>$$</p>
+<h1 id="column-generation"><a href="#column-generation" class="headerlink" title="column generation"></a>column generation</h1><h1 id="bender’s-decomposition"><a href="#bender’s-decomposition" class="headerlink" title="bender’s decomposition"></a>bender’s decomposition</h1><h2 id="single-bender’s"><a href="#single-bender’s" class="headerlink" title="single bender’s"></a>single bender’s</h2><h2 id="multi-bender’s"><a href="#multi-bender’s" class="headerlink" title="multi bender’s"></a>multi bender’s</h2><h1 id="branch-and-bound"><a href="#branch-and-bound" class="headerlink" title="branch and bound"></a>branch and bound</h1><h1 id="branch-and-cut"><a href="#branch-and-cut" class="headerlink" title="branch and cut"></a>branch and cut</h1><p>内点法</p>
+<p>单纯形法</p>
+<h1 id="CO"><a href="#CO" class="headerlink" title="CO"></a>CO</h1><h1 id="MIP"><a href="#MIP" class="headerlink" title="MIP"></a>MIP</h1><h2 id="MILP"><a href="#MILP" class="headerlink" title="MILP"></a>MILP</h2><p>非线性转为线性</p>
+<p>惩罚项的转变</p>
+<p>CO做了有功和无功的平衡</p>
+<h1 id="RO"><a href="#RO" class="headerlink" title="RO"></a>RO</h1><h1 id="SO"><a href="#SO" class="headerlink" title="SO"></a>SO</h1><h1 id="distributionally-robust-optimization"><a href="#distributionally-robust-optimization" class="headerlink" title="distributionally robust optimization"></a>distributionally robust optimization</h1><h1 id="常见的机器学习算法"><a href="#常见的机器学习算法" class="headerlink" title="常见的机器学习算法"></a>常见的机器学习算法</h1><h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><h2 id="Linear-model"><a href="#Linear-model" class="headerlink" title="Linear model"></a>Linear model</h2><h2 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -188,7 +270,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-21 16:47:17" itemprop="dateModified" datetime="2022-03-21T16:47:17+08:00">2022-03-21</time>
+      <time title="修改时间：2022-04-04 10:37:38" itemprop="dateModified" datetime="2022-04-04T10:37:38+08:00">2022-04-04</time>
     </span>
 
   
@@ -291,8 +373,7 @@
 
 
 
-
-
+<h2 id="序列化二叉树"><a href="#序列化二叉树" class="headerlink" title="序列化二叉树"></a><strong>序列化二叉树</strong></h2><p>请实现两个函数，分别用来序列化和反序列化二叉树，不对序列化之后的字符串进行约束，但要求能够根据序列化之后的字符串重新构造出一棵与原二叉树相同的树。</p>
 <h1 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h1><h2 id="顺时针打印矩阵"><a href="#顺时针打印矩阵" class="headerlink" title="顺时针打印矩阵"></a><strong>顺时针打印矩阵</strong></h2><p>从外向里以顺时针打印。</p>
 <p>螺旋输出，小心单行的情况，要判断 <code>if (top != bottom)</code>  和 <code>if (left != right)</code></p>
 <p>在这里犯了错。</p>
