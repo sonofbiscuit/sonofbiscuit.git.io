@@ -188,7 +188,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-04 15:26:42" itemprop="dateModified" datetime="2022-04-04T15:26:42+08:00">2022-04-04</time>
+      <time title="修改时间：2022-04-12 17:58:59" itemprop="dateModified" datetime="2022-04-12T17:58:59+08:00">2022-04-12</time>
     </span>
 
   
@@ -208,12 +208,221 @@
 </ol>
 <h1 id="dual"><a href="#dual" class="headerlink" title="dual"></a>dual</h1><h2 id="KKT"><a href="#KKT" class="headerlink" title="KKT"></a>KKT</h2><p>经典注水问题：<br>$$<br>min -\sum^n_{i=1}log(\alpha + x_i) \<br>s.t.~~~~~~~~  x \geq, 1^Tx=1<br>$$<br>其中$\alpha_i &gt;0$ 。</p>
 <p>令$x^*$ and $(\lambda^*,v*)$分别是原问题和对偶问题的某对最优解，对偶间隙为0，可以得到如下的KTT条件：<br>$$<br>x^* &gt; 0,~~~ 1^Tx^*=1,~~~\lambda^<em>\succeq0,~~~ \lambda_i^</em>x_i^*=0,i=1…n, \<br>\frac{-1}{\alpha_i + x_i^*}-\lambda_i^*+v^*=0, i=1…,n<br>$$<br>$\lambda^*$在最后一个方程里是一个松弛变量，可以消去。<br>$$<br>x^* &gt; 0,~~~ 1^Tx^*=1,~~~\lambda^<em>\succeq0,~~~ x_i^</em>(v^* - \frac{1}{\alpha_i + x_i^*})=0,i=1…n, \<br>v^* \geq \frac{1}{\alpha_i + x_i^*}, i=1…,n<br>$$<br>所以有下式：<br>$$<br>x_i^*=\left{ \begin{aligned} &amp;\frac{1}{v^*}-\alpha_i, &amp;v^* &lt; \frac{1}{\alpha^*} \<br>&amp;0 , &amp;v^<em>\geq \frac{1}{\alpha^</em>}<br>\end{aligned}<br>\right.<br>$$<br>更简洁地，$x^* = max{\frac{1}{v^*} - \alpha_i, 0}$, 将该值代入条件$1^Tx^*=1$，可以得到<br>$$<br>\sum^n_{i=1}max{ 0,\frac{1}{v^*}-\alpha_i }=1<br>$$</p>
-<h1 id="column-generation"><a href="#column-generation" class="headerlink" title="column generation"></a>column generation</h1><h1 id="bender’s-decomposition"><a href="#bender’s-decomposition" class="headerlink" title="bender’s decomposition"></a>bender’s decomposition</h1><h2 id="single-bender’s"><a href="#single-bender’s" class="headerlink" title="single bender’s"></a>single bender’s</h2><h2 id="multi-bender’s"><a href="#multi-bender’s" class="headerlink" title="multi bender’s"></a>multi bender’s</h2><h1 id="branch-and-bound"><a href="#branch-and-bound" class="headerlink" title="branch and bound"></a>branch and bound</h1><h1 id="branch-and-cut"><a href="#branch-and-cut" class="headerlink" title="branch and cut"></a>branch and cut</h1><p>内点法</p>
-<p>单纯形法</p>
+<h1 id="单纯形法"><a href="#单纯形法" class="headerlink" title="单纯形法"></a>单纯形法</h1><p>单纯形算法适用的情况</p>
+<p><strong>标准的线性规划格式</strong><br>$$<br>&amp; max~~~ c^Tx \<br>&amp; ~~~~~~~~~s.t. ~~~A*x \leq b \<br>&amp;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x_i \geq 0, i = 1,2,3,…,n<br>$$<br><strong>松弛型</strong></p>
+<img src="https://s2.loli.net/2022/04/11/OlA1U6KkL4q3DnC.png" alt="image-20220411162221373" style="zoom:50%;" />
+
+<p>主问题是 $2x_1 + x_2$, 不是$x_3$</p>
+<p>加入非负松弛变量</p>
+<img src="https://s2.loli.net/2022/04/11/hCZbmrWAHNowYPa.png" alt="image-20220411162306991" style="zoom:50%;" />
+
+<p><strong>单纯形</strong></p>
+<img src="https://s2.loli.net/2022/04/11/NgPC9wDpdcuGBEy.png" alt="image-20220411162333695" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2022/04/11/mC6Bopq7vzXjfDW.png" alt="image-20220411162348367" style="zoom:50%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220411162407384.png" alt="image-20220411162407384" style="zoom:50%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220411162420712.png" alt="image-20220411162420712" style="zoom:50%;" />
+
+<p>ref: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/388224103">https://zhuanlan.zhihu.com/p/388224103</a></p>
+<h1 id="影子价格"><a href="#影子价格" class="headerlink" title="影子价格"></a>影子价格</h1><h1 id="Row-Generation（就是割平面法）"><a href="#Row-Generation（就是割平面法）" class="headerlink" title="Row Generation（就是割平面法）"></a>Row Generation（就是割平面法）</h1><p><strong>常用于整数规划</strong></p>
+<p>割平面方法，从更宏观的角度，可以看作是一种行生成方法。这里的“行”（row），指的是线性不等式。每找到一个cut，就增加一个线性不等式。</p>
+<p>线性规划的算法复杂度和连续变量呈多项式级关系，另外随着约束条件（不等式）个数的增加，求解时间也会随之增加。（不确定呈什么关系，求拍砖）</p>
+<p>上面说到整数规划的算法复杂度和整数变量的个数n基本呈指数关系，那么它还和其他什么因素相关呢？答案是不等式的个数。（recall求解整数规划需要求解一个个的线性规划）</p>
+<p>我们从线性规划角度，理解行生成方法的基本思想：形成极值（最优解）所需要的约束条件个数，往往远小于原问题的约束条件个数。因此为何不在需要的时候，才把这些“重要”的约束条件加上来呢？</p>
+<p>下面举个简单例子：</p>
+<p>如下图，原问题有5个不等式（一条红线代表一个不等式），但是最优解点D只需CD和DE 2个不等式即可表述。</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412174455417.png" alt="image-20220412174455417" style="zoom:50%;" />
+
+<p>因此行生成方法的基本思路：先求解原问题的松弛问题，即初始问题（master problem）不加约束条件或只加其中几个约束，然后求解该松弛问题，如果得到的解是可行解，那么该解就是原问题的最优解（例如刚开始运气很好地加了CD和DE）。</p>
+<p>如果得到的解对原问题是不可行的，例如解是（0，6）这个点（因为没有加BC这个约束），或者无界的，那么这时候加上BC这个不等式便可以把这个不可行解排除。</p>
+<p>以此循环，直到松弛问题的解是可行的，那么该解也是原问题的最优解。</p>
+<p>而通过行生成方法，上面问题本来需要5个约束条件，很可能只需要2-3个约束条件，上面的循环已经终止了。</p>
+<p>在实际问题中，最优解所需要的约束条件往往远远小于原问题的约束条件个数。例如几万个约束条件，实际只有几百个是用来刻画最优解的。那么这个时候，割平面方法便可以大大提速线性规划的求解。</p>
+<p>在上一节的TSP问题中，subtour elimination constraints的个数是指数级的（因此不可能把他们全部加进来），但是求解实际问题中，往往通过割平面方法只需找到其中几千或几百个，即可找到原问题的最优解。用到的，正是相似的思路。</p>
+<p>其实TSP问题是有完整刻画的表达式的（Complete Formulation），这时的约束个数虽然不是指数级，但是数量也非常大，因此求解效率很低。割平面方法的引入，大大增加了TSP问题求解的高效性，这也是该方法一次完美的show off。</p>
+<p>搜索Literature 行生成方法，最先映入眼帘的可能是Benders’ Decomposition。在那里，一般把整数和实数变量隔离做分解，然后有比较“严格”的如何选取初始约束以及如何一步步地增加约束（feasibility cut和optimality cut）。</p>
+<p><strong>与行生成法对偶的方法，是列生成法</strong>（逐步增加变量个数）。其中的Dantzig-Wolfe分解法，是Benders’ Decomposition的dual problem。</p>
+<p><strong>ref:</strong>    <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28387290?group_id=893712252413284352">https://zhuanlan.zhihu.com/p/28387290?group_id=893712252413284352</a></p>
+<h1 id="column-generation"><a href="#column-generation" class="headerlink" title="column generation"></a>column generation</h1><p>列生成算法（Column Generation Algorithm）是一种用于求解<strong>大规模线性优化问题</strong>的高效算法，本质上来讲，列生成算法是单纯形法的一种形式，用来求解线性规划问题。</p>
+<p>列生成算法已被应用于求解很多著名的NP-hard优化问题，如机组人员调度问题（Crew assignment problem）、切割问题（Cutting stock problem）、车辆路径问题（Vehicle routing problem）、单资源工厂选址问题（The single facility location problem）等</p>
+<p><strong>基本思想</strong></p>
+<p>列生成算法通过求解子问题（sub problem）来找到可以进基的非基变量，该非基变量在模型中并没有显性的写出来（可以看成是生成了一个变量，每个变量其实等价于一列，所以该方法被称为列生成算法）。如果找不到一个可以进基的非基变量，那么就意味着所有的非基变量的检验数（Reduced Cost，RC）都满足最优解的条件，也就是说，该线性规划的最优解已被找到。其思路如下：</p>
+<p>1、先把原问题（Master Problem，MP）转换到一个规模更小（即变量数比原问题少）的问题上，这个只使用部分变量的模型被称为原问题的RMP 问题（Restricted Master Problem）。在RMP上用单纯形法求最优解，注意此时求得的最优解只是RMP上的，并不是MP的最优解。</p>
+<p>2、然后需要通过一个子问题去检测在那些未被考虑的变量中是否有使得RC小于零的情况，如果有，那么就把这个变量的相关系数列加入到RMP的系数矩阵中，返回第1步。</p>
+<p>经过反复迭代，直到子问题中的RC都大于等于零，此时就找到了MP的最优解。</p>
+<p><strong>注意min和max问题的影子价格</strong></p>
+<h1 id="拉格朗日松弛"><a href="#拉格朗日松弛" class="headerlink" title="拉格朗日松弛"></a>拉格朗日松弛</h1><p>拉格朗日对偶（问题）</p>
+<h1 id="bender’s-decomposition"><a href="#bender’s-decomposition" class="headerlink" title="bender’s decomposition"></a>bender’s decomposition</h1><p>主要思想是行生成+割平面方法</p>
+<h2 id="single-bender’s"><a href="#single-bender’s" class="headerlink" title="single bender’s"></a>single bender’s</h2><h2 id="multi-bender’s"><a href="#multi-bender’s" class="headerlink" title="multi bender’s"></a>multi bender’s</h2><h1 id="branch-and-bound（精确算法）"><a href="#branch-and-bound（精确算法）" class="headerlink" title="branch and bound（精确算法）"></a>branch and bound（精确算法）</h1><p><strong>分支定界</strong></p>
+<p>分支定界算法始终围绕着一颗搜索树进行的，我们将原问题看作搜索树的根节点，从这里出发，分支的含义就是将大的问题分割成小的问题。大问题可以看成是搜索树的父节点，那么从大问题分割出来的小问题就是父节点的子节点了。分支的过程就是不断给树增加子节点的过程。而定界就是在分支的过程中检查子问题的上下界，如果子问题不能产生一比当前最优解还要优的解，那么砍掉这一支。直到所有子问题都不能产生一个更优的解时，算法结束。</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412155612418.png" alt="image-20220412155612418" style="zoom:33%;" />
+
+<p><strong>例子</strong></p>
+<p>对于一个整数规划模型：<br>$$<br>maximize~~~~~~&amp;4x_1+9x_2+6x_3 \<br>subject~ to~~~~&amp;5x_1+8x_2+6x_3 \leq 12 \<br>&amp;x_1,x_2,x_3 ~ are~ binary~ variable<br>$$<br>因为求解的是最大化问题，不妨先设当前的最优解为负无穷：-INF。</p>
+<ol>
+<li><strong>首先从主问题分出两支子问题：</strong></li>
+</ol>
+<img src="https://s2.loli.net/2022/04/12/ZdT1qGzwELYUjSC.png" alt="image-20220412160043235" style="zoom: 50%;" />
+
+<p>通过线性松弛求得两个子问题的upper bound为Z_LP1 = 12.75，Z_LP2 = 12.2。由于Z_LP1 和Z_LP2都大于BestV=-INF，说明这两支均满足要求。继续往下。</p>
+<ol start="2">
+<li><strong>从节点 1 和节点 2 两个子问题再次分支，得到如下结果</strong></li>
+</ol>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412161353856.png" alt="image-20220412161353856" style="zoom: 50%;" />
+
+<p>子问题3已经不可行，无需再理。子问题4通过线性松弛得到最优解为10，刚好也符合原问题0的所有约束，在该支找到一个可行解，更新BestV = 10。</p>
+<p>子问题5通过线性松弛得到upper bound为11.87&gt;当前的BestV = 10，因此子问题5还有戏，待下一次分支。而子问题6得到upper bound为9&lt;当前的BestV = 10，那么从该支下去找到的解也不会变得更好，所以剪掉！</p>
+<ol start="3">
+<li><strong>对结点5进行分支</strong></li>
+</ol>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412161453040.png" alt="image-20220412161453040" style="zoom:50%;" />
+
+<p>子问题7不可行，无需再理。子问题8得到一个满足原问题0所有约束的解，但是目标值为4&lt;当前的BestV=10，所以不更新BestV，同时该支下去也不能得到更好的解了。</p>
+<ol start="4">
+<li><strong>此时，所有的分支遍历都完成，我们最终找到了最优解。</strong></li>
+</ol>
+<p><strong>分支定界法（branch and bound）</strong>是一种<strong>求解整数规划问题</strong>的最常用算法。这种方法不但可以求解纯整数规划，<strong>还可以求解混合整数规划问题</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. Using a heuristic, find a solution xh to the optimization problem. Store its value, B = f(x_h). (If no heuristic is available, set B to infinity.) B will denote the best solution found so far, and will be used as an upper bound on candidate solutions.</span><br><span class="line"></span><br><span class="line">2. Initialize a queue to hold a partial solution with none of the variables of the problem assigned.</span><br><span class="line"></span><br><span class="line">3. Loop until the queue is empty:</span><br><span class="line"></span><br><span class="line">	3.1. Take a node N off the queue.</span><br><span class="line">	</span><br><span class="line">	3.2. If N represents a single candidate solution x and f(x) &lt; B, then x is the best solution so far. Record it and set B ← f(x).</span><br><span class="line">	</span><br><span class="line">	3.3. Else, branch on N to produce new nodes Ni. For each of these:</span><br><span class="line"></span><br><span class="line">		3.3.1. If bound(N_i) &gt; B, do nothing; since the lower bound on this node is greater than the upper bound of the problem, it will never lead to the optimal solution, and can be discarded.</span><br><span class="line">		</span><br><span class="line">		3.3.2. Else, store Ni on the queue.</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>ref:</strong>   <a target="_blank" rel="noopener" href="https://www.cnblogs.com/dengfaheng/p/11225612.html">https://www.cnblogs.com/dengfaheng/p/11225612.html</a></p>
+<h1 id="branch-and-cut"><a href="#branch-and-cut" class="headerlink" title="branch and cut"></a>branch and cut</h1><p>branch and cut其实还是和branch and bound脱离不了干系的。</p>
+<p>在应用branch and bound求解整数规划问题的时候，如下图:</p>
+<img src="https://s2.loli.net/2022/04/12/h5InXbtRf4pg9j8.png" alt="image-20220412171138059" style="zoom:50%;" />
+
+<p>假如，我们现在求一个整数规划最大化问题，在分支定界过程中，求解整数规划模型的LP松弛模型得到的非整数解作为上界，而此前找到的整数解作为下界。 如果出现某个节点upper bound低于现有的lower bound，则可以剪掉该节点。否则，如果不是整数解继续分支。</p>
+<p>此外，在求解整数规划模型的LP松弛时，<strong>If cutting planes are used to tighten LP relaxations。</strong>那么这时候的branch and bound就变成了branch and cut。   <strong>割平面</strong></p>
+<img src="https://s2.loli.net/2022/04/12/AMhmExzpJrowPLG.png" alt="image-20220412171238809" style="zoom:50%;" />
+
+<p>红色部分是整数规划的可行解空间。<br>蓝色部分是整数规划的LP松弛可行解空间。<br>在求解LP松弛时，加入橙色的cut，缩小解空间，同时又不影响整数解的解空间，可使解收敛得更快。</p>
+<p>这就是branch and cut的过程了。比branch and bound高明之处就在于多了一个cutting planes，可能使branch and bound的效率变得更高。</p>
+<p><strong>例子</strong><br>$$<br>min~~~~~~~~~~~~~ &amp;z=-6x_1-5_2 \<br>subject~to~~~&amp;3x_1+x_2 \leq 11 \<br>&amp;-x_1+2x_2 \leq 5 \<br>&amp;x_1,x_2 \geq 0<br>$$<br><img src="https://s2.loli.net/2022/04/12/feg4ZSWLiKBYanc.png" alt="image-20220412171533780"></p>
+<p><img src="https://s2.loli.net/2022/04/12/4rb9IVU3pRLSAY7.png" alt="image-20220412171629952"></p>
+<p><strong>ref:</strong>     <a target="_blank" rel="noopener" href="https://www.cnblogs.com/dengfaheng/p/11344488.html">https://www.cnblogs.com/dengfaheng/p/11344488.html</a></p>
+<p><strong>更加详细的一个参考</strong>：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28387290?group_id=893712252413284352">https://zhuanlan.zhihu.com/p/28387290?group_id=893712252413284352</a></p>
+<h1 id="内点法"><a href="#内点法" class="headerlink" title="内点法"></a>内点法</h1><h1 id="各类梯度下降法和牛顿法"><a href="#各类梯度下降法和牛顿法" class="headerlink" title="各类梯度下降法和牛顿法"></a>各类梯度下降法和牛顿法</h1><p><strong>批量梯度下降：</strong></p>
+<ol>
+<li><p>是最小化所有样本的损失函数，最终得到全局最优解。　　　　　　</p>
+</li>
+<li><p>由于每次更新参数需要重新训练一次全部的样本，代价比较大，适用于小规模样本训练的情况。</p>
+</li>
+</ol>
+<p><strong>随机梯度下降：</strong></p>
+<ol>
+<li><p>是最优化每个样本的损失函数。每一次迭代得到的损失函数不是，每次每次向着全局最优的方向，但是大体是向着全局最优，最终的结果往往是在最优解的附近。　　　</p>
+</li>
+<li><p>当目标函数是凸函数的时候，结果一定是全局最优解。</p>
+<p>　　　　　　　3. 适合大规模样本训练的情况。</p>
+</li>
+</ol>
+<p><strong>小批量梯度下降法：</strong></p>
+<p>　将上述两种方法作结合。每次利用一小部分数据更新迭代参数。即样本在1和m之间。</p>
+<h3 id="牛顿法："><a href="#牛顿法：" class="headerlink" title="牛顿法："></a>牛顿法：</h3><p>是通过求解目标函数的一阶导数为0时的参数，进而求出目标函数最小值时的参数。</p>
+<p>优点：收敛速度很快。海森矩阵的逆在迭代过程中不断减小，可以起到逐步减小步长的效果。</p>
+<p>缺点：海森矩阵的逆计算复杂，代价比较大，因此有了拟牛顿法。</p>
+<p>x多变量时，二阶导使用hessian 矩阵</p>
+<h3 id="梯度下降法："><a href="#梯度下降法：" class="headerlink" title="梯度下降法："></a>梯度下降法：</h3><p>是通过梯度方向和步长，直接求解目标函数的最小值时的参数。</p>
+<p>越接近最优值时，步长应该不断减小，否则会在最优值附近来回震荡。</p>
+<img src="https://s2.loli.net/2022/04/05/7TF6qYWKdtrQwzy.png" alt="image-20220405211558700" style="zoom: 67%;" />
+
+<img src="https://s2.loli.net/2022/04/05/y1hXAfk682Hc4DE.png" alt="image-20220405211627441" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2022/04/05/1aAoWc8OKds3PJU.png" alt="image-20220405211655906" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2022/04/05/StCsT3KaGL64cxE.png" alt="image-20220405211707643" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220405211722098.png" alt="image-20220405211722098" style="zoom:67%;" />
+
+<p><strong>使用牛顿法/拟牛顿法收敛更快。但是每次迭代的时间比梯度下降法长。</strong></p>
+<p>ref: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112416130">https://zhuanlan.zhihu.com/p/112416130</a></p>
 <h1 id="CO"><a href="#CO" class="headerlink" title="CO"></a>CO</h1><h1 id="MIP"><a href="#MIP" class="headerlink" title="MIP"></a>MIP</h1><h2 id="MILP"><a href="#MILP" class="headerlink" title="MILP"></a>MILP</h2><p>非线性转为线性</p>
-<p>惩罚项的转变</p>
-<p>CO做了有功和无功的平衡</p>
-<h1 id="RO"><a href="#RO" class="headerlink" title="RO"></a>RO</h1><h1 id="SO"><a href="#SO" class="headerlink" title="SO"></a>SO</h1><h1 id="distributionally-robust-optimization"><a href="#distributionally-robust-optimization" class="headerlink" title="distributionally robust optimization"></a>distributionally robust optimization</h1><h1 id="常见的机器学习算法"><a href="#常见的机器学习算法" class="headerlink" title="常见的机器学习算法"></a>常见的机器学习算法</h1><h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><h2 id="Linear-model"><a href="#Linear-model" class="headerlink" title="Linear model"></a>Linear model</h2><h2 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h2>
+<p>基于CO，CO做了有功和无功的平衡</p>
+<p>将约束条件转换为惩罚项。使得主问题变为线性问题，求解MILP</p>
+<h1 id="RO"><a href="#RO" class="headerlink" title="RO"></a>RO</h1><p>苏文藻课程</p>
+<h1 id="SO"><a href="#SO" class="headerlink" title="SO"></a>SO</h1><p>苏文藻课程</p>
+<h1 id="distributionally-robust-optimization"><a href="#distributionally-robust-optimization" class="headerlink" title="distributionally robust optimization"></a>distributionally robust optimization</h1><p>苏文藻课程</p>
+<h1 id="常见的机器学习算法"><a href="#常见的机器学习算法" class="headerlink" title="常见的机器学习算法"></a>常见的机器学习算法</h1><h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><img src="https://s2.loli.net/2022/04/04/31WiDgLGTE8dM4l.jpg" alt="43E6AF2BAF69572D95CD2DBEAECD8CB2" style="zoom: 80%;" />
+
+<img src="https://s2.loli.net/2022/04/04/V6lH1xLfmhgTZnw.jpg" alt="IMG_0397" style="zoom:33%;" />
+
+
+
+<img src="https://s2.loli.net/2022/04/04/3zKRPoN5IMLc1QX.jpg" alt="IMG_0399" style="zoom:50%;" />
+
+<p><img src="https://s2.loli.net/2022/04/05/aux2AeH3yhLnEG5.jpg" alt="IMG_0400"></p>
+<p><img src="https://s2.loli.net/2022/04/05/enNSxgiFrtEhfKy.jpg" alt="QQ图片20220404232547"></p>
+<p>机器学习给的KKT和凸优化给的不同。但是我认为二者是等价的，应该可以互推。</p>
+<p>这个是凸优化上的条件。</p>
+<p><img src="https://s2.loli.net/2022/04/05/mP3SAVBihEr1Rxy.png" alt="image-20220405110624726"></p>
+<h2 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h2><p>后验概率的获得主要有两种策略</p>
+<ol>
+<li> 给定x，直接建模$P(c|x)$来预测c，这样叫做”判别式模型“</li>
+<li>先对联合概率分布$P(x|c)$建模，然后再由此获得$P(c|x)$.</li>
+</ol>
+<p>$$<br>P(c|x)&amp;= \frac{P(cx)}{P(x)} =\frac{P(c)P(x|c)}{P(x)} \<br>&amp;=\frac{P(c)}{P(x)}\cdot\frac{P(x|c)}{P(x)}\<br>&amp;= \frac{P(c)}{P(x)}\cdot \prod_{i=1}^{d}P(x_i|c)<br>$$</p>
+<p>$P(cx) = P(c)P(x|c) = P(x)P(x|c)$</p>
+<p>朴素贝叶斯要求独立同分布。</p>
+<p>半朴素贝叶斯分类器，对属性条件独立性假设进行了一定程度的放松。</p>
+<p><img src="https://s2.loli.net/2022/04/05/qzYdSFNCRwMITJg.jpg" alt="IMG_0408"></p>
+<p>贝叶斯网，借助有向无环图来刻画属性之间的依赖关系。用条件概率表来描述属性的联合概率分布。</p>
+<h3 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h3><p>我们一直假设训练样本的所有属性都被观测到，即训练样本是完整的，但是现实中常遇到不完整的样本，这种未能观测到的特征称为”隐变量“。</p>
+<p>令<strong>X</strong>表示已观测到的变量集，<strong>Z</strong>表示隐变量集，$\Theta$表示模型参数，若欲对$\Theta$做极大似然估计，则应该最大化对数似然。<br>$$<br>LL(\Theta|X,Z) = \ln P(X,Z|\Theta)<br>$$<br>由于<strong>Z</strong>是隐变量，该式无法求解，此时可以通过对<strong>Z</strong>计算期望，来最大化已观测数据的对数”边际似然“</p>
+<img src="https://s2.loli.net/2022/04/05/znXsWkHx1uKr6wS.jpg" alt="IMG_0406" style="zoom:50%;" />
+
+
+
+<img src="https://s2.loli.net/2022/04/05/Jz3ME2Uustfwd7W.png" alt="image-20220405163218219" style="zoom:50%;" />
+
+
+
+<img src="https://s2.loli.net/2022/04/05/E7epgyfWKiRzuvh.png" alt="image-20220405163353314" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2022/04/05/OU6KCEBo3lHDLjc.png" alt="image-20220405163644044" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2022/04/05/rwm2iCGY7ZKX3Bp.jpg" alt="IMG_0407" style="zoom: 50%;" />
+
+<img src="https://s2.loli.net/2022/04/05/oWbzHIuAx2NSdCk.png" alt="image-20220405164448434" style="zoom:50%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220405170825391.png" alt="image-20220405170825391" style="zoom:50%;" />
+
+<p>$\propto$正比于</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220405171059473.png" alt="image-20220405171059473" style="zoom:50%;" />
+
+
+
+<h2 id="Linear-model"><a href="#Linear-model" class="headerlink" title="Linear model"></a>Linear model</h2><h2 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h2><p>隐马尔科夫模型是结构最简单的动态贝叶斯网，是一种著名的有向图模型，主要用于时序数据建模，在语音识别、自然语言处理等领域有广泛应用。</p>
+<p>三个基本步骤</p>
+<ol>
+<li><p>给定参数，观测序列，计算条件概率</p>
+</li>
+<li><p>参数学习，给定序列，反推参数</p>
+</li>
+<li><p>解码。给定参数和观测序列，求最大可能性。</p>
+</li>
+</ol>
+<h2 id="次梯度"><a href="#次梯度" class="headerlink" title="次梯度"></a>次梯度</h2><p>支撑超平面的斜率就是次梯度。</p>
+<p>最起码是凸函数才能保证任意一点的次梯度存在。</p>
+<p><strong>次梯度下降</strong></p>
+<p><img src="https://s2.loli.net/2022/04/05/2QC5DFW8OPVRBeq.png" alt="image-20220405135334199"></p>
+<h2 id="近端梯度"><a href="#近端梯度" class="headerlink" title="近端梯度"></a>近端梯度</h2><p><img src="https://s2.loli.net/2022/04/05/JMpbdenLoHl4WsK.png" alt="image-20220405150019553"></p>
+<p><img src="https://s2.loli.net/2022/04/05/2lS9qtzTc4X1vw5.png" alt="image-20220405150032359"></p>
+<p><img src="https://s2.loli.net/2022/04/05/2xA4BL5z1Eok7M9.png" alt="image-20220405150045008"></p>
+<p><img src="https://s2.loli.net/2022/04/05/1gvUwrqYBSt9V5j.png" alt="image-20220405150056680"></p>
+<p><img src="https://s2.loli.net/2022/04/05/ro8kEHKAIxg1hXQ.png" alt="image-20220405150213656"></p>
+<p><img src="https://s2.loli.net/2022/04/05/QT9DgAbnELmwtd8.png" alt="image-20220405150221222"></p>
+<p>ref：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38290475/article/details/81052206">https://blog.csdn.net/qq_38290475/article/details/81052206</a></p>
+<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><p><img src="https://s2.loli.net/2022/04/05/Ov49MyQBKW8jcpI.jpg" alt="img"></p>
+<h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><img src="https://pica.zhimg.com/v2-e47296e78fff3d97eea11d0657ddcb81_1440w.jpg?source=172ae18b" alt="【机器学习】降维——PCA（非常详细）" style="zoom: 33%;" />
+
+
+
+<p>风电数据</p>
+<p>构建DRO时候，不同机组的历史数据不同，</p>
+<p><img src="https://s2.loli.net/2022/04/05/q4QFwmU5SvfK1rH.png" alt="img"></p>
+<h1 id="LDR变换"><a href="#LDR变换" class="headerlink" title="LDR变换"></a>LDR变换</h1>
       
     </div>
 
@@ -270,7 +479,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-04 10:37:38" itemprop="dateModified" datetime="2022-04-04T10:37:38+08:00">2022-04-04</time>
+      <time title="修改时间：2022-04-07 17:52:10" itemprop="dateModified" datetime="2022-04-07T17:52:10+08:00">2022-04-07</time>
     </span>
 
   
@@ -403,23 +612,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h1 id="搜索算法"><a href="#搜索算法" class="headerlink" title="搜索算法"></a>搜索算法</h1><h2 id="字符串的排列"><a href="#字符串的排列" class="headerlink" title="字符串的排列"></a><strong>字符串的排列</strong></h2>
       
     </div>
 
