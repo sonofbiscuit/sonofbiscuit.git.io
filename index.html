@@ -114,12 +114,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -148,6 +148,170 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/14/vsvode%E4%BD%BF%E7%94%A8ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/14/vsvode%E4%BD%BF%E7%94%A8ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5linux/" class="post-title-link" itemprop="url">vsvode使用ssh远程连接linux</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-05-14 15:24:45 / 修改时间：15:25:31" itemprop="dateCreated datePublished" datetime="2022-05-14T15:24:45+08:00">2022-05-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1.找到自己电脑公钥C:<code>Users**用户名**.ssh</code>这个目录<br><code>id-rsa</code>和<code>id-rsa.pub</code>两个文件, 第一个是私钥文件,第二个是公钥文件</p>
+<p>2.将公钥添加到远程linux系统中</p>
+<p>sudo vim /root/.ssh/authorized_keys</p>
+<p>:wq保存退出</p>
+<p>3.启用秘钥方式登录</p>
+<p>sudo vim /etc/ssh/sshd_config</p>
+<p><code>PubkeyAuthentication</code> yes的注释去掉</p>
+<p>:wq保存退出</p>
+<p>4.检查ssh服务</p>
+<p>sudo netstat -ntlp | grep ssh 如果有22端口说明已经启动，如果没有列出执行以下命令</p>
+<p>/etc/init.d/ssh resart</p>
+<p>5.配置vscode远程连接信息</p>
+<p>  1.vscode安装Remote - SSH</p>
+<p>  2.Remote Explorer里面选择SSH Targets</p>
+<p>  3.选择+号添加连接信息， ssh <strong>user</strong>@<strong>ip</strong> -p 22, 其中user为远程电脑登录用户名，ip为远程电脑ip地址</p>
+<p>  如果配置过程中出现 <strong>过程试图写入的管道不存在</strong>找到以下文件</p>
+<p>  C:<code>Users**用户名**.sshconfig</code></p>
+<p>``` 右键 属性-&gt;安全-&gt;高级-&gt;禁用继承/然后 添加-&gt;-&gt;高级-&gt;立即查找-&gt;选择你的用户名-&gt;添加上**修改**的权限`</p>
+<p>`` 然后使用vscode再次连接，中间过程会弹出输入登录机器密码的对话框，输入即可</p>
+<p>仅作记录</p>
+<p>ref: <a target="_blank" rel="noopener" href="http://t.zoukankan.com/guanglin-p-14931464.html">http://t.zoukankan.com/guanglin-p-14931464.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/17/Cplusplus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/17/Cplusplus/" class="post-title-link" itemprop="url">Cplusplus</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-17 09:34:28" itemprop="dateCreated datePublished" datetime="2022-04-17T09:34:28+08:00">2022-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-25 13:45:57" itemprop="dateModified" datetime="2022-04-25T13:45:57+08:00">2022-04-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一、计算机基础"><a href="#一、计算机基础" class="headerlink" title="一、计算机基础"></a>一、计算机基础</h1><ol>
+<li>C/C++内存有哪几种类型？<br>C中，内存分为5个区：<strong>堆</strong>(malloc)、<strong>栈</strong>(如局部变量、函数参数)、<strong>程序代码区</strong>（存放二进制代码）、<strong>全局/静态存储区</strong>（全局变量、static变量）和<strong>常量存储区</strong>（常量）。此外，C++中有<strong>自由存储区</strong>（new）一说。<br>全局变量、static变量会初始化为缺省值，而堆和栈上的变量是随机的，不确定的。</li>
+</ol>
+<ol start="2">
+<li><p>堆和栈的区别？<br> 1).堆存放动态分配的对象——即那些在程序运行时动态分配的对象，比如 new 出来的对象，其生存期由程序控制；<br> 2).栈用来保存定义在函数内的<strong>非static对象</strong>，如局部变量，仅在其定义的程序块运行时才存在；<br> 3).静态内存用来保存static对象，类static数据成员以及定义在任何函数外部的变量，static对象在使用之前分配，程序结束时销毁；<br> 4).栈和静态内存的对象由编译器自动创建和销毁。</p>
+</li>
+<li><p>堆和自由存储区的区别？<br>总的来说，堆是C语言和操作系统的术语，是操作系统维护的一块动态分配内存；自由存储是C++中通过new与delete动态分配和释放对象的抽象概念。他们并不是完全一样。<br>从技术上来说，堆（heap）是C语言和操作系统的术语。堆是操作系统所维护的一块特殊内存，它提供了动态分配的功能，当运行程序调用malloc()时就会从中分配，稍后调用free可把内存交还。而自由存储是C++中通过new和delete动态分配和释放对象的抽象概念，通过new来申请的内存区域可称为自由存储区。<strong>基本上，所有的C++编译器默认使用堆来实现自由存储</strong>，也即是缺省的全局运算符new和delete也许会按照malloc和free的方式来被实现，这时藉由new运算符分配的对象，说它在堆上也对，说它在自由存储区上也正确。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -188,7 +352,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-12 17:58:59" itemprop="dateModified" datetime="2022-04-12T17:58:59+08:00">2022-04-12</time>
+      <time title="修改时间：2022-04-25 13:46:12" itemprop="dateModified" datetime="2022-04-25T13:46:12+08:00">2022-04-25</time>
     </span>
 
   
@@ -221,9 +385,9 @@
 
 <img src="https://s2.loli.net/2022/04/11/mC6Bopq7vzXjfDW.png" alt="image-20220411162348367" style="zoom:50%;" />
 
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220411162407384.png" alt="image-20220411162407384" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/ChxMY9U1AlRXao3.png" alt="image-20220411162407384" style="zoom:50%;" />
 
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220411162420712.png" alt="image-20220411162420712" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/H4bA6pzI5sjwWLJ.png" alt="image-20220411162420712" style="zoom:50%;" />
 
 <p>ref: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/388224103">https://zhuanlan.zhihu.com/p/388224103</a></p>
 <h1 id="影子价格"><a href="#影子价格" class="headerlink" title="影子价格"></a>影子价格</h1><h1 id="Row-Generation（就是割平面法）"><a href="#Row-Generation（就是割平面法）" class="headerlink" title="Row Generation（就是割平面法）"></a>Row Generation（就是割平面法）</h1><p><strong>常用于整数规划</strong></p>
@@ -233,7 +397,7 @@
 <p>我们从线性规划角度，理解行生成方法的基本思想：形成极值（最优解）所需要的约束条件个数，往往远小于原问题的约束条件个数。因此为何不在需要的时候，才把这些“重要”的约束条件加上来呢？</p>
 <p>下面举个简单例子：</p>
 <p>如下图，原问题有5个不等式（一条红线代表一个不等式），但是最优解点D只需CD和DE 2个不等式即可表述。</p>
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412174455417.png" alt="image-20220412174455417" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/2i4wUupVWlmx8Mr.png" alt="image-20220412174455417" style="zoom:50%;" />
 
 <p>因此行生成方法的基本思路：先求解原问题的松弛问题，即初始问题（master problem）不加约束条件或只加其中几个约束，然后求解该松弛问题，如果得到的解是可行解，那么该解就是原问题的最优解（例如刚开始运气很好地加了CD和DE）。</p>
 <p>如果得到的解对原问题是不可行的，例如解是（0，6）这个点（因为没有加BC这个约束），或者无界的，那么这时候加上BC这个不等式便可以把这个不可行解排除。</p>
@@ -257,7 +421,7 @@
 <h1 id="bender’s-decomposition"><a href="#bender’s-decomposition" class="headerlink" title="bender’s decomposition"></a>bender’s decomposition</h1><p>主要思想是行生成+割平面方法</p>
 <h2 id="single-bender’s"><a href="#single-bender’s" class="headerlink" title="single bender’s"></a>single bender’s</h2><h2 id="multi-bender’s"><a href="#multi-bender’s" class="headerlink" title="multi bender’s"></a>multi bender’s</h2><h1 id="branch-and-bound（精确算法）"><a href="#branch-and-bound（精确算法）" class="headerlink" title="branch and bound（精确算法）"></a>branch and bound（精确算法）</h1><p><strong>分支定界</strong></p>
 <p>分支定界算法始终围绕着一颗搜索树进行的，我们将原问题看作搜索树的根节点，从这里出发，分支的含义就是将大的问题分割成小的问题。大问题可以看成是搜索树的父节点，那么从大问题分割出来的小问题就是父节点的子节点了。分支的过程就是不断给树增加子节点的过程。而定界就是在分支的过程中检查子问题的上下界，如果子问题不能产生一比当前最优解还要优的解，那么砍掉这一支。直到所有子问题都不能产生一个更优的解时，算法结束。</p>
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412155612418.png" alt="image-20220412155612418" style="zoom:33%;" />
+<img src="https://s2.loli.net/2022/04/12/tvXw4O9s8zVU3GB.png" alt="image-20220412155612418" style="zoom:33%;" />
 
 <p><strong>例子</strong></p>
 <p>对于一个整数规划模型：<br>$$<br>maximize~~~~~~&amp;4x_1+9x_2+6x_3 \<br>subject~ to~~~~&amp;5x_1+8x_2+6x_3 \leq 12 \<br>&amp;x_1,x_2,x_3 ~ are~ binary~ variable<br>$$<br>因为求解的是最大化问题，不妨先设当前的最优解为负无穷：-INF。</p>
@@ -270,14 +434,14 @@
 <ol start="2">
 <li><strong>从节点 1 和节点 2 两个子问题再次分支，得到如下结果</strong></li>
 </ol>
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412161353856.png" alt="image-20220412161353856" style="zoom: 50%;" />
+<img src="https://s2.loli.net/2022/04/12/aE4W5fBDbHTcvuG.png" alt="image-20220412161353856" style="zoom: 50%;" />
 
 <p>子问题3已经不可行，无需再理。子问题4通过线性松弛得到最优解为10，刚好也符合原问题0的所有约束，在该支找到一个可行解，更新BestV = 10。</p>
 <p>子问题5通过线性松弛得到upper bound为11.87&gt;当前的BestV = 10，因此子问题5还有戏，待下一次分支。而子问题6得到upper bound为9&lt;当前的BestV = 10，那么从该支下去找到的解也不会变得更好，所以剪掉！</p>
 <ol start="3">
 <li><strong>对结点5进行分支</strong></li>
 </ol>
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220412161453040.png" alt="image-20220412161453040" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/uIATlUHx9jaoghs.png" alt="image-20220412161453040" style="zoom:50%;" />
 
 <p>子问题7不可行，无需再理。子问题8得到一个满足原问题0所有约束的解，但是目标值为4&lt;当前的BestV=10，所以不更新BestV，同时该支下去也不能得到更好的解了。</p>
 <ol start="4">
@@ -291,7 +455,7 @@
 <p><strong>ref:</strong>   <a target="_blank" rel="noopener" href="https://www.cnblogs.com/dengfaheng/p/11225612.html">https://www.cnblogs.com/dengfaheng/p/11225612.html</a></p>
 <h1 id="branch-and-cut"><a href="#branch-and-cut" class="headerlink" title="branch and cut"></a>branch and cut</h1><p>branch and cut其实还是和branch and bound脱离不了干系的。</p>
 <p>在应用branch and bound求解整数规划问题的时候，如下图:</p>
-<img src="https://s2.loli.net/2022/04/12/h5InXbtRf4pg9j8.png" alt="image-20220412171138059" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/nvNTFE8UzOCZtWS.png" alt="image-20220412171138059" style="zoom:50%;" />
 
 <p>假如，我们现在求一个整数规划最大化问题，在分支定界过程中，求解整数规划模型的LP松弛模型得到的非整数解作为上界，而此前找到的整数解作为下界。 如果出现某个节点upper bound低于现有的lower bound，则可以剪掉该节点。否则，如果不是整数解继续分支。</p>
 <p>此外，在求解整数规划模型的LP松弛时，<strong>If cutting planes are used to tighten LP relaxations。</strong>那么这时候的branch and bound就变成了branch and cut。   <strong>割平面</strong></p>
@@ -334,7 +498,7 @@
 
 <img src="https://s2.loli.net/2022/04/05/StCsT3KaGL64cxE.png" alt="image-20220405211707643" style="zoom:67%;" />
 
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220405211722098.png" alt="image-20220405211722098" style="zoom:67%;" />
+<img src="https://s2.loli.net/2022/04/12/xad3FKUT1eiwvWR.png" alt="image-20220405211722098" style="zoom:67%;" />
 
 <p><strong>使用牛顿法/拟牛顿法收敛更快。但是每次迭代的时间比梯度下降法长。</strong></p>
 <p>ref: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112416130">https://zhuanlan.zhihu.com/p/112416130</a></p>
@@ -344,6 +508,37 @@
 <h1 id="RO"><a href="#RO" class="headerlink" title="RO"></a>RO</h1><p>苏文藻课程</p>
 <h1 id="SO"><a href="#SO" class="headerlink" title="SO"></a>SO</h1><p>苏文藻课程</p>
 <h1 id="distributionally-robust-optimization"><a href="#distributionally-robust-optimization" class="headerlink" title="distributionally robust optimization"></a>distributionally robust optimization</h1><p>苏文藻课程</p>
+<h1 id="粒子群算法（PSO）和遗传算法"><a href="#粒子群算法（PSO）和遗传算法" class="headerlink" title="粒子群算法（PSO）和遗传算法"></a>粒子群算法（PSO）和遗传算法</h1><p>PSO: partivcle swarm optimizatioin</p>
+<p>GA: genetic algorithm</p>
+<p>PSO和GA的<strong>相同点：</strong></p>
+<ol>
+<li>都属于仿生算法。PSO主要模拟鸟类觅食、人类认知等社会行为而提出；GA主要借用生物进化论中”适者生存“的规律。</li>
+<li>都属于全局优化方法。两种算法都是在解空间随机产生初始种群，因为算法在全局的解空间进行搜索，且将搜索重点集中在性能高的部分。</li>
+<li>都属于随机搜索算法。都是通过随机优化方法更新种群和搜索最优点。PSO中认知项和社会项前都加有随机数。GA的遗传操作均属于随即操作。</li>
+<li>都隐含并行性。搜索过程是从问题解的一个集合开始，而不是从单个个体开始，具有隐含并行搜索特性，从而减小了陷入局部极小的可能性。</li>
+<li>根据个体的适配信息进行搜索，因此不受函数约束条件的限制，如连续性、可导性等。</li>
+<li>对高维复杂问题，往往会遇到早熟收敛和收敛性能差的缺点，都无法保证收敛到最优点。</li>
+</ol>
+<p>PSO和GA的<strong>不同点：</strong></p>
+<ol>
+<li>PSO有记忆，好的解的所有粒子均保存，而GA没有记忆，以前的知识随着种群的改变而被破坏。</li>
+<li>GA算法中，染色体之间相互共享信息，所以整个种群的移动是比较均匀的向最优区域移动。PSO中的例子仅仅通过当前搜索到的最优点进行共享信息，所以很大程度上这是一种单项信息共享机制，整个搜索更新过程是跟随当前最优解的过程。<strong>在大多数情况下，所有粒子可能比遗传算法中的进化个体以更快速度收敛于最优解。</strong> </li>
+<li>PSO相对于GA，不需要编码，没有交叉和变异操作，粒子只是通过内部速度进行更新，因此原理更简单、参数更少、实现更容易。</li>
+<li>PSO算法主要应用于连续问题，包括神经网络训练和函数优化等，而GA除了连续问题之外，还可应用于离散问题，比如TSP问题、货郎担问题、工作车间调度等。</li>
+</ol>
+<h1 id="禁忌搜索算法"><a href="#禁忌搜索算法" class="headerlink" title="禁忌搜索算法"></a>禁忌搜索算法</h1><p>禁忌搜索(Tabu Search, TS)也是属于模拟人类智能的一种优化算法。</p>
+<img src="https://s2.loli.net/2022/04/15/Iz2RtKDcQdZrkEV.jpg" alt="img" style="zoom: 67%;" />
+
+<p><strong>禁忌表（Tabu List，TL）</strong><br><strong>是用来存放（记忆）禁忌对象的表</strong>。它是禁忌搜索得以进行的基本前提。禁忌表本身是有容量限制的，它的大小对存放禁忌对象的个数有影响，会影响算法的性能。</p>
+<p><strong>禁忌对象（Tabu Object，TO）</strong><br><strong>是指禁忌表中被禁的那些变化元素</strong>。禁忌对象的选择可以根据具体问题而制定。例如在旅行商问题（Traveling Salesman Problem，TSP）中可以将交换的城市对作为禁忌对象，也可以将总路径长度作为禁忌对象。</p>
+<p><strong>禁忌期限（Tabu Tenure，TT）</strong><br>也叫禁忌长度，<strong>指的是禁忌对象不能被选取的周期</strong>。禁忌期限过短容易出现循环，跳不出局部最优，长度过长会造成计算时间过长。</p>
+<p><strong>渴望准则（Aspiration Criteria，AC）</strong><br>也称为特赦规则。<strong>当所有的对象都被禁忌之后，可以让其中性能最好的被禁忌对象解禁</strong>，或者当某个对象解禁会带来目标值的很大改进时，也可以使用特赦规则。</p>
+<p><strong>非对称的旅行商问题（ATSP）</strong></p>
+<p><img src="https://s2.loli.net/2022/04/15/tRMBUr7ebDYcZIi.png" alt="image-20220415155952005"></p>
+<p>分析：这是一个简单的问题,利用枚举的方法也可以找到最优的答案，但是，找到答案不是我们的目的，我们主要是想通过一一个简单的例子来理解禁忌搜索是如何进行工作的。从距离矩阵D可以看到，这是一个<strong>非对称</strong>的TSP问题，但是这并不影响算法的执行。由于题目假设了邻域构造的方式，而且规定了始点和终点都是城市a，因此，在以下的求解过程中，我们不使用城市a和其他城市进行交换，这样的操作并不会影响全局寻优的能力。</p>
+<img src="https://pic3.zhimg.com/80/v2-d325fe1019c1c1b584a9f460eeca7df2_720w.jpg" alt="img" style="zoom: 67%;" />
+
+<p><strong>注：</strong>在实际应用中，通过选择更高的禁忌对象，设置合理的禁忌期限，或者采用其他更好的的参数，都可以避免循环（反复出现同种情况的邻域值）的出现，提高算法的性能。</p>
 <h1 id="常见的机器学习算法"><a href="#常见的机器学习算法" class="headerlink" title="常见的机器学习算法"></a>常见的机器学习算法</h1><h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><img src="https://s2.loli.net/2022/04/04/31WiDgLGTE8dM4l.jpg" alt="43E6AF2BAF69572D95CD2DBEAECD8CB2" style="zoom: 80%;" />
 
 <img src="https://s2.loli.net/2022/04/04/V6lH1xLfmhgTZnw.jpg" alt="IMG_0397" style="zoom:33%;" />
@@ -386,10 +581,10 @@
 
 <img src="https://s2.loli.net/2022/04/05/oWbzHIuAx2NSdCk.png" alt="image-20220405164448434" style="zoom:50%;" />
 
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220405170825391.png" alt="image-20220405170825391" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/k7JlOnXshWMopT1.png" alt="image-20220405170825391" style="zoom:50%;" />
 
 <p>$\propto$正比于</p>
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220405171059473.png" alt="image-20220405171059473" style="zoom:50%;" />
+<img src="https://s2.loli.net/2022/04/12/GwrPcM8OuxULJYv.png" alt="image-20220405171059473" style="zoom:50%;" />
 
 
 
@@ -422,7 +617,17 @@
 <p>风电数据</p>
 <p>构建DRO时候，不同机组的历史数据不同，</p>
 <p><img src="https://s2.loli.net/2022/04/05/q4QFwmU5SvfK1rH.png" alt="img"></p>
-<h1 id="LDR变换"><a href="#LDR变换" class="headerlink" title="LDR变换"></a>LDR变换</h1>
+<h1 id="LDR变换"><a href="#LDR变换" class="headerlink" title="LDR变换"></a>LDR变换</h1><h1 id="pickup-and-delivery-problem-with-time-windows"><a href="#pickup-and-delivery-problem-with-time-windows" class="headerlink" title="pickup and delivery problem with time-windows"></a>pickup and delivery problem with time-windows</h1><p>求解PDPTW问题的算法包括：<strong>列生成算法</strong>（column generation）、<strong>分支切割</strong>（branch-and-cut）、<strong>分支切割定价</strong>（branch-and-cut-and-price）<em>等精确计算算法</em>，<strong>禁忌搜索</strong>（tabu search）、<strong>模拟退火</strong>（simulated annealing algorithm）、<strong>基于插入搜索的算法</strong>（insertion-based heuristic）、<strong>自适应大邻域搜索</strong>（adaptive large neighborhood search）、<strong>变深度搜索</strong>（variable-depth search algorithm）。由于在配送场景下，对算法时效性有极高的要求，上述算法均无法适用于配送场景的问题。在后文中，我们将介绍路径规划的问题模型，以及提出的启发式算法（Two-Stage Fast Heuristic），同时给出了一些仿真结果。</p>
+<p>ref: <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000024516742">https://segmentfault.com/a/1190000024516742</a></p>
+<h1 id="指派问题-Assignment-Problems-AP"><a href="#指派问题-Assignment-Problems-AP" class="headerlink" title="指派问题(Assignment Problems - AP)"></a>指派问题(Assignment Problems - AP)</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38361726/article/details/120738776">https://blog.csdn.net/qq_38361726/article/details/120738776</a></p>
+<h1 id="车辆路径问题-VRP"><a href="#车辆路径问题-VRP" class="headerlink" title="车辆路径问题(VRP)"></a>车辆路径问题(VRP)</h1><p>VRP是指一定数量的客户，各自有不同数量的货物需求，配送中心向客户提供货物，由一个车队负责分送货物，组织适当的行车路线，目标是使得客户的需求得到满足，并能在一定的约束下，达到诸如路程最短、成本最小、耗费时间最少等目的。</p>
+<p>TSP是VRP问题的特例。</p>
+<h1 id="旅行商问题-TSP"><a href="#旅行商问题-TSP" class="headerlink" title="旅行商问题(TSP)"></a>旅行商问题(TSP)</h1><p><img src="https://pic4.zhimg.com/80/v2-e0921653dd164fded4bb4256283e66ff_720w.jpg" alt="img"></p>
+<img src="https://pic3.zhimg.com/80/v2-9c5e778c1ce83c44f661abc525f34876_720w.jpg" alt="img" style="zoom: 67%;" />
+
+<p>其中约束(3)尽管可被简化但仍使得该问题成为了NP问题，因此基于上述讨论，本文将简单介绍可用于解决TSP的启发式算法。</p>
+<h2 id="非对称旅行商问题（ATSP）"><a href="#非对称旅行商问题（ATSP）" class="headerlink" title="非对称旅行商问题（ATSP）"></a>非对称旅行商问题（ATSP）</h2><h2 id="非对称旅行商问题（STSP）"><a href="#非对称旅行商问题（STSP）" class="headerlink" title="非对称旅行商问题（STSP）"></a>非对称旅行商问题（STSP）</h2><h1 id="凸包算法"><a href="#凸包算法" class="headerlink" title="凸包算法"></a>凸包算法</h1><h2 id="Graham-scan"><a href="#Graham-scan" class="headerlink" title="Graham scan"></a>Graham scan</h2><p><img src="https://s2.loli.net/2022/04/23/piQgGPzcaZCMI8A.png" alt="image-20220423094807908"></p>
+
       
     </div>
 
@@ -479,7 +684,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-07 17:52:10" itemprop="dateModified" datetime="2022-04-07T17:52:10+08:00">2022-04-07</time>
+      <time title="修改时间：2022-05-11 11:56:49" itemprop="dateModified" datetime="2022-05-11T11:56:49+08:00">2022-05-11</time>
     </span>
 
   
@@ -583,6 +788,16 @@
 
 
 <h2 id="序列化二叉树"><a href="#序列化二叉树" class="headerlink" title="序列化二叉树"></a><strong>序列化二叉树</strong></h2><p>请实现两个函数，分别用来序列化和反序列化二叉树，不对序列化之后的字符串进行约束，但要求能够根据序列化之后的字符串重新构造出一棵与原二叉树相同的树。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Code449</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">		<span class="keyword">int</span> val;</span><br><span class="line">		TreeNode* left;</span><br><span class="line">		TreeNode* right;</span><br><span class="line">		<span class="built_in">TreeNode</span>(<span class="keyword">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">	<span class="comment">// 前序遍历  和 中序遍历  能确定一颗二叉树   中序遍历和后序遍历能确定一颗二叉树</span></span><br><span class="line">	<span class="comment">// 但是对于二叉搜索树，其前序遍历和后序遍历都能确定一颗唯一的二叉树</span></span><br><span class="line">	<span class="function">string <span class="title">serialize</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">		vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">		string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="built_in">postOrder</span>(root, vec);</span><br><span class="line">		<span class="keyword">if</span> (vec.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">			<span class="keyword">return</span> res;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; a : vec) &#123;</span><br><span class="line">			res.<span class="built_in">append</span>(<span class="built_in">to_string</span>(a) + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		res.<span class="built_in">pop_back</span>();  <span class="comment">// 去掉最后一个 &quot;,&quot;</span></span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 后序遍历  递归法</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(TreeNode* <span class="keyword">const</span> root, vector&lt;<span class="keyword">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">postOrder</span>(root-&gt;left, vec);</span><br><span class="line">		<span class="built_in">postOrder</span>(root-&gt;right, vec);</span><br><span class="line">		vec.<span class="built_in">emplace_back</span>(root-&gt;val);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 后序遍历  非递归</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">postOrder_iter</span><span class="params">(TreeNode* <span class="keyword">const</span> root, vector&lt;<span class="keyword">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">	<span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(string data)</span> </span>&#123; <span class="comment">// 根据后序遍历还原</span></span><br><span class="line">		<span class="keyword">int</span> lower = INT_MIN;</span><br><span class="line">		<span class="keyword">int</span> upper = INT_MAX;</span><br><span class="line">		vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">		<span class="comment">// 解析一下 data</span></span><br><span class="line">		stringstream ss; </span><br><span class="line">		ss &lt;&lt; data;</span><br><span class="line">		string temp = <span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">while</span> (std::<span class="built_in">getline</span>(ss, temp, <span class="string">&#x27;,&#x27;</span>)) &#123;</span><br><span class="line">			vec.<span class="built_in">emplace_back</span>(<span class="built_in">stoi</span>(temp));</span><br><span class="line">		&#125;</span><br><span class="line">		stack&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; a : vec) &#123;</span><br><span class="line">			st.<span class="built_in">push</span>(a);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">construct</span>(lower, upper, st);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function">TreeNode* <span class="title">construct</span><span class="params">(<span class="keyword">int</span> lower, <span class="keyword">int</span> upper, stack&lt;<span class="keyword">int</span>&gt;&amp; st)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (st.<span class="built_in">empty</span>() || st.<span class="built_in">top</span>() &lt; lower || st.<span class="built_in">top</span>() &gt; upper) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> val = st.<span class="built_in">top</span>();</span><br><span class="line">		st.<span class="built_in">pop</span>();</span><br><span class="line">		TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(val);</span><br><span class="line">		root-&gt;right = <span class="built_in">construct</span>(val, upper, st);  <span class="comment">// 右边的都大于val ，即val为lower bound</span></span><br><span class="line">		root-&gt;left = <span class="built_in">construct</span>(lower, val, st);  <span class="comment">//左边的都小于val ，即val为upper bound</span></span><br><span class="line">		<span class="keyword">return</span> root;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 <h1 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h1><h2 id="顺时针打印矩阵"><a href="#顺时针打印矩阵" class="headerlink" title="顺时针打印矩阵"></a><strong>顺时针打印矩阵</strong></h2><p>从外向里以顺时针打印。</p>
 <p>螺旋输出，小心单行的情况，要判断 <code>if (top != bottom)</code>  和 <code>if (left != right)</code></p>
 <p>在这里犯了错。</p>
@@ -840,7 +1055,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-13 11:31:11" itemprop="dateModified" datetime="2022-03-13T11:31:11+08:00">2022-03-13</time>
+      <time title="修改时间：2022-04-18 15:51:11" itemprop="dateModified" datetime="2022-04-18T15:51:11+08:00">2022-04-18</time>
     </span>
 
   
@@ -1355,7 +1570,10 @@
 </li>
 </ul>
 <h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p><img src="https://s2.loli.net/2022/03/10/O1mIJrEBeCNUKvD.png" alt="image-20220310113333580"></p>
-<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h4 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h4><h4 id="加载和执行进程"><a href="#加载和执行进程" class="headerlink" title="加载和执行进程"></a>加载和执行进程</h4><h4 id="等待和终止进程"><a href="#等待和终止进程" class="headerlink" title="等待和终止进程"></a>等待和终止进程</h4><h2 id="协程补充"><a href="#协程补充" class="headerlink" title="协程补充"></a>协程补充</h2><p>当系统线程较少的时候没有什么问题，但是当线程数量非常多的时候，却产生了问题。<strong>一是系统线程会占用非常多的内存空间，二是过多的线程切换会占用大量的系统时间。</strong></p>
+<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h4 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h4><h4 id="加载和执行进程"><a href="#加载和执行进程" class="headerlink" title="加载和执行进程"></a>加载和执行进程</h4><h4 id="等待和终止进程"><a href="#等待和终止进程" class="headerlink" title="等待和终止进程"></a>等待和终止进程</h4><h2 id="协程补充"><a href="#协程补充" class="headerlink" title="协程补充"></a>协程补充</h2><p><strong>进程：</strong> 进程是一个具有一定独立功能的程序关于某个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E9%9B%86&spm=1001.2101.3001.7020">数据集</a>合上的一次运行活动，是系统资源分配和独立运行的最小单位；<br><strong>线程：</strong> 线程是进程的一个执行单元，是任务调度和系统执行的最小单位；<br><strong>协程：</strong> 协程是一种用户态的轻量级线程，协程的调度完全由用户控制。</p>
+<p><strong>进程与线程的区别</strong></p>
+<p>1、根本区别： 进程是操作系统资源分配和独立运行的最小单位；线程是任务调度和系统执行的最小单位。<br>2、地址空间区别： 每个进程都有独立的地址空间，一个进程崩溃不影响其它进程；一个进程中的多个线程共享该 进程的地址空间，一个线程的非法操作会使整个进程崩溃。<br>3、上下文切换开销区别： 每个进程有独立的代码和数据空间，进程之间上下文切换开销较大；线程组共享代码和数据空间，线程之间切换的开销较小。</p>
+<p>当系统线程较少的时候没有什么问题，但是当线程数量非常多的时候，却产生了问题。<strong>一是系统线程会占用非常多的内存空间，二是过多的线程切换会占用大量的系统时间。</strong></p>
 <p>协程运行在线程之上，当一个协程执行完成后，可以选择主动让出，让另一个协程运行在当前线程之上。<strong>协程并没有增加线程数量，只是在线程的基础之上通过分时复用的方式运行多个协程</strong>，而且协程的切换在用户态完成，切换的代价比线程从用户态到内核态的代价小很多。</p>
 <p>实际上协程并不是什么银弹，协程只有在等待IO的过程中才能重复利用线程，上面我们已经讲过了，线程在等待IO的过程中会陷入阻塞状态，意识到问题没有？</p>
 <p>假设协程运行在线程之上，并且协程调用了一个阻塞IO操作，这时候会发生什么？实际上操作系统并不知道协程的存在，它只知道线程，<strong>因此在协程调用阻塞IO操作的时候，操作系统会让线程进入阻塞状态，当前的协程和其它绑定在该线程之上的协程都会陷入阻塞而得不到调度，这往往是不能接受的。</strong></p>
@@ -1763,7 +1981,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-01 19:47:18" itemprop="dateModified" datetime="2022-03-01T19:47:18+08:00">2022-03-01</time>
+      <time title="修改时间：2022-05-14 14:57:02" itemprop="dateModified" datetime="2022-05-14T14:57:02+08:00">2022-05-14</time>
     </span>
 
   
@@ -1997,200 +2215,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的一些记录">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">智能指针</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-12-11 13:06:53 / 修改时间：15:28:00" itemprop="dateCreated datePublished" datetime="2021-12-11T13:06:53+08:00">2021-12-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="shared-ptr-和-unique-ptr"><a href="#shared-ptr-和-unique-ptr" class="headerlink" title="shared_ptr 和 unique_ptr"></a>shared_ptr 和 unique_ptr</h1><table>
-<thead>
-<tr>
-<th></th>
-<th>shared_ptr</th>
-<th>unique_ptr</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>初始化</td>
-<td>①shared_ptr&lt;T&gt;sp;      <br />    sp.reset(new T()); <br />②shared_ptr&lt;T&gt; sp(new T());<br />③shared_ptr&lt;T&gt; sp1 = sp;  //拷贝构造<br />④auto sp = make_shared&lt;int&gt;(10);</td>
-<td>①unique_ptr&lt;T&gt; up;<br />up.reset(new T());<br />②unique_ptr&lt;T&gt; up(new T() );<br />③unique_ptr&lt;T&gt; up1 = std::move(up);  //移动构造，因为<strong>unique_ptr是move-only</strong><br />④auto up = make_unique&lt;int&gt;(10);</td>
-<td>两者的<strong>构造函数将声明为explicit</strong>，即不允许隐式类型转换，如shared_ptr&lt;int&gt; sp = new int(10)  //错误<br />shared_ptr&lt;int&gt;  sp(new int(10))  //正确<br />第一句是拷贝构造函数，一般拷贝构造都要传入与其类型相同的变量引用。内置指针无法隐式转换为shared_ptr所以报错。<br />第二局显式调用了shared_ptr的构造函数，正常传入内置指针。</td>
-</tr>
-<tr>
-<td>条件判断</td>
-<td>if(sp){…}</td>
-<td>if(up){…}</td>
-<td>二者均<strong>重载operator bool()</strong></td>
-</tr>
-<tr>
-<td>解引用</td>
-<td>*sp</td>
-<td>*up</td>
-<td>获得所指的对象</td>
-</tr>
-<tr>
-<td>-&gt;mem</td>
-<td>sp-&gt;mem，等价于(*sp).mem</td>
-<td>up-&gt;mem，等价于(*up).mem</td>
-<td>-&gt;主要用于类类型的指针访问类的成员<br />.主要用于类类型的对象访问类的成员</td>
-</tr>
-<tr>
-<td>get()</td>
-<td>sp.get()</td>
-<td>up.get()</td>
-<td>返回p中保存的指针。<strong>小心使用</strong>，若智能指针释放了其对象，返回的指针所指向的对象也就消失了。</td>
-</tr>
-<tr>
-<td>p.swap(q)</td>
-<td>swap(p,q)<br />p.swap(q)</td>
-<td>swap(p,q)<br />p.swap(q)</td>
-<td>交换p和q中的指针</td>
-</tr>
-<tr>
-<td>独有操作</td>
-<td>①shared_ptr&lt;T&gt; p1(p); //拷贝构造<br />②p=q;  //赋值<br />③p.unique();  //若p.use_count();为1，返回true，否则返回false.<br />④p.use_count(); //返回强引用计数。</td>
-<td>①up = nullptr;  //释放up指向的对象，并将up置空<br />②up.release();  //up放弃对指针的控制权，返回裸指针，并将up置空。<br />③up.reset(); //置空up<br />up.reset(p);  // p为裸指针，将up指向p;<br />③up.reset(nullptr); // 置空up</td>
-<td>①unique_ptr为move-only，不可拷贝和赋值，可以被移动。<br />②release()会切断一个unique_ptr和它原来管理的对象之间的联系。<strong>通常用来初始化一个智能指针。</strong></td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/27/objectpool/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的一些记录">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/11/27/objectpool/" class="post-title-link" itemprop="url">object pool</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-11-27 14:57:52" itemprop="dateCreated datePublished" datetime="2021-11-27T14:57:52+08:00">2021-11-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-12-11 13:54:16" itemprop="dateModified" datetime="2021-12-11T13:54:16+08:00">2021-12-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="object-pool"><a href="#object-pool" class="headerlink" title="object pool"></a>object pool</h1><p>实现了一个最基础的对象池，实现方式为<br>1.创建一个对象<br>2.从对象池取出该对象<br>3.使用完后返回池中    </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/27/objectpool/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 </div>
   </main>
