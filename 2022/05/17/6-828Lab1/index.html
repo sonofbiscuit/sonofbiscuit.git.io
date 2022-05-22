@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="PC BootstrapThe PC’s Physical Address Space   早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF) 最重要的部分是Basic Input&#x2F;Output System (BIOS)，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (RO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.828Lab1">
+<meta property="og:url" content="http://example.com/2022/05/17/6-828Lab1/index.html">
+<meta property="og:site_name" content="我的一些记录">
+<meta property="og:description" content="PC BootstrapThe PC’s Physical Address Space   早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF) 最重要的部分是Basic Input&#x2F;Output System (BIOS)，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (RO">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220517122025755.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/PDW1a34oZVg8Ytd.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/5mKUDGAswoZbuIt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/ZRyWbj38usFvmN9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/3fRjomwzLVUyE6h.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/t9ayFTDzYM75lJw.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/8CJDEayGtXoR3wp.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/lh1UiAVvbOWjLay.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/4WlqerkMhyTUCsc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/FfUZ5AkPBcNlCJV.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/myS4R9jDwvfcAJp.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220518153305171.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220518153337802.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/WKgHeMSYBt3UV8O.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220518170934792.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/rNBvldLZ7WUufDe.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220518173511422.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/vPznfE9bwAKSF4N.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/roiDh2v3TskuRAx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/D2cVRnXdpaiI5eP.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/CXgSuAbDTMUPWNm.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/ylz7Vrp5APt4Roh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/JjV2Gl3Uy1RQ8Np.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522172955485.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/B3xzQXu8ldivrNK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/46IQNuzcP17HJ8C.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522213815891.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522214112303.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522214134785.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522214913927.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522215011773.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/CJT36u1powsZPjS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Z6QbjgWxeX21oCU.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/T4gfBOJXFW8Rjid.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522221005338.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/HJTjCcetVzk7buf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/MQk6y5TJuNXf3Yz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/RsxIbcmhAouZWJ1.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/BlO5HewtJvWUdRG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/84lAVsnb9TUjMvf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/gNm5rjRT9S6iIWl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/IoJriQZ5zH7v9k4.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522222620191.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522222706554.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/CREO15lqh9NfXDg.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522223632755.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/TSWJcyAMg6GzNZ1.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522223357850.png">
+<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220522223512459.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/m1pUGnx78lB5VjP.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/BUn6TOxev9pg3ul.png">
+<meta property="article:published_time" content="2022-05-17T04:00:23.000Z">
+<meta property="article:modified_time" content="2022-05-22T14:39:11.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220517122025755.png">
+
+
+<link rel="canonical" href="http://example.com/2022/05/17/6-828Lab1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/05/17/6-828Lab1/","path":"2022/05/17/6-828Lab1/","title":"6.828Lab1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>6.828Lab1 | 我的一些记录</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我的一些记录</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PC-Bootstrap"><span class="nav-number">1.</span> <span class="nav-text">PC Bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-PC%E2%80%99s-Physical-Address-Space"><span class="nav-number">1.1.</span> <span class="nav-text">The PC’s Physical Address Space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3"><span class="nav-number">1.1.1.</span> <span class="nav-text">Exercise 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise4"><span class="nav-number">1.1.2.</span> <span class="nav-text">Exercise4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#c-int-char-c-1-%E4%B8%8Ec-c-1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.0.1.</span> <span class="nav-text">c &#x3D; (int *) ((char *) c + 1) 与c&#x3D;c+1的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-5"><span class="nav-number">1.1.3.</span> <span class="nav-text">Exercise 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-6"><span class="nav-number">1.1.4.</span> <span class="nav-text">Exercise 6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-kernel"><span class="nav-number">2.</span> <span class="nav-text">The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-7"><span class="nav-number">2.0.1.</span> <span class="nav-text">Exercise 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-8"><span class="nav-number">2.0.2.</span> <span class="nav-text">Exercise 8</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-1"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">problem 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-2"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">problem 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-3"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">problem 3</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1"><span class="nav-number">2.0.2.3.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2"><span class="nav-number">2.0.2.3.2.</span> <span class="nav-text">2</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/17/6-828Lab1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          6.828Lab1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-17 12:00:23" itemprop="dateCreated datePublished" datetime="2022-05-17T12:00:23+08:00">2022-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-22 22:39:11" itemprop="dateModified" datetime="2022-05-22T22:39:11+08:00">2022-05-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="PC-Bootstrap"><a href="#PC-Bootstrap" class="headerlink" title="PC Bootstrap"></a>PC Bootstrap</h1><h2 id="The-PC’s-Physical-Address-Space"><a href="#The-PC’s-Physical-Address-Space" class="headerlink" title="The PC’s Physical Address Space"></a>The PC’s Physical Address Space</h2><img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220517122025755.png" alt="image-20220517122025755" style="zoom: 67%;" />
+
+<ul>
+<li>早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF)</li>
+<li>最重要的部分是Basic Input/Output System (BIOS)，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (ROM)中，现在pc机将BIOS存储在updateable flash memory(可更新的闪存)中。</li>
+<li>BIOS负责执行基本的系统初始化，如激活显卡和检查已安装的内存数量。在执行此初始化之后，BIOS从某些适当的位置(如 floppy disk(软盘), hard disk, CD-ROM, or the network)加载操作系统，并将机器的控制权传递给操作系统。</li>
+<li>虽然现在可以处理器支持4GB的物理地址空间了，但还是保留那1MB的物理地址的设定来向后兼容</li>
+</ul>
+<h3 id="Exercise-3"><a href="#Exercise-3" class="headerlink" title="Exercise 3"></a>Exercise 3</h3><p>学习boot.s,main.c,boot.asm，了解在GDB中执行the boot loader时发生了什么？</p>
+<p>在地址 0x7c00 处设置断点，它是加载后的引导扇区的位置。继续运行，直到那个断点。在 <code>boot/boot.S</code> 中跟踪代码，使用源代码和反汇编文件 <code>obj/boot/boot.asm</code> 去保持跟踪。</p>
+<p>在 <code>boot/main.c</code> 文件中跟踪进入 <code>bootmain()</code> ，然后进入 <code>readsect()</code>。识别 <code>readsect()</code> 中相关的每一个语句的准确汇编指令。跟踪 <code>readsect()</code> 中剩余的指令，然后返回到 <code>bootmain()</code> 中，识别 <code>for</code> 循环的开始和结束位置，这个循环从磁盘上读取内核的剩余扇区。找出循环结束后运行了什么代码，在这里设置一个断点，然后继续。接下来再走完引导加载器的剩余工作。</p>
+<p>完成之后，就能够回答下列的问题了：</p>
+<ul>
+<li><strong>处理器开始运行 32 代码时指向到什么地方？从 16 位模式切换到 32 位模式的真实原因是什么？</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Jump to next instruction, but in 32-bit code segment.</span><br><span class="line"># Switches processor into 32-bit mode.</span><br><span class="line">ljmp    $PROT_MODE_CSEG, $protcseg</span><br><span class="line">  7c2d:    ea 32 7c 08 00 66 b8   ljmp   $0xb866,$0x87c32</span><br></pre></td></tr></table></figure>
+
+<p>在boot.asm 这里切换到32位代码。应该是经过64与60端口的控制，加载完<strong>GDT</strong>表后，<strong>CRO的bit0位为1</strong>，此时机器已处于保护模式，故处理器从16位模式转为32位模式。</p>
+<p>全局描述表(GDT Global Descriptor Table):在保护模式下一个重要的数据结构。用来存储内存的分段信息。</p>
+<p>GDT可以被放在内存的任何位置，那么当程序员通过段寄存器来引用一个段描述符时，CPU必须知道GDT的入口，也就是基地址放在哪里，所以Intel的设计者门提供了一个寄存器GDTR用来存放GDT的入口地址，程序员将GDT设定在内存中某个位置之后，可以通过LGDT指令将GDT的入口地址装入此寄存器，从此以后，CPU就根据此寄存器中的内容作为GDT的入口来访问GDT了。</p>
+<ul>
+<li><strong>引导加载器执行的最后一个指令是什么，内核加载之后的第一个指令是什么？</strong></li>
+</ul>
+<p>引导加载程序的最后一条指令是boot/main.c中bootmain函数最后的<code>((void (*)(void)) (ELFHDR-&gt;e_entry))();</code> 这个第一条指令位于/kern/entry.S文件中，第一句 movw $0x1234, 0x472</p>
+<img src="https://s2.loli.net/2022/05/17/PDW1a34oZVg8Ytd.png" alt="image-20220517140436330" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2022/05/17/5mKUDGAswoZbuIt.png" alt="image-20220517140447848" style="zoom:67%;" />
+
+
+
+<ul>
+<li><strong>内核的第一个指令在哪里？</strong></li>
+</ul>
+<p>位于<code>/kern/entry.S</code>文件中</p>
+<ul>
+<li><strong>为从硬盘上获取完整的内核，引导加载器如何决定有多少扇区必须被读入？在哪里能找到这些信息？</strong></li>
+</ul>
+<p>通过<code>ELF program headers</code>决定，他在操作系统内核映像文件的ELF头部信息里找到。</p>
+<p>Examine the full list of the names, sizes, and link addresses of all the sections in the kernel executable by typing:</p>
+<p><img src="https://s2.loli.net/2022/05/17/ZRyWbj38usFvmN9.png" alt="image-20220517155248619"></p>
+<ul>
+<li><code>.text</code>：程序的可运行指令。</li>
+<li><code>.rodata</code>：只读数据，比如，由 C 编译器生成的 ASCII 字符串常量。（然而我们并不需要操心设置硬件去禁止写入它）</li>
+<li><code>.data</code>：保持在程序的初始化数据中的数据节，比如，初始化声明所需要的全局变量，比如，像 <code>int x = 5;</code>。</li>
+</ul>
+<p>look at the <code>.text</code> section of the boot loader:</p>
+<p><img src="https://s2.loli.net/2022/05/17/3fRjomwzLVUyE6h.png" alt="image-20220517155417627"></p>
+<h3 id="Exercise4"><a href="#Exercise4" class="headerlink" title="Exercise4"></a>Exercise4</h3><p>下载 <a target="_blank" rel="noopener" href="https://sipb.mit.edu/iap/6.828/files/pointers.c">pointers.c</a> 的源代码，运行它，然后确保你理解了输出值的来源的所有内容。尤其是，确保你理解了第 1 行和第 6 行的指针地址的来源、第 2 行到第 4 行的值是如何得到的、以及为什么第 5 行指向的值表面上看像是错误的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span></span></span><br><span class="line"><span class="function"><span class="title">f</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">int</span> *b = <span class="built_in">malloc</span>(<span class="number">16</span>);  <span class="comment">//一个int四个字节，共16个字节</span></span><br><span class="line">    <span class="keyword">int</span> *c;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;1: a = %p, b = %p, c = %p\n&quot;</span>, a, b, c);</span><br><span class="line"></span><br><span class="line">    c = a;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">	a[i] = <span class="number">100</span> + i;</span><br><span class="line">    c[<span class="number">0</span>] = <span class="number">200</span>;  <span class="comment">// c指向a</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;2: a[0] = %d, a[1] = %d, a[2] = %d, a[3] = %d\n&quot;</span>,</span><br><span class="line">	   a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>], a[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">    c[<span class="number">1</span>] = <span class="number">300</span>;</span><br><span class="line">    *(c + <span class="number">2</span>) = <span class="number">301</span>;</span><br><span class="line">    <span class="number">3</span>[c] = <span class="number">302</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;3: a[0] = %d, a[1] = %d, a[2] = %d, a[3] = %d\n&quot;</span>,</span><br><span class="line">	   a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>], a[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">    c = c + <span class="number">1</span>;  <span class="comment">// c指向a[1]。由于a中存int，一个int占四个字节，所以c的地址会+4，而不是+1</span></span><br><span class="line">    *c = <span class="number">400</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;4: a[0] = %d, a[1] = %d, a[2] = %d, a[3] = %d\n&quot;</span>,</span><br><span class="line">	   a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>], a[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">    c = (<span class="keyword">int</span> *) ((<span class="keyword">char</span> *) c + <span class="number">1</span>);  </span><br><span class="line">    <span class="comment">//如果先将c转化为字符串，再直接对字符串+1，这样导致c实际地址就是+1</span></span><br><span class="line">    *c = <span class="number">500</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;5: a[0] = %d, a[1] = %d, a[2] = %d, a[3] = %d\n&quot;</span>,</span><br><span class="line">	   a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>], a[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">    b = (<span class="keyword">int</span> *) a + <span class="number">1</span>;</span><br><span class="line">    c = (<span class="keyword">int</span> *) ((<span class="keyword">char</span> *) a + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;6: a = %p, b = %p, c = %p\n&quot;</span>, a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">int</span> ac, <span class="keyword">char</span> **av)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="https://s2.loli.net/2022/05/17/t9ayFTDzYM75lJw.png" alt="img" style="zoom:67%;" />
+
+<p><strong>如果先将c转化为字符串，再直接对字符串+1，这样导致c实际地址就是+1，从<code>0x7fffd33e72c4</code>到<code>0x7fffd33e72c5</code></strong></p>
+<h5 id="c-int-char-c-1-与c-c-1的区别"><a href="#c-int-char-c-1-与c-c-1的区别" class="headerlink" title="c = (int *) ((char *) c + 1) 与c=c+1的区别"></a>c = (int *) ((char *) c + 1) 与c=c+1的区别</h5><p><img src="https://s2.loli.net/2022/05/17/8CJDEayGtXoR3wp.png" alt="image-20220517161940295"></p>
+<img src="https://s2.loli.net/2022/05/17/lh1UiAVvbOWjLay.png" alt="image-20220517162003852" style="zoom:67%;" />
+
+<p>转换为char后，c只向前移动了1位，即八个bit。</p>
+<p>*c=500，将灰色框内的值变为500.</p>
+<img src="https://s2.loli.net/2022/05/17/4WlqerkMhyTUCsc.png" alt="image-20220517162103314" style="zoom:67%;" />
+
+<p><strong>其他</strong><br>如果int *p=(int*)100,则(int)p+1和(int)(p+1)不同，前者是101，但后者是104。当指针加整数时，向第二个例子，整数隐式乘以指针所指向的对象的大小。<br>p[i]定义为和*(p+i)相同，代表p指向的内存的第i个对象，当对象大于1字节时，这条规则起作用<br>&amp;p[i]和(p+i)相同，代表p指向的内存的第i个对象的地址<br>在对内存地址进行加法时，要确定他是<strong>integer addition or pointer addition</strong></p>
+<p>ref: <a target="_blank" rel="noopener" href="https://blog.csdn.net/han_hhh/article/details/121701438">https://blog.csdn.net/han_hhh/article/details/121701438</a></p>
+<h3 id="Exercise-5"><a href="#Exercise-5" class="headerlink" title="Exercise 5"></a>Exercise 5</h3><p>内核的文件头:</p>
+<img src="https://s2.loli.net/2022/05/18/FfUZ5AkPBcNlCJV.png" alt="image-20220518152817746" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2022/05/18/myS4R9jDwvfcAJp.png" alt="image-20220518152831699" style="zoom:67%;" />
+
+<p>得到了<code>Program Header</code>文件头，上面省略了余下的一些输出内容。每个<code>LOAD</code>都是一个<code>ELF</code>对象，里面包含了相对本文件的索引<code>off</code>、虚拟内址<code>vaddr</code>、物理地址<code>paddr</code>、对齐<code>align</code>、对象在文件和内存中的大小<code>filesz, memsz</code>。</p>
+<p>这个<code>header</code>在<code>bootmain</code>函数中通过<code>readseg</code>函数加载到了内存中，位置在<code>0x10000</code>，并通过一个宏<code>ELFHDR</code>索引。<code>header</code>中存放的数据采用的是默认的对齐方式，所以可以直接通过一个<code>struct Elf</code>指针访问各个属性。</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220518153305171.png" alt="image-20220518153305171" style="zoom: 50%;" />
+
+<p>在文件头<code>struct Elf</code>中，我们拿到了关于结构体<code>struct Proghdr</code>数组的信息<code>e_phoff</code>。从这个数组的成员中，我们拿到了关于每个<code>segment</code>的信息，也就可以把它们正式从硬盘中拷贝到内存中的指定位置。</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220518153337802.png" alt="image-20220518153337802" style="zoom:50%;" />
+
+<p>第一个<code>segment</code>对象的地址存放在<code>ELFHDR-&gt;e_phoff</code>中，是从硬盘中读入的原始数据。转化为指针如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ph = (struct Proghdr *) ((<span class="keyword">uint8_t</span> *) ELFHDR + ELFHDR-&gt;e_phoff);</span><br></pre></td></tr></table></figure>
+
+<p>也就是加上了一个偏置。同样利用<code>elf</code>文件的数据，查出这个“对象数组”的长度，也就可以遍历这个<code>Proghdr</code>数组了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (; ph &lt; eph; ph++)</span><br><span class="line">    readseg(ph-&gt;p_pa, ph-&gt;p_memsz, ph-&gt;p_offset);</span><br></pre></td></tr></table></figure>
+
+<p><code>ph</code>是个<code>struct Proghdr</code>类型的指针，直接<code>++</code>让地址的值前进相应地址长度，非常方便。</p>
+<p>至此，内核完全加载完毕。</p>
+<p><img src="https://s2.loli.net/2022/05/18/WKgHeMSYBt3UV8O.png" alt="image-20220518154931248"></p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220518170934792.png" alt="image-20220518170934792" style="zoom: 67%;" />
+
+<img src="https://s2.loli.net/2022/05/18/rNBvldLZ7WUufDe.png" alt="image-20220518170900480" style="zoom: 67%;" />
+
+<p>获取kernel ELF文件的相关信息：</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220518173511422.png" alt="image-20220518173511422" style="zoom:67%;" />
+
+<p>可看到程序入口的虚拟地址是0x10000c，程序头表偏移为52B，程序头表条目是2.</p>
+<p><strong>如果你得到一个错误的引导加载器链接地址，通过再次跟踪引导加载器的前几个指令，你将会发现第一个指令会 “中断” 或者出错。然后在 <code>boot/Makefrag</code> 修改链接地址来修复错误，运行 <code>make clean</code>，使用 <code>make</code> 重新编译，然后再次跟踪引导加载器去查看会发生什么事情。不要忘了改回正确的链接地址，然后再次 <code>make clean</code>！</strong></p>
+<p><img src="https://s2.loli.net/2022/05/18/vPznfE9bwAKSF4N.png" alt="image-20220518181251389"></p>
+<p>修改0x7C00为0x7d00，使得bootloader无法正确加载。</p>
+<p><img src="https://s2.loli.net/2022/05/18/roiDh2v3TskuRAx.png" alt="image-20220518181451276"></p>
+<p><strong>可能</strong>就是GDT表加载错误才导致后面加载失败，因为加载信息都错掉了。</p>
+<h3 id="Exercise-6"><a href="#Exercise-6" class="headerlink" title="Exercise 6"></a>Exercise 6</h3><p>在BIOS进入 the boot loader时检查内存0x00100000处的8个字，然后在 the boot loader进入内核时再检查一次。</p>
+<p><img src="https://s2.loli.net/2022/05/18/D2cVRnXdpaiI5eP.png" alt="image-20220518185538199"></p>
+<p><img src="https://s2.loli.net/2022/05/18/CXgSuAbDTMUPWNm.png" alt="image-20220518185555496"></p>
+<p>0x00100000往后8个字前后不一样应该是由于bootmain将内核的某个section存入了该地址处。由于要在进入内核时再看一次，故第二个断点应该设置在call entry处，<br>即 *<em>b <em>0x7d69</em></em></p>
+<p><img src="https://s2.loli.net/2022/05/18/ylz7Vrp5APt4Roh.png" alt="image-20220518185643002"></p>
+<p><strong>内核的入口地址是0x0010000c，也在此范围中，可能是.text段的内容，因为内核最先加载的就是.text</strong></p>
+<p>➜  lab git:(lab1) objdump -x obj/kern/kernel </p>
+<p>obj/kern/kernel:     file format elf32-i386<br>obj/kern/kernel<br>architecture: i386, flags 0x00000112:<br>EXEC_P, HAS_SYMS, D_PAGED<br>start address 0x0010000c</p>
+<p>Program Header:<br>    LOAD off    0x00001000 vaddr 0xf0100000 paddr 0x00100000 align 212<br>         filesz 0x0000ee68 memsz 0x0000ee68 flags r-x<br>    LOAD off    0x00010000 vaddr 0xf010f000 paddr 0x0010f000 align 212<br>         filesz 0x0000a948 memsz 0x0000a948 flags rw-</p>
+<p>Sections:<br>Idx Name          Size      VMA       LMA       File off  Algn<br>  0 .text         0000178e  f0100000  00100000  00001000  22<br>                  CONTENTS, ALLOC, LOAD, READONLY, CODE<br>  1 .rodata       00000704  f01017a0  001017a0  000027a0  25<br>                  CONTENTS, ALLOC, LOAD, READONLY, DATA<br>  2 .stab         000044d1  f0101ea4  00101ea4  00002ea4  22<br>                  CONTENTS, ALLOC, LOAD, READONLY, DATA<br>  3 .stabstr      00008af3  f0106375  00106375  00007375  20<br>                  CONTENTS, ALLOC, LOAD, READONLY, DATA<br>  4 .data         0000a300  f010f000  0010f000  00010000  212<br>                  CONTENTS, ALLOC, LOAD, DATA<br>  5 .bss          00000648  f0119300  00119300  0001a300  25<br>                  CONTENTS, ALLOC, LOAD, DATA<br>  6 .comment      00000011  00000000  00000000  0001a948  20<br>                  CONTENTS, READONLY</p>
+<h1 id="The-kernel"><a href="#The-kernel" class="headerlink" title="The kernel"></a>The kernel</h1><h3 id="Exercise-7"><a href="#Exercise-7" class="headerlink" title="Exercise 7"></a>Exercise 7</h3><p>在0x0010000c处打上断点，si单步执行，直到 movl %eax, %cr0 前一步</p>
+<img src="https://s2.loli.net/2022/05/22/JjV2Gl3Uy1RQ8Np.png" alt="image-20220522172810387" style="zoom:67%;" />
+
+<p>查看0x00100000 和 0xf0100000 的内容</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522172955485.png" alt="image-20220522172955485" style="zoom:67%;" />
+
+<p>执行movl %eax, %cr0 ， 再次查看内容</p>
+<p><img src="https://s2.loli.net/2022/05/22/B3xzQXu8ldivrNK.png" alt="image-20220522173104250"></p>
+<p>发现VMA和LMA有相同的内容，这是因为分页后，0x00100000 被映射到了 0xf0100000 处，完成了分页操作。</p>
+<p>make clean 后，注释掉movl %eax, %cr0  （kern/entry.S）</p>
+<p>重新运行</p>
+<img src="https://s2.loli.net/2022/05/22/46IQNuzcP17HJ8C.png" alt="image-20220522194929977" style="zoom:67%;" />
+
+<p>qemu-system-i386 -nographic -drive file=obj/kern/kernel.img,index=0,media=disk,format=raw -serial mon:stdio -gdb tcp::26000 -D qemu.log  -S<br><strong>qemu: fatal: Trying to execute code outside RAM or ROM at 0xf010002c</strong></p>
+<p>EAX=f010002c EBX=00010074 ECX=00000000 EDX=000000d5<br>ESI=00010074 EDI=00000000 EBP=00007bf8 ESP=00007bec<br>EIP=f010002c EFL=00000086 [–S–P-] CPL=0 II=0 A20=1 SMM=0 HLT=0<br>ES =0010 00000000 ffffffff 00cf9300 DPL=0 DS   [-WA]<br>CS =0008 00000000 ffffffff 00cf9a00 DPL=0 CS32 [-R-]<br>SS =0010 00000000 ffffffff 00cf9300 DPL=0 DS   [-WA]<br>DS =0010 00000000 ffffffff 00cf9300 DPL=0 DS   [-WA]<br>FS =0010 00000000 ffffffff 00cf9300 DPL=0 DS   [-WA]<br>GS =0010 00000000 ffffffff 00cf9300 DPL=0 DS   [-WA]<br>LDT=0000 00000000 0000ffff 00008200 DPL=0 LDT<br>TR =0000 00000000 0000ffff 00008b00 DPL=0 TSS32-busy<br>GDT=     00007c4c 00000017<br>IDT=     00000000 000003ff<br>CR0=00000011 CR2=00000000 CR3=00117000 CR4=00000000<br>DR0=00000000 DR1=00000000 DR2=00000000 DR3=00000000<br>DR6=ffff0ff0 DR7=00000400<br>CCS=00000084 CCD=80010011 CCO=EFLAGS<br>EFER=0000000000000000<br>FCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001f80<br>FPR0=0000000000000000 0000 FPR1=0000000000000000 0000<br>FPR2=0000000000000000 0000 FPR3=0000000000000000 0000<br>FPR4=0000000000000000 0000 FPR5=0000000000000000 0000<br>FPR6=0000000000000000 0000 FPR7=0000000000000000 0000<br>XMM00=00000000000000000000000000000000 XMM01=00000000000000000000000000000000<br>XMM02=00000000000000000000000000000000 XMM03=00000000000000000000000000000000<br>XMM04=00000000000000000000000000000000 XMM05=00000000000000000000000000000000<br>XMM06=00000000000000000000000000000000 XMM07=00000000000000000000000000000000<br>make: *** [qemu-nox-gdb] Aborted (core dumped)</p>
+<p><strong>由于未开启分页机制，虚拟地址还未映射到物理地址。</strong></p>
+<h3 id="Exercise-8"><a href="#Exercise-8" class="headerlink" title="Exercise 8"></a>Exercise 8</h3><p>补全”%o”</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522213815891.png" alt="image-20220522213815891" style="zoom:67%;" />
+
+<h4 id="problem-1"><a href="#problem-1" class="headerlink" title="problem 1"></a>problem 1</h4><p>解释<code>printf.c</code>和 <code>console.c</code>之间的接口。<code>具体来说， console.c</code>导出什么函数 ？<code>printf.c</code>如何使用这个函数 ？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// printf.c</span></span><br><span class="line"><span class="comment">// Simple implementation of cprintf console output for the kernel,</span></span><br><span class="line"><span class="comment">// based on printfmt() and the kernel console&#x27;s cputchar().</span></span><br><span class="line"><span class="comment">//为内核简单实现cprintf控制台输出，</span></span><br><span class="line"><span class="comment">//基于printfmt（）和内核控制台的cputchar（）。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inc/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inc/stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inc/stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span></span></span><br><span class="line"><span class="function"><span class="title">putch</span><span class="params">(<span class="keyword">int</span> ch, <span class="keyword">int</span> *cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   cputchar(ch);</span><br><span class="line">   *cnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">vcprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, va_list ap)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   vprintfmt((<span class="keyword">void</span>*)putch, &amp;cnt, fmt, ap);</span><br><span class="line">   <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">cprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, ...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   va_list ap;</span><br><span class="line">   <span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line">   va_start(ap, fmt);</span><br><span class="line">   cnt = vcprintf(fmt, ap);</span><br><span class="line">   va_end(ap);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522214112303.png" alt="image-20220522214112303" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522214134785.png" alt="image-20220522214134785" style="zoom:67%;" />
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 03FD    r  line status register</span></span><br><span class="line"><span class="comment">       bit 7 = 0  reserved</span></span><br><span class="line"><span class="comment">       bit 6 = 1  transmitter shift and holding registers empty</span></span><br><span class="line"><span class="comment">       bit 5 = 1  transmitter holding register empty. Controller is</span></span><br><span class="line"><span class="comment">             ready to accept a new character to send.</span></span><br><span class="line"><span class="comment">       bit 4 = 1  break interrupt. the received data input is held in</span></span><br><span class="line"><span class="comment">             in the zero bit state longer than the time of start</span></span><br><span class="line"><span class="comment">             bit + data bits + parity bit + stop bits.</span></span><br><span class="line"><span class="comment">       bit 3 = 1  framing error. the stop bit that follows the last</span></span><br><span class="line"><span class="comment">             parity or data bit is a zero bit.</span></span><br><span class="line"><span class="comment">       bit 2 = 1  parity error. Character has wrong parity</span></span><br><span class="line"><span class="comment">       bit 1 = 1  overrun error. a character was sent to the receiver</span></span><br><span class="line"><span class="comment">             buffer before the previous character in the buffer</span></span><br><span class="line"><span class="comment">             could be read. This destroys the previous</span></span><br><span class="line"><span class="comment">             character.</span></span><br><span class="line"><span class="comment">       bit 0 = 1  data ready. a complete incoming character has been</span></span><br><span class="line"><span class="comment">             received and sent to the receiver buffer register.</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span></span></span><br><span class="line"><span class="function"><span class="title">serial_putc</span><span class="params">(<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">// COM1 = 0x3F8, COM_LSR(Line Status Register) = 5, COM_LSR_TXRDY(传输缓冲区) = 0x20,</span></span><br><span class="line">    <span class="comment">// 0x03F8 + 5  =&gt; 0x03FD   0x03FD &amp; 0x20(0010 0000) =&gt; 取 bit 5</span></span><br><span class="line">    <span class="comment">// bti 5 = 1 :</span></span><br><span class="line">    <span class="comment">// transmitter holding register empty. Controller is ready to accept a new character to send.</span></span><br><span class="line">    <span class="comment">// 如果bit 5 = 1，那么传输方寄存器已空，controller可以接受一个新的字符了</span></span><br><span class="line">   <span class="keyword">for</span> (i = <span class="number">0</span>;</span><br><span class="line">        !(inb(COM1 + COM_LSR) &amp; COM_LSR_TXRDY) &amp;&amp; i &lt; <span class="number">12800</span>;  <span class="comment">// bit 5 != 1  &amp;&amp; 没超时</span></span><br><span class="line">        i++)</span><br><span class="line">      delay();</span><br><span class="line">    <span class="comment">//COM_TX = 0    Out: Transmit buffer</span></span><br><span class="line">    <span class="comment">//serial_putc()函数的功能首先就是在bit 5 =1 的时候，跳出循环，否则只要 i &lt;12800就会一直循环等待。</span></span><br><span class="line">   outb(COM1 + COM_TX, c);   <span class="comment">// 将c写入I/O端口</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***** Parallel port output code *****/</span></span><br><span class="line"><span class="comment">// For information on PC parallel port programming, see the class References</span></span><br><span class="line"><span class="comment">// page.</span></span><br><span class="line"><span class="comment">// 并行端口输入</span></span><br><span class="line"><span class="comment">/* 0x378~0x37A parallel printer port</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0378    w    data port</span></span><br><span class="line"><span class="comment">0379    r/w    status port</span></span><br><span class="line"><span class="comment">         bit 7 = 0 busy * 0x80</span></span><br><span class="line"><span class="comment">         bit 6 = 0 acknowledge</span></span><br><span class="line"><span class="comment">         bit 5 = 1 out of paper</span></span><br><span class="line"><span class="comment">         bit 4 = 1 printer is selected</span></span><br><span class="line"><span class="comment">         bit 3 = 0 error</span></span><br><span class="line"><span class="comment">         bit 2 = 0 IRQ has occurred</span></span><br><span class="line"><span class="comment">         bit 1-0 reserved</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">037A    r/w    control port</span></span><br><span class="line"><span class="comment">         bit 7-5 reserved</span></span><br><span class="line"><span class="comment">         bit 4 = 1 enable IRQ</span></span><br><span class="line"><span class="comment">         bit 3 = 1 select printer    * 0x08</span></span><br><span class="line"><span class="comment">         bit 2 = 0 initialize printer *0x04</span></span><br><span class="line"><span class="comment">         bit 1 = 1 automatic line feed</span></span><br><span class="line"><span class="comment">         bit 0 = 1 strobe        * 0x01</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span></span></span><br><span class="line"><span class="function"><span class="title">lpt_putc</span><span class="params">(<span class="keyword">int</span> c)</span>   <span class="comment">// 并行端口输入</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">// 0x379 &amp; 0x80   读取0x379的内容，和0x80相与，取bits 7，判断是否繁忙</span></span><br><span class="line">   <span class="keyword">for</span> (i = <span class="number">0</span>; !(inb(<span class="number">0x378</span>+<span class="number">1</span>) &amp; <span class="number">0x80</span>) &amp;&amp; i &lt; <span class="number">12800</span>; i++)   <span class="comment">// io端口不繁忙且未超时，一直等待，直到使用了端口或等待时间到</span></span><br><span class="line">      delay();</span><br><span class="line">   outb(<span class="number">0x378</span>+<span class="number">0</span>, c);  <span class="comment">// write char c</span></span><br><span class="line">   outb(<span class="number">0x378</span>+<span class="number">2</span>, <span class="number">0x08</span>|<span class="number">0x04</span>|<span class="number">0x01</span>);   <span class="comment">//初始化 printer</span></span><br><span class="line">   outb(<span class="number">0x378</span>+<span class="number">2</span>, <span class="number">0x08</span>);  <span class="comment">// 选择 printer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span></span></span><br><span class="line"><span class="function"><span class="title">cga_putc</span><span class="params">(<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">// if no attribute given, then use black on white</span></span><br><span class="line">    <span class="comment">// 如果没有给定属性，则使用黑白相间的颜色</span></span><br><span class="line">   <span class="keyword">if</span> (!(c &amp; ~<span class="number">0xFF</span>))    <span class="comment">// c 低16位为字符值，高16位为显示属性</span></span><br><span class="line">      c |= <span class="number">0x0700</span>;</span><br><span class="line">    <span class="comment">// crt_pos:当前输出位置指针，指向内存区中对应输出映射地址。</span></span><br><span class="line">   <span class="keyword">switch</span> (c &amp; <span class="number">0xff</span>) &#123;    <span class="comment">// 取低16位</span></span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;\b&#x27;</span>:   <span class="comment">// backspace</span></span><br><span class="line">      <span class="keyword">if</span> (crt_pos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">         crt_pos--;</span><br><span class="line">         crt_buf[crt_pos] = (c &amp; ~<span class="number">0xff</span>) | <span class="string">&#x27; &#x27;</span>;  <span class="comment">// 删除处使用&#x27; &#x27;填充</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;\n&#x27;</span>:    <span class="comment">// //new line：换行, 自动添加回车</span></span><br><span class="line">      crt_pos += CRT_COLS;   <span class="comment">// CRT_COLS默认输出格式下整个屏幕的列数，为80。</span></span><br><span class="line">        <span class="comment">// CRT_ROWS:默认输出格式下整个屏幕的行数，为25。</span></span><br><span class="line">      <span class="comment">/* fallthru */</span></span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;\r&#x27;</span>:</span><br><span class="line">      crt_pos -= (crt_pos % CRT_COLS);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;\t&#x27;</span>:  <span class="comment">// tab  转换为五个 &#x27; &#x27;</span></span><br><span class="line">      cons_putc(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">      cons_putc(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">      cons_putc(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">      cons_putc(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">      cons_putc(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="keyword">default</span>:</span><br><span class="line">      crt_buf[crt_pos++] = c;       <span class="comment">/* write the character */</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// What is the purpose of this?</span></span><br><span class="line">    <span class="comment">// CRT_SIZE:是CRT_COLS和CRT_ROWS的乘积，即2000=80*25，是不翻页时一页屏幕最大能容纳的字数。</span></span><br><span class="line">    <span class="comment">// 当前屏幕写满了，</span></span><br><span class="line">   <span class="keyword">if</span> (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">      <span class="keyword">int</span> i;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 函数：memmove(): memmove(void *dst, const void *src, size_t n).</span></span><br><span class="line"><span class="comment">         * 意为将从src指向位置起的n字节数据送到dst指向位置，可以在两个区域重叠时复制。</span></span><br><span class="line"><span class="comment">         * */</span></span><br><span class="line">        <span class="comment">// 所有数据向前挪动一行，最上面一行数据丢失</span></span><br><span class="line">      memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * <span class="keyword">sizeof</span>(<span class="keyword">uint16_t</span>));</span><br><span class="line">      <span class="comment">// 清空最后一行，用空格填充</span></span><br><span class="line">        <span class="keyword">for</span> (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">         crt_buf[i] = <span class="number">0x0700</span> | <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">      crt_pos -= CRT_COLS;</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="comment">// 写光标位置</span></span><br><span class="line">   <span class="comment">/* move that little blinky thing */</span></span><br><span class="line">   outb(addr_6845, <span class="number">14</span>);</span><br><span class="line">   outb(addr_6845 + <span class="number">1</span>, crt_pos &gt;&gt; <span class="number">8</span>);</span><br><span class="line">   outb(addr_6845, <span class="number">15</span>);</span><br><span class="line">   outb(addr_6845 + <span class="number">1</span>, crt_pos);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="problem-2"><a href="#problem-2" class="headerlink" title="problem 2"></a>problem 2</h4><ol>
+<li><p>从console.c</p>
+<p>解释以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1      if (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">2              int i;</span><br><span class="line">3              memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * sizeof(uint16_t));</span><br><span class="line">4              for (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">5                      crt_buf[i] = 0x0700 | &#x27; &#x27;;</span><br><span class="line">6              crt_pos -= CRT_COLS;</span><br><span class="line">7      &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>见上</p>
+<h4 id="problem-3"><a href="#problem-3" class="headerlink" title="problem 3"></a>problem 3</h4><ol>
+<li><p>For the following questions you might wish to consult the notes for Lecture 2. These notes cover GCC’s calling convention on the x86.</p>
+<p>Trace the execution of the following code step-by-step:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1, y = 3, z = 4;</span><br><span class="line">cprintf(&quot;x %d, y %x, z %d\n&quot;, x, y, z);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>In the call to <code>cprintf()</code>, to what does <code>fmt</code> point? To what does <code>ap</code> point?</li>
+<li>List (in order of execution) each call to <code>cons_putc</code>, <code>va_arg</code>, and <code>vcprintf</code>. For <code>cons_putc</code>, list its argument as well. For <code>va_arg</code>, list what <code>ap</code> points to before and after the call. For <code>vcprintf</code> list the values of its two arguments.</li>
+</ul>
+</li>
+</ol>
+<p>对于以下问题，您可能希望查阅第 2 讲的注释。这些注释涵盖了 GCC 在 x86 上的调用约定。</p>
+<p>逐步跟踪以下代码的执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1, y = 3, z = 4;</span><br><span class="line">cprintf(&quot;x %d, y %x, z %d\n&quot;, x, y, z);</span><br></pre></td></tr></table></figure>
+
+<h5 id="1"><a href="#1" class="headerlink" title="1"></a>1</h5><ul>
+<li>在调用 to<code>cprintf()</code>时，<code>fmt</code>指向什么？<code>ap</code>指向什么？</li>
+<li>列出（按执行顺序）对<code>cons_putc</code>、<code>va_arg</code>和 <code>vcprintf</code>的每个调用。对于<code>cons_putc</code>，也列出它的argument。对于 <code>va_arg</code>，列出<code>ap</code>调用前后所指向的内容。列出它的两个参数的<code>vcprintf</code>值。</li>
+</ul>
+<p>将代码复制到该位置</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522214913927.png" alt="image-20220522214913927" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522215011773.png" alt="image-20220522215011773" style="zoom:67%;" />
+
+<p>在gdb给该行打断点</p>
+<p><img src="https://s2.loli.net/2022/05/22/CJT36u1powsZPjS.png" alt="image-20220522215850429"></p>
+<p>disassemble 反汇编当前代码段的部分指令</p>
+<p><img src="https://s2.loli.net/2022/05/22/Z6QbjgWxeX21oCU.png" alt="image-20220522215943610"></p>
+<p>在kernel.asm中查找该地址</p>
+<p>（vim命令模式下，/+查找字符是向下查找，?是向上查找。 如果你要继续查找此关键字，敲字符n就可以继续查找了）</p>
+<img src="https://s2.loli.net/2022/05/22/T4gfBOJXFW8Rjid.png" alt="image-20220522220412446" style="zoom: 67%;" />
+
+<p>call 0xf0100906 &lt;cprintf&gt;</p>
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522221005338.png" alt="image-20220522221005338" style="zoom:67%;" />
+
+<p>va_start，函数名称，读取可变参数的过程其实就是在栈区中，使用指针,遍历栈区中的参数列表,从低地址到高地址一个一个地把参数内容读出来的过程·</p>
+<p>可以看到 fmt 是 cprintf 函数的第一个参数，即指向字符串<code>&quot;x %d, y %x, z %d\n&quot;</code>的指针。</p>
+<p>ap 指向第二个参数的地址。<strong>注意 ap 中存放的是第二个参数的地址，而非第二个参数。</strong></p>
+<img src="https://s2.loli.net/2022/05/22/HJTjCcetVzk7buf.png" alt="image-20220522221407297" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2022/05/22/MQk6y5TJuNXf3Yz.png" alt="image-20220522221535010" style="zoom:67%;" />
+
+<h5 id="2"><a href="#2" class="headerlink" title="2"></a>2</h5><p>调用关系为 cprintf -&gt; vcprintf -&gt; vprintfmt -&gt; putch -&gt; cputchar -&gt; cons_putc</p>
+<p>接上图，可以看到vpprintf后是vprintfmt</p>
+<p><img src="https://s2.loli.net/2022/05/22/RsxIbcmhAouZWJ1.png" alt="image-20220522222019680"></p>
+<p><img src="https://s2.loli.net/2022/05/22/BlO5HewtJvWUdRG.png" alt="image-20220522222138140"></p>
+<p>之后，vprintfmt依次调用putch和cputchar</p>
+<p><img src="https://s2.loli.net/2022/05/22/84lAVsnb9TUjMvf.png" alt="image-20220522222344930"></p>
+<p>cputchar调用 cons_putc</p>
+<p><img src="https://s2.loli.net/2022/05/22/gNm5rjRT9S6iIWl.png" alt="image-20220522222504049"></p>
+<img src="https://s2.loli.net/2022/05/22/IoJriQZ5zH7v9k4.png" alt="image-20220522222602885" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522222620191.png" alt="image-20220522222620191" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522222706554.png" alt="image-20220522222706554" style="zoom:67%;" />
+
+<p>0xf010022b之后，    准备输出</p>
+<img src="https://s2.loli.net/2022/05/22/CREO15lqh9NfXDg.png" alt="image-20220522223041430" style="zoom:50%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522223632755.png" alt="image-20220522223632755" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2022/05/22/TSWJcyAMg6GzNZ1.png" alt="image-20220522223329251" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522223357850.png" alt="image-20220522223357850" style="zoom:67%;" />
+
+<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220522223512459.png" alt="image-20220522223512459" style="zoom:67%;" />
+
+<p>120，32,  49， 44， 32， 121， 32， 51， 44， 32， 122， 32， 52， 10</p>
+<p>ascii 码转换为char</p>
+<img src="https://s2.loli.net/2022/05/22/m1pUGnx78lB5VjP.png" alt="image-20220522223726095" style="zoom: 67%;" />
+
+<p><img src="https://s2.loli.net/2022/05/22/BUn6TOxev9pg3ul.png" alt="image-20220522223755233"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/16/centos%E6%98%BE%E7%A4%BA%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3/" rel="prev" title="centos扩展root">
+                  <i class="fa fa-chevron-left"></i> centos扩展root
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

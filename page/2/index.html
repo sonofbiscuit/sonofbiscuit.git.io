@@ -114,12 +114,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -148,6 +148,279 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/27/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/27/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">webserver环境配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-27 14:05:14" itemprop="dateCreated datePublished" datetime="2022-01-27T14:05:14+08:00">2022-01-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-14 18:39:03" itemprop="dateModified" datetime="2022-05-14T18:39:03+08:00">2022-05-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>virtualbox</p>
+<p>centos 7.9</p>
+<p>ohmyzsh</p>
+<p>vim</p>
+<p>GCC</p>
+<p>GDB</p>
+<p>CMAKE</p>
+<p>ragel</p>
+<p>boost</p>
+<p>其他</p>
+<p>Linux 修改  /etc/sysconfig/network-scripts/ifcfg-enp0s3      =&gt;  ONBOOT=YES</p>
+<p>修改 VirtualBox 网络模式为 桥接网卡  ( ip addr看网卡几为broadcast)</p>
+<p>ping   ip addr    inet地址测试</p>
+<p>执行 service network restart</p>
+<h2 id="若ping通但是ssh连接不上"><a href="#若ping通但是ssh连接不上" class="headerlink" title="若ping通但是ssh连接不上"></a>若ping通但是ssh连接不上</h2><p>1） 首先要确保centos安装过了 <strong>openssh-server</strong> , 终端输入 yum list installed | grep openssh-server</p>
+<p><img src="https://s2.loli.net/2022/01/27/mSGPLv4ETJV6Ysw.png" alt="image-20220126195616524"></p>
+<p>这表示已经安装了，若没有内容则表示没安装</p>
+<p>使用 <strong>yum install openssh-server</strong> 安装</p>
+<p>2）找到  <strong>/etc/ssh/</strong> 目录下的sshd的配置文件 ssha_config, 将文件中的  <strong>Port,  ListenAddress</strong>前的注释符号**#**去掉， 然后打开远程登录 <strong>PermitRootLogin yes</strong>, 选择验证为 <strong>PasswordAuthentication yes</strong>.</p>
+<p>3）开启<strong>sshd</strong>服务，输入sudo service sshd start</p>
+<p>接着检查sshd是否已经打开 , ps -e | grep sshd</p>
+<p>也可以 <strong>netstat -an | grep 22</strong>检查 22 端口是否开启监听（状态为LISTEN）</p>
+<p>4）虚拟机和主机互相ping</p>
+<p>若主机ping不通虚拟机，那么为虚拟机防火墙的问题</p>
+<p>若虚拟机不能ping通主机，那么打开<strong>windows防火墙的ICMPv4-in规则</strong></p>
+<p><img src="https://s2.loli.net/2022/01/27/9uoUIgfcvryzkqt.png" alt="image-20220126200617686"></p>
+<p><strong>termius 连接，默认端口就行（我写了个端口反而不行</strong></p>
+<h2 id="安装-ohmyzsh"><a href="#安装-ohmyzsh" class="headerlink" title="安装 ohmyzsh"></a>安装 ohmyzsh</h2><p>这是一个命令解释器</p>
+<p>官网复制命令安装</p>
+<p>换到码云安装，<strong>githubusercontent 老报错</strong></p>
+<p>sh -c “$(curl --insecure -fsSL <a target="_blank" rel="noopener" href="https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)&quot;">https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)&quot;</a></p>
+<h2 id="安装VIM"><a href="#安装VIM" class="headerlink" title="安装VIM"></a>安装VIM</h2><p>注意与C++的版本兼容</p>
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>yum install wget<br>yum install ncurses-devel<br>yum install gcc gcc-c++<br>yum install ctags<br>yum install bzip2</p>
+<p>wget <a href="ftp://ftp.vim.org/pub/vim/unix/vim-8.1.tar.bz2">ftp://ftp.vim.org/pub/vim/unix/vim-8.1.tar.bz2</a><br>tar xvf vim-8.1.tar.bz2     (解压)<br>cd vim81<br>./configure --prefix=/apps/webserver  （编译时指定路径）<br>make -j4  （make -j带一个参数，可以把项目在进行运行编译，让make最多允许4个编译命令同时执行）<br>make install</p>
+<p>#验证安装成功<br>which vim<br>/apps/webserver/bin/vim             (我使用configure指定位置安装老是装不上，后来默认了)</p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/sylar-yin/myvim.git">https://github.com/sylar-yin/myvim.git</a><br>cp myvim/.vim <del>/ -rf<br>cp myvim/.vimrc ~/                   （</del>路径代表用户根目录，/路径代表最顶层根目录）</p>
+<p>alias vctags=”ctags -R --c++-kinds=+p --fields=+iaS --extra=+q”<br><strong>添加到/etc/profile末尾</strong></p>
+<h1 id="GCC安装"><a href="#GCC安装" class="headerlink" title="GCC安装"></a>GCC安装</h1><p>wget “<a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.gz&quot;">http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.gz&quot;</a><br>这个包下载比较快</p>
+<h2 id="安装bison"><a href="#安装bison" class="headerlink" title="安装bison"></a>安装bison</h2><p>yum install bison</p>
+<h2 id="安装texinfo"><a href="#安装texinfo" class="headerlink" title="安装texinfo"></a>安装texinfo</h2><p>yum install texinfo</p>
+<h2 id="添加自定义安装路径到PATH"><a href="#添加自定义安装路径到PATH" class="headerlink" title="添加自定义安装路径到PATH"></a>添加自定义安装路径到PATH</h2><p>export PATH=/apps/webserver/bin:$PATH<br>export LD_LIBRARY_PATH=/apps/webserver/lib:/apps/webserver/lib64:$LD_LIBRARY_PATH<br>将这条语句添加到~/.profile 或者 /etc/profile 文件最后。</p>
+<h2 id="安装autoconf"><a href="#安装autoconf" class="headerlink" title="安装autoconf"></a>安装autoconf</h2><p>gcc安装需要依赖automake-1.15以上版本，automake-1.15以上版本，需要依赖autoconf 2.69</p>
+<p>wget <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz">http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz</a><br>tar xvf autoconf-2.69.tar.gz<br>cd autoconf-2.69<br>./configure --prefix=/apps/webserver<br>make -j4<br>make install</p>
+<p>#验证安装成功<br>which autoconf<br>/apps/webserver/bin/autoconf</p>
+<h2 id="安装automake"><a href="#安装automake" class="headerlink" title="安装automake"></a>安装automake</h2><p>gcc安装需要依赖automake-1.15以上版本</p>
+<p>wget <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz">http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz</a><br>tar xvf automake-1.15.tar.gz<br>cd automake-1.15<br>./configure --prefix=/apps/webserver<br>make -j4<br>make install</p>
+<p>#验证安装成功<br>which automake<br>/apps/webserver/bin/automake</p>
+<h2 id="开始安装GCC"><a href="#开始安装GCC" class="headerlink" title="开始安装GCC"></a>开始安装GCC</h2><p>wget “<a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.gz&quot;">http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.gz&quot;</a><br>（安装时间巨长，等就行了）<br>tar xvf gcc-9.1.0.tar.xz<br>cd gcc-9.1.0<br>sh contrib/download_prerequisites<br>mkdir build<br>cd build<br>../configure --enable-checking=release --enable-languages=c,c++ --disable-multilib --prefix=/apps/webserver<br>make -j4<br>make install</p>
+<p>#验证安装成功<br>which gcc<br>/apps/webserver/bin/gcc</p>
+<p>查看gcc版本是否一致，若不是安装版本，则进入到<strong>gcc x.x/build</strong>文件夹，输入source /etc/profile</p>
+<h1 id="安装GDB"><a href="#安装GDB" class="headerlink" title="安装GDB"></a>安装GDB</h1><p>linux下使用GDB调试<br>gdb需要在gcc安装完成之后再安装</p>
+<p>wget <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gdb/gdb-8.3.tar.xz">http://ftp.gnu.org/gnu/gdb/gdb-8.3.tar.xz</a><br>tar xvf gdb-8.3.tar.xz<br>cd gdb-8.3<br>./configure --prefix=/apps/webserver<br>make -j4<br>make install</p>
+<p>#验证安装成功<br>which gdb<br>/apps/webserver/bin/gdb</p>
+<h1 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h1><p>wget <a target="_blank" rel="noopener" href="https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz</a></p>
+<p>其余版本 <a target="_blank" rel="noopener" href="https://cmake.org/download/">https://cmake.org/download/</a></p>
+<p>tar xvf cmake-3.14.5.tar.gz<br>cd cmake-3.14.5<br>./configure --prefix=/apps/webserver<br>make -j4<br>make install</p>
+<p>#验证安装成功<br>which cmake<br>/apps/webserver/bin/cmake</p>
+<h1 id="安装Ragel"><a href="#安装Ragel" class="headerlink" title="安装Ragel"></a>安装Ragel</h1><p>wget <a target="_blank" rel="noopener" href="http://www.colm.net/files/ragel/ragel-6.10.tar.gz">http://www.colm.net/files/ragel/ragel-6.10.tar.gz</a><br>tar xvf ragel-6.10.tar.gz<br>cd ragel-6.10<br>./configure --prefix=/apps/webserver<br>make -j4<br>make install</p>
+<p>#验证安装成功<br>which ragel<br>/apps/webserver/bin/ragel</p>
+<h1 id="安装其他软件"><a href="#安装其他软件" class="headerlink" title="安装其他软件"></a>安装其他软件</h1><p>yum install boost-devel<br>yum install psmisc    (killall安装)<br>yum install net-tools (netstat安装)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88deleter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88deleter/" class="post-title-link" itemprop="url">智能指针deleter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-11 21:17:50 / 修改时间：21:18:35" itemprop="dateCreated datePublished" datetime="2021-12-11T21:17:50+08:00">2021-12-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/11/EBO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的一些记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/11/EBO/" class="post-title-link" itemprop="url">EBO(Empty Base Optimization)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-11 15:28:43 / 修改时间：21:17:08" itemprop="dateCreated datePublished" datetime="2021-12-11T15:28:43+08:00">2021-12-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="EBO概念"><a href="#EBO概念" class="headerlink" title="EBO概念"></a>EBO概念</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B1</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	A a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B2</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	A a;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">private</span> A &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(A) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(B1) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(B2) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in"><span class="keyword">sizeof</span></span>(C) &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为<img src="https://s2.loli.net/2021/12/11/JIx6n5ztubm8hPp.png" alt="EBO_1.png"></p>
+<p>对于A这样一个空类，编译器会给这个空类安插一个char，来标识这个类。</p>
+<p>对于B，由于字节对齐，B将占用8个字节。</p>
+<p><strong>对于B1来说，A的大小为1，int大小为4，一共为5，字节补齐将其补齐为8(4的倍数)。</strong></p>
+<p><strong>对于B2来说，直接继承然后添加一个int，空间为5，并未进行补齐。1的补齐所浪费的空间是巨大的。EBO机制存在的意义就在此。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty1</span> :</span> <span class="keyword">public</span> Empty &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty2</span> :</span> <span class="keyword">public</span> Empty1 &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty3</span> :</span> <span class="keyword">public</span> Empty,Empty1 &#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//sizeof(Empty) == 1     &lt;- EBO机制</span></span><br><span class="line"><span class="comment">//sizeof(Empty1) == 1    &lt;- EBO机制</span></span><br><span class="line"><span class="comment">//sizeof(Empty2) == 1    &lt;- EBO机制</span></span><br><span class="line"><span class="comment">//sizeof(Empty3) == 1    </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>前三个都是EBO的体现，但是Empty3继承了两次Empty，不符合EBO的规则，但实际上Empty3的大小仍为1。</p>
+<p>:(===为啥是1===</p>
+<p><strong>EBO的准则：只有空类对象不与同一类型的其他对象或子对象分配在同一地址，就不需要为其分配空间。</strong></p>
+<p><strong>同一地址的问题，即使是同一类型的对象只有分配地址不同，也不需要为其分配空间</strong></p>
+<p>我理解的不好，网址插个旗</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxiao93/article/details/76038001">https://blog.csdn.net/zhangxiao93/article/details/76038001</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
