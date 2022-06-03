@@ -20,12 +20,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="PC BootstrapThe PC’s Physical Address Space   早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF) 最重要的部分是Basic Input&#x2F;Output System (BIOS)，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (RO">
+<meta name="description" content="PC BootstrapThe PC’s Physical Address Space   早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF) 最重要的部分是**Basic Input&#x2F;Output System (BIOS)**，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.828Lab1">
 <meta property="og:url" content="http://example.com/2022/05/17/6-828Lab1/index.html">
 <meta property="og:site_name" content="我的一些记录">
-<meta property="og:description" content="PC BootstrapThe PC’s Physical Address Space   早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF) 最重要的部分是Basic Input&#x2F;Output System (BIOS)，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (RO">
+<meta property="og:description" content="PC BootstrapThe PC’s Physical Address Space   早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF) 最重要的部分是**Basic Input&#x2F;Output System (BIOS)**，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/apzkU1cGI5YCqgR.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/17/PDW1a34oZVg8Ytd.png">
@@ -81,9 +81,9 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/3SezlGXtE7gMcTD.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/8fuNUjOd9vnQEkH.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/LZHfOB14oKDQedl.png">
-<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220523131709311.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/Az8IQt2FhgD73d1.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/nrQyBk9HSv85XWC.png">
-<meta property="og:image" content="c:/Users/zq/AppData/Roaming/Typora/typora-user-images/image-20220523133643397.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/EPGICj2LrVmTzqt.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/ioOsFIc4qzEX5gC.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/2GnipTQcFz5Rul4.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/2WT6iQGvJsgpR3a.png">
@@ -91,8 +91,28 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/XgPc52kHWMnfwiD.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/zl42JmAv5B7cjV1.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/23/zahDgVRnyj6U9Od.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/nZ2YagVsuP9FXSW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/MjnGhxmEktR2NWP.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/Dsg8NQlOAvY2otG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/WKwp2NxBIPHaAX8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/hxk1DYoTrZwpB2P.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/e9OsqWFKYv81B76.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/SIWUp2ahfZOP4t8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/bVInmrfcN6YsqjB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/WMQfEjbsJgDlU4S.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/wJ6T2spyFvP7DxI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/28/FszN2t4h6bVH3nG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/oLO9PpUryhDSVeE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/9I7hWzcHuRLlPUs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/Cv6OTo4a31SArkx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/U61vX4bqchRWj37.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/Ol4sxCRFyk765Z3.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/ZtsXhU9qlTwdf5D.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/b5VjniJfOaTDpmW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/YsG4kSha2vADzR7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/03/SQLMoxtWkUBPyHg.png">
 <meta property="article:published_time" content="2022-05-17T04:00:23.000Z">
-<meta property="article:modified_time" content="2022-05-23T14:52:58.293Z">
+<meta property="article:modified_time" content="2022-06-03T09:00:17.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2022/05/23/apzkU1cGI5YCqgR.png">
 
@@ -171,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PC-Bootstrap"><span class="nav-number">1.</span> <span class="nav-text">PC Bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-PC%E2%80%99s-Physical-Address-Space"><span class="nav-number">1.1.</span> <span class="nav-text">The PC’s Physical Address Space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3"><span class="nav-number">1.1.1.</span> <span class="nav-text">Exercise 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise4"><span class="nav-number">1.1.2.</span> <span class="nav-text">Exercise4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#c-int-char-c-1-%E4%B8%8Ec-c-1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.0.1.</span> <span class="nav-text">c &#x3D; (int *) ((char *) c + 1) 与c&#x3D;c+1的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-5"><span class="nav-number">1.1.3.</span> <span class="nav-text">Exercise 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-6"><span class="nav-number">1.1.4.</span> <span class="nav-text">Exercise 6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-kernel"><span class="nav-number">2.</span> <span class="nav-text">The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-7"><span class="nav-number">2.0.1.</span> <span class="nav-text">Exercise 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-8"><span class="nav-number">2.0.2.</span> <span class="nav-text">Exercise 8</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-1"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">problem 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-2"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">problem 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-3"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">problem 3</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1"><span class="nav-number">2.0.2.3.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2"><span class="nav-number">2.0.2.3.2.</span> <span class="nav-text">2</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-4"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">problem 4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-5"><span class="nav-number">2.0.2.5.</span> <span class="nav-text">problem 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-6"><span class="nav-number">2.0.2.6.</span> <span class="nav-text">problem 6</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Stack"><span class="nav-number">3.</span> <span class="nav-text">The Stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-9"><span class="nav-number">3.0.1.</span> <span class="nav-text">Exercise 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-10"><span class="nav-number">3.0.2.</span> <span class="nav-text">Exercise 10</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PC-Bootstrap"><span class="nav-number">1.</span> <span class="nav-text">PC Bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-PC%E2%80%99s-Physical-Address-Space"><span class="nav-number">1.1.</span> <span class="nav-text">The PC’s Physical Address Space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3"><span class="nav-number">1.1.1.</span> <span class="nav-text">Exercise 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise4"><span class="nav-number">1.1.2.</span> <span class="nav-text">Exercise4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#c-int-char-c-1-%E4%B8%8Ec-c-1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.0.1.</span> <span class="nav-text">c &#x3D; (int *) ((char *) c + 1) 与c&#x3D;c+1的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-5"><span class="nav-number">1.1.3.</span> <span class="nav-text">Exercise 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-6"><span class="nav-number">1.1.4.</span> <span class="nav-text">Exercise 6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-kernel"><span class="nav-number">2.</span> <span class="nav-text">The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-7"><span class="nav-number">2.0.1.</span> <span class="nav-text">Exercise 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-8"><span class="nav-number">2.0.2.</span> <span class="nav-text">Exercise 8</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-1"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">problem 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-2"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">problem 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-3"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">problem 3</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1"><span class="nav-number">2.0.2.3.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2"><span class="nav-number">2.0.2.3.2.</span> <span class="nav-text">2</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-4"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">problem 4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-5"><span class="nav-number">2.0.2.5.</span> <span class="nav-text">problem 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem-6"><span class="nav-number">2.0.2.6.</span> <span class="nav-text">problem 6</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Stack"><span class="nav-number">3.</span> <span class="nav-text">The Stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-9"><span class="nav-number">3.0.1.</span> <span class="nav-text">Exercise 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-10"><span class="nav-number">3.0.2.</span> <span class="nav-text">Exercise 10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-11"><span class="nav-number">3.0.3.</span> <span class="nav-text">Exercise 11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-12"><span class="nav-number">3.0.4.</span> <span class="nav-text">Exercise 12</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#summary"><span class="nav-number">4.</span> <span class="nav-text">summary</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-23 22:52:58" itemprop="dateModified" datetime="2022-05-23T22:52:58+08:00">2022-05-23</time>
+      <time title="修改时间：2022-06-03 17:00:17" itemprop="dateModified" datetime="2022-06-03T17:00:17+08:00">2022-06-03</time>
     </span>
 
   
@@ -276,7 +296,7 @@
 
 <ul>
 <li>早期PC，16位，只有可用物理地址只有1M(0x00000000~0x000FFFFF)</li>
-<li>最重要的部分是Basic Input/Output System (BIOS)，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (ROM)中，现在pc机将BIOS存储在updateable flash memory(可更新的闪存)中。</li>
+<li>最重要的部分是**Basic Input/Output System (BIOS)**，它占据从0x000F0000到0x000FFFFF的64KB区域。在早期的pc机中，BIOS保存在read-only memory (ROM)中，现在pc机将BIOS存储在updateable flash memory(可更新的闪存)中。</li>
 <li>BIOS负责执行基本的系统初始化，如激活显卡和检查已安装的内存数量。在执行此初始化之后，BIOS从某些适当的位置(如 floppy disk(软盘), hard disk, CD-ROM, or the network)加载操作系统，并将机器的控制权传递给操作系统。</li>
 <li>虽然现在可以处理器支持4GB的物理地址空间了，但还是保留那1MB的物理地址的设定来向后兼容</li>
 </ul>
@@ -498,14 +518,14 @@
 
 <img src="https://s2.loli.net/2022/05/23/LZHfOB14oKDQedl.png" alt="image-20220523131208149" style="zoom:80%;" />
 
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220523131709311.png" alt="image-20220523131709311" style="zoom:67%;" />
+<img src="https://s2.loli.net/2022/06/03/Az8IQt2FhgD73d1.png" alt="image-20220523131709311" style="zoom:67%;" />
 
 <p>71, 101, 49, 49, 48, 32, 87, 111, 114, 108, 100</p>
 <p>He110 World</p>
 <img src="https://s2.loli.net/2022/05/23/nrQyBk9HSv85XWC.png" alt="image-20220523131908104" style="zoom:67%;" />
 
 <p>%x 指无符号十六进制数</p>
-<img src="C:\Users\zq\AppData\Roaming\Typora\typora-user-images\image-20220523133643397.png" alt="image-20220523133643397" style="zoom:67%;" />
+<img src="https://s2.loli.net/2022/06/03/EPGICj2LrVmTzqt.png" alt="image-20220523133643397" style="zoom:67%;" />
 
 <p>57616转换为16进制，正好是e110</p>
 <p>%s指字符串，0x00646c72在小端模式下对应的ASCII码为 0x72, 0x6c, 0x64, 0x00, 可得’rld’</p>
@@ -536,7 +556,95 @@
 <img src="https://s2.loli.net/2022/05/23/zahDgVRnyj6U9Od.png" alt="image-20220523174417402" style="zoom:67%;" />
 
 <h3 id="Exercise-10"><a href="#Exercise-10" class="headerlink" title="Exercise 10"></a>Exercise 10</h3><p>要熟悉x86上的C调用约定，请在<strong>obj/kern/kernel.asm</strong>中找到<strong>test_backtrace</strong>函数的地址，在那里设置一个断点，并检查内核启动后每次调用它时会发生什么。test_backtrace的每个递归嵌套级别在堆栈上推送多少32位字，这些字是什么？</p>
-<p>​    </p>
+<p><img src="https://s2.loli.net/2022/05/28/nZ2YagVsuP9FXSW.png" alt="image-20220528164332775"></p>
+<p>给back_trace的test_backtrace(x-1); mon_backtrace(0, 0, 0);和 打上断点，    查看<code>esp</code>的初始值。</p>
+<p><img src="https://s2.loli.net/2022/05/28/MjnGhxmEktR2NWP.png" alt="image-20220528165206593"></p>
+<p>初始x传入值为5，向后执行直至x=0</p>
+<p><img src="https://s2.loli.net/2022/05/28/Dsg8NQlOAvY2otG.png" alt="image-20220528171319674"></p>
+<p>中途查看esp内容，发现第二列保存的是x的值。每次递归会保存两行。每一列的意思是</p>
+<p><img src="https://s2.loli.net/2022/05/28/WKwp2NxBIPHaAX8.png" alt="image-20220528210745786"></p>
+<p><img src="https://s2.loli.net/2022/05/28/hxk1DYoTrZwpB2P.png" alt="image-20220528211308210"></p>
+<p><strong>x86堆栈要倒着长，如果以为push以后esp会增加可就大错特错了。。ebp虽然叫栈底，但是永远大于等于栈顶</strong></p>
+<p>0xf0100069应该是test_backtrace的下一条的返回地址。</p>
+<p><img src="https://s2.loli.net/2022/06/03/e9OsqWFKYv81B76.png" alt="image-20220528180523233"></p>
+<p>test_backtrace(5)的栈帧范围是：esp: 0xf0116fc0      ebp: 0xf0116fc8</p>
+<p>test_backtrace(4):   esp: 0xf0116fa0      ebp: 0xf0116fa8</p>
+<p>test_backtrace(3):   esp: 0xf0116f80      ebp: 0xf0116f88</p>
+<p>test_backtrace(2):   esp: 0xf0116f60      ebp: 0xf0116f68</p>
+<p>test_backtrace(1):   esp: 0xf0116f40      ebp: 0xf0116f48</p>
+<p>next x           |       this x     |    don’t know  | don’t know  | </p>
+<p>don’t know  |        last  x   |     last ebp       |  return addr|</p>
+<h3 id="Exercise-11"><a href="#Exercise-11" class="headerlink" title="Exercise 11"></a>Exercise 11</h3><p>implement a stack backtrace function</p>
+<p>The backtrace function should display a listing of function call frames in the following format:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f0109e58  eip f0100a62  args 00000001 f0109e80 f0109e98 f0100ed2 00000031</span><br><span class="line">  ebp f0109ed8  eip f01000d6  args 00000000 00000000 f0100058 f0109f28 00000061</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+
+<p>Each line contains an <code>ebp</code>, <code>eip</code>, and <code>args</code>.</p>
+<p>运行 <code>make grade</code> 这个评级脚本去查看它的输出是否是我们的脚本所期望的结果/。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C函数调用时，首先将参数push入栈，然后push返回地址，接着将原来的EBP push入栈，然后将ESP的值赋给EBP，令ESP指向新的栈顶。而函数返回时，会将EBP的值赋予ESP，然后pop出原来的EBP的值赋予EBP指针。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/05/28/SIWUp2ahfZOP4t8.png" alt="image-20220528223530430"></p>
+<img src="https://s2.loli.net/2022/05/28/bVInmrfcN6YsqjB.png" alt="image-20220528223513219" style="zoom:67%;" />
+
+<h3 id="Exercise-12"><a href="#Exercise-12" class="headerlink" title="Exercise 12"></a>Exercise 12</h3><p>修改堆栈回溯函数以显示每个<code>eip</code>对应的函数名、源文件名和行<code>号</code>。</p>
+<p>在<code>debuginfo_eip</code>中，<code>__STAB_*</code>来自哪里？这个问题有一个很长的答案；为了帮助您找到答案，以下是您可能想做的一些事情：</p>
+<ul>
+<li>look in the file <code>kern/kernel.ld</code> for <code>__STAB_*</code></li>
+<li>run objdump -h obj/kern/kernel</li>
+<li>run objdump -G obj/kern/kernel</li>
+<li>run gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c, and look at init.s.</li>
+<li>see if the bootloader loads the symbol table in memory as part of loading the kernel binary</li>
+</ul>
+<p>向内核监视器添加一个<code>backtrace </code>命令，并扩展您的实现<code>mon_backtrace</code>以调用<code>debuginfo_eip</code>并打印表单的每个堆栈帧的一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">K&gt; backtrace</span><br><span class="line">Stack backtrace:</span><br><span class="line">  ebp f010ff78  eip f01008ae  args 00000001 f010ff8c 00000000 f0110580 00000000</span><br><span class="line">         kern/monitor.c:143: monitor+106</span><br><span class="line">  ebp f010ffd8  eip f0100193  args 00000000 00001aac 00000660 00000000 00000000</span><br><span class="line">         kern/init.c:49: i386_init+59</span><br><span class="line">  ebp f010fff8  eip f010003d  args 00000000 00000000 0000ffff 10cf9a00 0000ffff</span><br><span class="line">         kern/entry.S:70: &lt;unknown&gt;+0</span><br><span class="line">K&gt; </span><br></pre></td></tr></table></figure>
+
+<p>Each line gives the file name and line within that file of the stack frame’s <code>eip</code>, followed by the name of the function and the offset of the <code>eip</code> from the first instruction of the function (e.g., <code>monitor+106</code> means the return <code>eip</code> is 106 bytes past the beginning of <code>monitor</code>).</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Include debugging information in kernel memory */</span></span><br><span class="line">.stab : &#123;</span><br><span class="line">	PROVIDE(__STAB_BEGIN__ = .);</span><br><span class="line">	*(.stab);</span><br><span class="line">	PROVIDE(__STAB_END__ = .);</span><br><span class="line">	BYTE(<span class="number">0</span>)		<span class="comment">/* Force the linker to allocate space</span></span><br><span class="line"><span class="comment">			   for this section */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.stabstr : &#123;</span><br><span class="line">	PROVIDE(__STABSTR_BEGIN__ = .);</span><br><span class="line">	*(.stabstr);</span><br><span class="line">	PROVIDE(__STABSTR_END__ = .);</span><br><span class="line">	BYTE(<span class="number">0</span>)		<span class="comment">/* Force the linker to allocate space</span></span><br><span class="line"><span class="comment">			   for this section */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/05/28/WMQfEjbsJgDlU4S.png" alt="image-20220528230025894"></p>
+<p>可以得到stab和 stabstr的起始地址和结束地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__STAB_BEGIN__ = 0xf0101f2c</span><br><span class="line">__STAB_END__ = 0xf0101f2c + 00004549 - 1</span><br><span class="line">__STABSTR_BEGIN__ = 0xf0106475</span><br><span class="line">__STABSTR_END__ = 0xf0106475 + 00008b11 - 1</span><br></pre></td></tr></table></figure>
+
+<p>objdump -G obj/kern/kernel 列出所有stab的信息</p>
+<p><img src="https://s2.loli.net/2022/06/03/wJ6T2spyFvP7DxI.png" alt="image-20220528230955470"></p>
+<p>进入内核后打个断点，查看stabstr内的内容</p>
+<p><img src="https://s2.loli.net/2022/05/28/FszN2t4h6bVH3nG.png" alt="image-20220528232511341"></p>
+<p>使用<code>objdump -G obj/kern/kernel &gt; output.md</code>将内核的符号表信息输出到output.md文件</p>
+<p><img src="https://s2.loli.net/2022/06/03/oLO9PpUryhDSVeE.png" alt="image-20220603142339089"></p>
+<p>观察kernel.asm</p>
+<p><img src="https://s2.loli.net/2022/06/03/9I7hWzcHuRLlPUs.png" alt="image-20220603142401904"></p>
+<p>观察entry.S</p>
+<p><img src="https://s2.loli.net/2022/06/03/Cv6OTo4a31SArkx.png" alt="image-20220603142437259"></p>
+<p>可以看到，output.md 中的各个字段，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Symnum   下标，整个符号表看作一个数组，Symnum是当前符号在数组中的下标</span><br><span class="line">n_type   符号类型，FUN指函数名，SLINE指在text段中的行号</span><br><span class="line">n_othr   不清楚</span><br><span class="line">n_desc   在文件中的行号</span><br><span class="line">n_value  表示地址</span><br><span class="line">n_strx   </span><br><span class="line">String   保存信息（函数、语句啥的）</span><br></pre></td></tr></table></figure>
+
+<p>在查看<code>kdebug.c</code>时候发现函数的参数为<code>int</code>类型，但是传入是<code>N_FUN</code>，于是翻了一下<code>stab.h</code></p>
+<p><img src="https://s2.loli.net/2022/06/03/U61vX4bqchRWj37.png" alt="image-20220603145602882"></p>
+<p>修改monitor.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint32_t</span> ebp;</span><br><span class="line">    <span class="keyword">uint32_t</span>* eip;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">    ebp = read_ebp();</span><br><span class="line">    cprintf(<span class="string">&quot;Stack backtrace:\n&quot;</span>);</span><br><span class="line">    <span class="comment">// ebp f0109ed8  eip f01000d6  args 00000000 00000000 f0100058 f0109f28 00000061</span></span><br><span class="line">    <span class="comment">// eip = *(uint32_t *(ebp + 4))</span></span><br><span class="line">    <span class="keyword">while</span>(ebp != <span class="number">0</span>)&#123;</span><br><span class="line">        eip = (<span class="keyword">uint32_t</span> *)(ebp+<span class="number">4</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">// 08x   八位宽无符号16进制</span></span><br><span class="line">        cprintf(<span class="string">&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;</span>,</span><br><span class="line">                ebp, eip[<span class="number">0</span>], eip[<span class="number">1</span>], eip[<span class="number">2</span>], eip[<span class="number">3</span>], eip[<span class="number">4</span>], eip[<span class="number">5</span>]);</span><br><span class="line">        <span class="comment">// 打印行号</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(debuginfo_eip(eip[<span class="number">0</span>], &amp;info)==<span class="number">0</span>)&#123;</span><br><span class="line">            cprintf(<span class="string">&quot;    %s:%d: %s+%d\n&quot;</span>, info.eip_file, info.eip_line, info.eip_fn_name, eip[<span class="number">0</span>] - info.eip_fn_addr);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取 ebp的 内容  返回</span></span><br><span class="line">        ebp = *((<span class="keyword">uint32_t</span> *) ebp);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/06/03/Ol4sxCRFyk765Z3.png" alt="image-20220603161956295"></p>
+<p>可以看到后续多了<code>:F(0,15)</code></p>
+<p>那么需要输出指定长度，以便把后面多余的字符删除。test_backtrace 和 i386_init 为函数名</p>
+<p><img src="https://s2.loli.net/2022/06/03/ZtsXhU9qlTwdf5D.png" alt="image-20220603162303721"></p>
+<p>使用<code>eip_fn_namelen</code>进行指定长度的输出</p>
+<p>修改为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cprintf(<span class="string">&quot;    %s:%d: %.*s+%d\n&quot;</span>, info.eip_file, info.eip_line, info.eip_fn_namelen, info.eip_fn_name, eip[<span class="number">0</span>] - info.eip_fn_addr);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/06/03/b5VjniJfOaTDpmW.png" alt="image-20220603162648588"></p>
+<p>正常输出</p>
+<p><code>make grade</code></p>
+<p><img src="https://s2.loli.net/2022/06/03/YsG4kSha2vADzR7.png" alt="image-20220603162723295"></p>
+<h1 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h1><ol>
+<li>启动顺序   bios-&gt;bootloader-&gt;kernel</li>
+</ol>
+<p>bios: </p>
+<p>0x000FFFFF~0x0010 0000</p>
+<p>bootloader:</p>
+<p>sectorsize(扇区大小)是512</p>
+<p><img src="https://s2.loli.net/2022/06/03/SQLMoxtWkUBPyHg.png" alt="image-20220603165727917"></p>
+<p>0x7c00~0x7dff</p>
+<p>BIOS找到一个可引导的软盘或硬盘，它将512字节的引导扇区加载到物理地址0x7c00到0x7dff的内存中，然后使用jmp指令将CS:IP设置为0000:7c00，将控制权传递给<strong>the boot loader</strong>。</p>
+<p>kern  入口LMA为 00100000 被映射到虚拟地址（LMA）0xf0100000<br>kernel最先加载的就是 .text<br>所作操作：开启内存分页机制，启用虚拟内存，I/O的实现，栈的初始化。</p>
 
     </div>
 
