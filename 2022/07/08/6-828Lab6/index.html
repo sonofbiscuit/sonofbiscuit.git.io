@@ -20,14 +20,24 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Network Driver (default final project)Lab 6 Network Driver 网卡基于E1000芯片 除了编写驱动之外，还需要创建一个 system call 来访问我们的驱动程序。我们将实现缺失的网络服务器代码，以在网络堆栈和驱动程序之间传输数据包。我们还可以通过完成web服务器将所有内容绑定在一起。使用新的web服务器，我们能够从文件系统中提供文件。 没">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6-828Lab6">
 <meta property="og:url" content="http://example.com/2022/07/08/6-828Lab6/index.html">
 <meta property="og:site_name" content="我的一些记录">
+<meta property="og:description" content="Network Driver (default final project)Lab 6 Network Driver 网卡基于E1000芯片 除了编写驱动之外，还需要创建一个 system call 来访问我们的驱动程序。我们将实现缺失的网络服务器代码，以在网络堆栈和驱动程序之间传输数据包。我们还可以通过完成web服务器将所有内容绑定在一起。使用新的web服务器，我们能够从文件系统中提供文件。 没">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/image-20220710105135537.png">
+<meta property="og:image" content="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NtYWxsX1BvbmQ=,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70-20220710112319607.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190718154556909.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/20190717163648563.png">
 <meta property="article:published_time" content="2022-07-08T06:34:24.000Z">
-<meta property="article:modified_time" content="2022-07-08T06:34:24.463Z">
+<meta property="article:modified_time" content="2022-07-22T12:18:20.883Z">
+<meta property="article:tag" content="6.828">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/image-20220710105135537.png">
 
 
 <link rel="canonical" href="http://example.com/2022/07/08/6-828Lab6/">
@@ -91,7 +101,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -104,6 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Network-Driver-default-final-project"><span class="nav-number">1.</span> <span class="nav-text">Network Driver (default final project)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#QEMU%E2%80%99s-virtual-network"><span class="nav-number">1.1.</span> <span class="nav-text">QEMU’s virtual network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Packet-Inspection"><span class="nav-number">1.2.</span> <span class="nav-text">Packet Inspection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debugging-the-E1000"><span class="nav-number">1.3.</span> <span class="nav-text">Debugging the E1000</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Network-Server"><span class="nav-number">1.4.</span> <span class="nav-text">The Network Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Core-Network-Server-Environment"><span class="nav-number">1.5.</span> <span class="nav-text">The Core Network Server Environment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-A-Initialization-and-transmitting-packets-%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%BD%AC%E5%8F%91%E5%8C%85-%E6%8A%A5%E6%96%87"><span class="nav-number">2.</span> <span class="nav-text">Part A: Initialization and transmitting packets 实现和转发包(报文)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Network-Interface-Card"><span class="nav-number">2.1.</span> <span class="nav-text">The Network Interface Card</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCI-Interface"><span class="nav-number">2.2.</span> <span class="nav-text">PCI Interface</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3"><span class="nav-number">2.2.1.</span> <span class="nav-text">Exercise 3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-mapped-I-O"><span class="nav-number">2.3.</span> <span class="nav-text">Memory-mapped I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-4"><span class="nav-number">2.3.1.</span> <span class="nav-text">Exercise 4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMA"><span class="nav-number">2.4.</span> <span class="nav-text">DMA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmitting-Packets"><span class="nav-number">2.5.</span> <span class="nav-text">Transmitting Packets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-5"><span class="nav-number">2.5.1.</span> <span class="nav-text">Exercise 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-6"><span class="nav-number">2.5.2.</span> <span class="nav-text">Exercise 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-7"><span class="nav-number">2.5.3.</span> <span class="nav-text">Exercise 7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmitting-Packets-Network-Server%E4%BC%A0%E8%BE%93%E6%8A%A5%E6%96%87-%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.6.</span> <span class="nav-text">Transmitting Packets: Network Server传输报文:网络服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-8"><span class="nav-number">2.6.1.</span> <span class="nav-text">Exercise 8</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -121,7 +132,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -186,6 +197,13 @@
 
       <time title="创建时间：2022-07-08 14:34:24" itemprop="dateCreated datePublished" datetime="2022-07-08T14:34:24+08:00">2022-07-08</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-22 20:18:20" itemprop="dateModified" datetime="2022-07-22T20:18:20+08:00">2022-07-22</time>
+    </span>
 
   
 </div>
@@ -197,7 +215,172 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="Network-Driver-default-final-project"><a href="#Network-Driver-default-final-project" class="headerlink" title="Network Driver (default final project)"></a>Network Driver (default final project)</h1><p><strong>Lab 6 Network Driver</strong></p>
+<p>网卡基于E1000芯片</p>
+<p>除了编写驱动之外，还需要创建一个 system call 来访问我们的驱动程序。我们将实现缺失的网络服务器代码，以在网络堆栈和驱动程序之间传输数据包。我们还可以通过完成web服务器将所有内容绑定在一起。使用新的web服务器，我们能够从文件系统中提供文件。</p>
+<p>没有框架文件，没有固定的系统调用接口，许多设计决策都留给您。</p>
+<h2 id="QEMU’s-virtual-network"><a href="#QEMU’s-virtual-network" class="headerlink" title="QEMU’s virtual network"></a><strong>QEMU’s virtual network</strong></h2><p>QEMU是一个模拟处理器软件，默认提供一个运行在IP 10.0.2.2 上的虚拟路由，并为JOS分配IP 10.0.2.15 ，为了解决内网连接问题，host无法运行在QEMU上的web server，我们配置QEMU在主机某个端口上运行服务。该端口只需连接到JOS中的某个端口，并在真实主机和虚拟网络之间来回传送数据。 </p>
+<img src="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/image-20220710105135537.png" alt="image-20220710105135537" style="zoom:50%;" />
+
+<p><strong>echo server</strong>是回显服务,用户输入<em>什么</em>,服务器将输入信息返回给客户端。</p>
+<p><strong>webserver</strong> 是指驻留于因特网上某种类型计算机的程序。当Web浏览器（客户端）连到服务器上并请求文件时，服务器将处理该请求并将文件反馈到该浏览器上，附带的信息会告诉浏览器如何查看该文件（即文件类型）。服务器使用HTTP（超文本传输协议）与客户机浏览器进行信息交流，这就是人们常把它们称为HTTP服务器的原因。目前最主流的三个Web服务器是Apache Nginx IIS。</p>
+<h2 id="Packet-Inspection"><a href="#Packet-Inspection" class="headerlink" title="Packet Inspection"></a>Packet Inspection</h2><p>Makefile 配置了QEMU的网络栈，将进出的网络包记录到 qemu.pcap中。我们可以使用图形化的 wireshark，或是使用命令行获得网络包的hex/ASCII信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -XXnr qemu.pcap</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Debugging-the-E1000"><a href="#Debugging-the-E1000" class="headerlink" title="Debugging the E1000"></a>Debugging the E1000</h2><p>The E1000 can produce a lot of debug output, so you have to enable specific logging channels. Some channels you might find useful are:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tx</td>
+<td>日志发送操作</td>
+</tr>
+<tr>
+<td>txerr</td>
+<td>日志发送错误</td>
+</tr>
+<tr>
+<td>rx</td>
+<td>Log changes to RCTL</td>
+</tr>
+<tr>
+<td>rxfilter</td>
+<td>Log 日志入方向过滤</td>
+</tr>
+<tr>
+<td>rxerr</td>
+<td>Log 接受错误</td>
+</tr>
+<tr>
+<td>unknown</td>
+<td>Log 对未知寄存器进行读写操作</td>
+</tr>
+<tr>
+<td>eeprom</td>
+<td>Log reads from the EEPROM(带电可擦可编程只读存储器)</td>
+</tr>
+<tr>
+<td>interrupt</td>
+<td>Log 记录中断和中断寄存器的更改。</td>
+</tr>
+</tbody></table>
+<p>To enable “tx” and “txerr” logging, for example, use make E1000_DEBUG=tx,txerr ….</p>
+<h2 id="The-Network-Server"><a href="#The-Network-Server" class="headerlink" title="The Network Server"></a>The Network Server</h2><p>从零开始写一个网络栈是十分困难的，因此我们使用<code>lwIP</code>， 其是一个开源的轻量级TCP/IP协议套件，其中包含网络栈。</p>
+<p><strong>网络服务器实际上是四个环境的组合:</strong></p>
+<ul>
+<li><p>核心网络服务器环境(包括套接字调用调度程序和lwIP)</p>
+</li>
+<li><p>输入环境</p>
+</li>
+<li><p>输出环境</p>
+</li>
+<li><p>计时器的环境</p>
+</li>
+</ul>
+<p>我们将实现图中标记为绿色的部分。</p>
+<p><a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20190717163505895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NtYWxsX1BvbmQ=,size_16,color_FFFFFF,t_70"><img src="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NtYWxsX1BvbmQ=,size_16,color_FFFFFF,t_70.png" alt="MIT6.828 Lab6_Network Driver"></a></p>
+<h2 id="The-Core-Network-Server-Environment"><a href="#The-Core-Network-Server-Environment" class="headerlink" title="The Core Network Server Environment"></a>The Core Network Server Environment</h2><p>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。</p>
+<p><img src="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p><img src="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70-20220710112319607.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190718154556909.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>For each user environment IPC, the dispatcher in the network server calls the appropriate BSD socket interface function provided by lwIP on behalf of the user. </p>
+<p>Regular user environments do not use the nsipc_* calls directly. Instead, they use the functions in lib/sockets.c, which provides a file descriptor-based sockets API. </p>
+<p>文件服务器和网络服务器之间有一个关键的区别。像accept和recv这样的BSD套接字调用可以无限阻塞。由于这是不可接受的，网络服务器使用用户级线程来避免阻塞整个服务器环境。</p>
+<p>除了核心网络环境之外，还有三个辅助环境。除了接收来自用户应用程序的消息外，核心网络环境的调度程序还接收来自输入环境和计时器环境的消息。</p>
+<p>核心网络服务器环境是由所有套接字调用分发者和lwIP组成。套接字调度器和文件服务器工作类似。用户环境使用根(<code>lib/nsipc.c</code><br>)发送IPC消息给核心网络环境。如果你查看<code>lib/nsipc.c</code><br>，你可以看到核心网络服务器和文件服务器一样:<code>i386_init</code><br>创建带有<code>NS_TYPE_NS</code><br>的环境，所以我们扫描<code>envs</code><br>，找到特殊的环境类型。对于每个用户环境IPC，网络服务器的调度器调用合适BSD套接字接口函数</p>
+<p>常用的用户环境不使用<code>nsipc_*</code><br>直接调用。相反，他们使用<code>lib/sockets.c</code><br>中的函数，它提供了一个基于文件描述符的套接字API。因此，用户环境通过文件描述符指向套接字，就像指向磁盘上的文件一样。大量的操作(<code>connect</code><br>, <code>accept</code><br>等)是指定套接字的，但是<code>read</code><br>, <code>write</code><br>和<code>close</code><br>是通过普通的文件描述符<code>lib/fd.c</code><br>完成的。和文件服务器为所有打开的文件保留唯一ID一样，lwIP也生成唯一ID为所有打开的套接字。在文件服务器和网络服务器中，我们使用保存在<code>struct Fd</code><br>中的信息来映射每个环境文件描述符到这些唯一ID空间</p>
+<p>尽管文件服务器和网络服务器的IPC调度器行为一样，但是还有一个关键的区别。BSD套接字调用像<code>accept</code><br>和<code>recv</code><br>能无限阻塞。如果调度器允许lwIP执行阻塞调用中的一个，调度器也会阻塞，整个系统，同一个时间只有一个网络调用。因为这是不能接受的，所以网络服务器使用用户级别的线程来避免阻塞整个服务环境。对于每个到达的IPC消息，调度器创建一个线程，在线程中处理请求。如果线程阻塞，只有那个线程进入休眠，其他线程会继续执行</p>
+<p>除了核心网络环境之外，也有三个辅助环境，除了从用户程序接收消息，核心网络环境调度器也从输入和时间环境接收消息</p>
+<p><strong>输出环境</strong></p>
+<p>当正在服务用户环境的套接字调用时，lwIP会为网卡生成包数据.lwIP发送每个包给输出辅助环境，使用<code>NSREQ_OUTPUT</code><br>的IPC消息，包数据会在IPC的页参数带上。输出环境负责接收这些消息，通过你创建的系统调用接口分发给设备驱动</p>
+<p><strong>输入环境</strong></p>
+<p>通过网卡接收到的包，需要注入到lwIP中，对于每一个设备驱动接收到的包，输入环境从内核空间拉出包(使用你需要实现的内核系统调用)，然后发送包数据到核心服务环境，使用<code>NSREQ_INPUT</code><br>的IPC消息</p>
+<p>包输入功能与核心网络环境分离，因为JOS很难同时接收IPC消息，同时轮询或等待设备驱动数据包也很困难。在JOS中，我们没有<code>select</code><br>系统调用，这个系统调用可以监听多个输入源来区分哪个输入准备进行了</p>
+<p>如果你阅读过<code>net/input.c</code><br>和<code>net/output.c</code><br>，你会发现这两个都需要你实现。这是主要的，因为实现决定了系统调用接口。在你实现了驱动和系统调用接口之后，你需要为两个辅助环境编写代码</p>
+<p><strong>定时器环境</strong></p>
+<p>定时器环境周期性发送<code>NSREQ_TIMER</code><br>类型消息给核心网络服务器，通知一个定时器已经过期了。来自线程的定时器消息被lwIP用来实现各种各样的网络超时</p>
+<h1 id="Part-A-Initialization-and-transmitting-packets-实现和转发包-报文"><a href="#Part-A-Initialization-and-transmitting-packets-实现和转发包-报文" class="headerlink" title="Part A: Initialization and transmitting packets 实现和转发包(报文)"></a>Part A: Initialization and transmitting packets 实现和转发包(报文)</h1><p>你的内核代码没有时间概念，所以你需要添加。现在有时钟中断，这是由硬件每10ms生成的。每个时钟中断，我们可以递增变量来表明时间已经提前了10ms。这个实现在<code>kern/time.c</code><br>，但是没有植入到你的内核中</p>
+<p>我们需要为我们的内核添加时间概念。使用时钟中断，并用一个变量进行计数。</p>
+<p>Add a call to time_tick for every clock interrupt in <code>kern/trap.c</code>(in <code>kern/time.c</code>). Implement <code>sys_time_msec</code> and add it to syscall in <code>kern/syscall.c</code> so that user space has access to the time.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// LAB 4: Your code here.</span></span><br><span class="line">    <span class="keyword">case</span> (IRQ_OFFSET + IRQ_TIMER):</span><br><span class="line">        <span class="comment">// 回应8259A 接收中断。</span></span><br><span class="line">        lapic_eoi();</span><br><span class="line">        time_tick();</span><br><span class="line">        sched_yield();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">sys_time_msec</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// LAB 6: Your code here.</span></span><br><span class="line">    <span class="keyword">return</span> time_msec();</span><br><span class="line">    <span class="comment">// panic(&quot;sys_time_msec not implemented&quot;);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="keyword">case</span> SYS_time_msec:</span><br><span class="line">        <span class="keyword">return</span> sys_time_msec();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="The-Network-Interface-Card"><a href="#The-Network-Interface-Card" class="headerlink" title="The Network Interface Card"></a>The Network Interface Card</h2><p>Browse Intel’s <a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/readings/hardware/8254x_GBe_SDM.pdf">Software Developer’s Manual</a> for the E1000. 本手册涵盖了几个密切相关的以太网控制器。QEMU模拟82540EM。</p>
+<p><strong>接收和发送描述:</strong></p>
+<p>数据包接收</p>
+<p>​    识别到网络上存在一个数据包，</p>
+<p>​    执行地址过滤,</p>
+<p>​    将数据包存储在接收数据FIFO中，</p>
+<p>​    将数据传输到主机内存中的接收缓冲区，</p>
+<p>​            buffer size <code>RCTL.BSIZE &amp; RCTL.BSEX</code></p>
+<p>​    updating the state of a receive descriptor.</p>
+<p>​            Status</p>
+<p>​            Errors</p>
+<p>​            Specia</p>
+<h2 id="PCI-Interface"><a href="#PCI-Interface" class="headerlink" title="PCI Interface"></a>PCI Interface</h2><p>PCI是外围设备互连(Peripheral Component Interconnect)的简称，是在目前计算机系统中得到广泛应用的通用总线接口标准：</p>
+<p>在一个PCI系统中，最多可以有256根PCI总线，一般主机上只会用到其中很少的几条。<br>在一根PCI总线上可以连接多个物理设备，可以是一个网卡、显卡或者声卡等，最多不超过32个。<br>一个PCI物理设备可以有多个功能，比如同时提供视频解析和声音解析，最多可提供8个功能。<br>每个功能对应1个256字节的PCI配置空间</p>
+<p>为了在引导期间执行PCI初始化，PCI代码遍历PCI总线以寻找设备。 当它找到设备时，它会读取其供应商ID和设备ID，并使用这两个值作为搜索pci_attach_vendor数组的键。 该数组由struct pci_driver条目组成，如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_driver</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> key1, key2;</span><br><span class="line">    <span class="keyword">int</span> (*attachfn) (struct pci_func *pcif);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果发现的设备的供应商ID和设备ID与数组中的条目匹配，则PCI代码会调用该条目的<code>attachfn</code>来执行设备初始化。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_func</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pci_bus</span> *<span class="title">bus</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> dev;</span><br><span class="line">    <span class="keyword">uint32_t</span> func;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> dev_id;</span><br><span class="line">    <span class="keyword">uint32_t</span> dev_class;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> reg_base[<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">uint32_t</span> reg_size[<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">uint8_t</span> irq_line;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>我们重点关注<code>struct pci_func</code>的最后三个成员，因为它们记录了设备的negotiated memory，I/O 和中断资源。 <code>reg_base</code>和<code>reg_size</code>数组包含最多六个基址寄存器或BAR的信息。<code>reg_base</code>存储内存映射 I/O 区域的基地址（或 I/O 端口资源的基本 I/O 端口），<code>reg_size</code>包含<code>reg_base</code>中相应基值的大小（以字节为单位）或 I/O 端口数， 和<code>irq_line</code>包含分配给设备的 IRQ line 以进行中断。</p>
+<p><code>pci_func_enable</code>将会使能设备，协调资源，并将其填入<code>struct pci_func</code>。</p>
+<h3 id="Exercise-3"><a href="#Exercise-3" class="headerlink" title="Exercise 3"></a>Exercise 3</h3><blockquote>
+<p>Implement an attach function to initialize the E1000.</p>
+</blockquote>
+<p>查看手册以及根据内核启动时的打印信息，我们可以知道 E1000 的 Vender ID = 0x8086， Device ID = 0x100E。</p>
+<p>Add an entry to the pci_attach_vendor array in <code>kern/pci.c</code> to trigger your function if a matching PCI device is found，将E1000加入数组中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_driver</span> <span class="title">pci_attach_vendor</span>[] =</span> &#123;</span><br><span class="line">    &#123; PCI_E1000_VENDOR_ID, PCI_E1000_DEVICE_ID, &amp;pci_e1000_attach&#125;,</span><br><span class="line">    &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>编写 <code>e1000.c</code> and <code>e1000.h</code>文件。.c文件写 attach函数， 在.h 文件中定义其 PCI ID等信息。</p>
+<p>just enable the E1000 device via pci_func_enable.</p>
+<h2 id="Memory-mapped-I-O"><a href="#Memory-mapped-I-O" class="headerlink" title="Memory-mapped I/O"></a>Memory-mapped I/O</h2><p>软件通过 Memory-mapped I/O 与 E1000 进行通信。之前我们已经两次接触过 MMIO这个概念了，分别在 CGA控制台和 lapic。 我们通过内存地址对设备进行读写。这些以内存地址为基础的读写目标并不是 DRAM，而是设备。</p>
+<p><code>pci_func_enable</code> 为 E1000分配了一个 MMIO 区域并且在 BAR0 中存储了它的 base and size。这是分配给设备的一系列物理内存地址，这意味着我们必须通过虚拟地址访问它。 由于MMIO区域被分配了非常高的物理地址（通常高于3GB），因为JOS的256MB限制，我们无法使用KADDR（内核地址）访问它。所以我们将创建一个新的映射。我们还是使用<code>mmio_map_region</code>分配<code>MMIOBASE</code>以上的区域，其保证了我们不会修改到之前创建的 LAPIC 映射。<strong>由于PCI设备初始化发生在JOS创建用户环境之前</strong>，因此您可以在kern_pgdir中创建映射，并且它总是可用的。</p>
+<h3 id="Exercise-4"><a href="#Exercise-4" class="headerlink" title="Exercise 4"></a>Exercise 4</h3><p>In your attach function, create a virtual memory mapping for the E1000’s BAR 0 by calling mmio_map_region (which you wrote in lab 4 to support memory-mapping the LAPIC).</p>
+<p>将E1000的物理地址映射到虚拟地址，同时记录映射的虚拟地址，方便之后对 E1000 设备的访问。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 映射，并保存其虚拟地址，方便访问。</span></span><br><span class="line">e1000 = mmio_map_region(pcif-&gt;reg_base[<span class="number">0</span>], pcif-&gt;reg_size[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cprintf(<span class="string">&quot;device status:[%08x]\n&quot;</span>, *(<span class="keyword">uint32_t</span> *)((<span class="keyword">uint8_t</span> *)e1000 + E1000_DEVICE_STATUS));</span><br><span class="line"><span class="comment">// 或者写为 e1000[E1000_DEVICE_STATUS &gt;&gt; 2];</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> E1000_LOCATE(offset)  (offset &gt;&gt; 2)</span></span><br><span class="line">cprintf(<span class="string">&quot;device status:[%08x]\n&quot;</span>, e1000[E1000_LOCATE(E1000_DEVICE_STATUS)]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">PCI function <span class="number">00</span>:<span class="number">03.0</span> (<span class="number">8086</span>:<span class="number">100</span>e) enabled</span><br><span class="line">device status:[<span class="number">80080783</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h2><p>通过读写 E1000 寄存器来传输接收数据包是十分低效的做法，并且还需要E1000 缓存数据包。因此考虑到各个方面的因素，我们采用 DMA 的方式直接访问内存。驱动程序负责为发送和接收队列分配内存，设置DMA描述符，并使E1000定位到这些队列，但之后的所有内容都会变成异步的。</p>
+<p>从抽象层来看，接收和发送队列非常相似。 两者都由一系列描述符组成。 虽然这些描述符的确切结构各不相同，但每个描述符包含一些标志和数据包数据缓冲区的物理地址（要发送的网卡的数据包数据，或者操作系统为网卡写入接收数据包而分配的缓冲区）。</p>
+<h2 id="Transmitting-Packets"><a href="#Transmitting-Packets" class="headerlink" title="Transmitting Packets"></a>Transmitting Packets</h2><p>初始化要发送的网卡。传输初始化的第一步是设置传输队列。</p>
+<p><img src="https://zbdbcdb.oss-cn-hangzhou.aliyuncs.com/img/20190717163648563.png" alt="MIT6.828 Lab6_Network Driver"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Transmit Descriptor */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">E1000TxDesc</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint64_t</span> buffer_addr;       <span class="comment">/* Address of the descriptor&#x27;s data buffer */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint16_t</span> length;    <span class="comment">/* Data buffer length */</span></span><br><span class="line">    <span class="keyword">uint8_t</span> cso;        <span class="comment">/* Checksum offset */</span></span><br><span class="line">    <span class="keyword">uint8_t</span> cmd;        <span class="comment">/* Descriptor control */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> status;     <span class="comment">/* Descriptor status */</span></span><br><span class="line">    <span class="keyword">uint8_t</span> css;        <span class="comment">/* Checksum start */</span></span><br><span class="line">    <span class="keyword">uint16_t</span> special;</span><br><span class="line"></span><br><span class="line">&#125;__attribute__((packed));</span><br></pre></td></tr></table></figure>
+
+<p>在驱动程序初始化期间为每个描述符保留数据包缓冲区的空间，并简单地将数据包数据复制到这些预分配的缓冲区中。</p>
+<h3 id="Exercise-5"><a href="#Exercise-5" class="headerlink" title="Exercise 5"></a>Exercise 5</h3><p>执行第14.5节(但不是它的子节)中描述的初始化步骤。使用第13节作为初始化过程中引用的寄存器的参考，使用第3.3.3节和第3.4节作为传输描述符和传输描述符数组的参考。</p>
+<p>在对各寄存器进行初始化时，要不断得在第13章找到其偏移地址和详细定义。最后按照要求写入地址。</p>
+<p>我们必须将要传输的数据包添加到传输队列的尾部，这意味着需要将数据包数据复制到下一个数据包缓冲区，然后更新TDT（传输描述符尾部）寄存器以通知网卡在传输队列中有另一个数据包。[Note] TDT 是传输描述符数组的索引而不是偏移地址。</p>
+<p>如果在发送描述符的命令字段中设置RS（Report Status）位，则当网卡在该描述符中发送了数据包时，网卡将在描述符的状态字段中设置DD（Descriptor Done）位。 如果设置了描述符的DD位，我们就能回收该描述符并使用它来传输另一个数据包。</p>
+<p>如果用户调用传输系统调用，但下一个描述符的<code>DD</code>位未置位，表明传输队列已满，该怎么办？ 你必须决定在这种情况下该做什么。你可以简单地丢弃数据包。网络协议对此具有弹性，但如果丢弃大量数据包，协议可能无法恢复。我们可以告诉用户环境它必须重试，就像我们对<code>sys_ipc_try_send</code>所做的那样。This has the advantage of pushing back on the environment generating the data.。</p>
+<h3 id="Exercise-6"><a href="#Exercise-6" class="headerlink" title="Exercise 6"></a>Exercise 6</h3><p>编写一个函数，通过检查下一个描述符是否空闲来传输一个包，将包数据复制到下一个描述符，并更新TDT。确保您处理的传输队列已满。</p>
+<h3 id="Exercise-7"><a href="#Exercise-7" class="headerlink" title="Exercise 7"></a>Exercise 7</h3><p>添加一个系统调用，允许您从用户空间传输数据包。具体的界面取决于您。不要忘记检查从用户空间传递给内核的指针</p>
+<h2 id="Transmitting-Packets-Network-Server传输报文-网络服务器"><a href="#Transmitting-Packets-Network-Server传输报文-网络服务器" class="headerlink" title="Transmitting Packets: Network Server传输报文:网络服务器"></a>Transmitting Packets: Network Server传输报文:网络服务器</h2><p>既然我们已经有了 packet send 的系统调用，也是时候发送数据包了。output helper environment 运行在一个循环中：从 core network server 接收 <code>NSREQ_OUTPUT</code> IPC 信息，使用 system call 将伴随 IPC 发送过来的 Packet 发送到设备驱动中。 <code>NSREQ_OUTPUT</code>由在<code>net/lwip/jos/jif/jif.c</code>文件中的<code>low_level_output</code> 函数发送 , which glues the lwIP stack to JOS’s network system. 每个IPC 都包含一个由 <code>union Nsipc</code>构成的页，packet 存在于 <code>struct kif_pkt</code>字段。struct jif_pkt looks like：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">jif_pkt</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> jp_len;</span><br><span class="line">    <span class="keyword">char</span> jp_data[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在结构的末尾使用像<code>jp_data</code>这样的<strong>零长度数组</strong>是用于表示没有预定长度的缓冲区的常见C技巧（有些人会说是恶心）。 由于C不进行数组边界检查，只要确保结构后面有足够的未使用内存，就可以使用<code>jp_data</code>，就好像它是一个任意大小的数组一样。</p>
+<h3 id="Exercise-8"><a href="#Exercise-8" class="headerlink" title="Exercise 8"></a>Exercise 8</h3><p>Implement net/output.c.</p>
+<p>在<code>/net/serv.c</code>中创建了一个相当于守护进程<code>output</code>，在output 中我们需要接收 ipc， 解析信息然后调用 system call 发送数据包。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span></span></span><br><span class="line"><span class="function"><span class="title">output</span><span class="params">(<span class="keyword">envid_t</span> ns_envid)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    binaryname = <span class="string">&quot;ns_output&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// LAB 6: Your code here:</span></span><br><span class="line">    <span class="comment">//     - read a packet from the network server</span></span><br><span class="line">    <span class="comment">//    - send the packet to the device driver</span></span><br><span class="line">    <span class="keyword">uint32_t</span> whom;</span><br><span class="line">    <span class="keyword">int</span> perm;</span><br><span class="line">    <span class="keyword">int32_t</span> req;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        req = ipc_recv((<span class="keyword">envid_t</span> *)&amp;whom, &amp;nsipcbuf, &amp;perm);</span><br><span class="line">        <span class="keyword">if</span> (req != NSREQ_OUTPUT) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (sys_pkt_try_send(nsipcbuf.pkt.jp_data, nsipcbuf.pkt.jp_len) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            sys_yield();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Linux Daemon（守护进程）是运行在后台的一种特殊进程。它独立于控制终端并且周期性地执行某种任务或等待处理某些发生的事件。它不需要用户输入就能运行而且提供某种服务，不是对整个系统就是对某个用户程序提供服务。Linux系统的大多数服务器就是通过守护进程实现的。常见的守护进程包括系统日志进程syslogd、 web服务器httpd、邮件服务器sendmail和数据库服务器mysqld等。</p>
+
     </div>
 
     
@@ -205,6 +388,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/6-828/" rel="tag"># 6.828</a>
+          </div>
 
         
 
